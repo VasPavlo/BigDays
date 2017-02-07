@@ -144,15 +144,15 @@ namespace BigDays
 
 			_imageHelpers = new ImageHelpers(this);
 
-			var temp = _imageHelpers.getRealPathFromURI(Settings.URI);
+			var temp = _imageHelpers.getRealPathFromURI(Constants.URI);
 			_ImgPath  = temp.Item2;
 			_imageName = temp.Item1;
 
 
-			if (Settings.ImageBtm != null)
+			if (Constants.ImageBtm != null)
 			{
 
-				_bmp = Compress(Settings.ImageBtm);
+				_bmp = Compress(Constants.ImageBtm);
 
 				_scaleImageView.SetImageBitmap(_bmp);
 

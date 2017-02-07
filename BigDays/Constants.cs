@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -13,11 +14,14 @@ namespace BigDays
 {
 	#pragma warning disable 0219, 0649
 	[Android.Runtime.Preserve(AllMembers=true)]
-	public class Constants
+	public static class Constants
 	{
 		public static string VersionLink;
 		public static readonly string StoreSearchLink;
 		public static string CaptionName;
+
+		public static Android.Net.Uri URI { get; set; }
+		public static Bitmap ImageBtm { get; set; }
 
 		static Constants()
 		{

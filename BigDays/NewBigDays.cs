@@ -161,7 +161,7 @@ namespace BigDays
 						break;
 					case (int) RequestCode.PickImage:
 						if (data == null) break;
-						Settings.URI= data.Data;
+						Constants.URI= data.Data;
 
 						var config = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
 						//Initialize ImageLoader with configuration.
@@ -169,7 +169,7 @@ namespace BigDays
 						ImageLoader imageLoader = ImageLoader.Instance;
 						Bitmap bmp = imageLoader.LoadImageSync(data.DataString);
 
-						Settings.ImageBtm = bmp;
+						Constants.ImageBtm = bmp;
 
 						_ImgPath = data.DataString;
 

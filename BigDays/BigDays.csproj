@@ -89,6 +89,9 @@
     <Reference Include="AdBuddiz.Xamarin.Android">
       <HintPath>Lib\AdBuddiz.Xamarin.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Genetics">
+      <HintPath>..\packages\Genetics.1.1.0.50\lib\MonoAndroid\Genetics.dll</HintPath>
+    </Reference>
     <Reference Include="GooglePlayServicesLib">
       <HintPath>..\Components\googleplayservices-19.0.0\lib\android\GooglePlayServicesLib.dll</HintPath>
     </Reference>
@@ -100,9 +103,6 @@
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
       <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
-    </Reference>
-    <Reference Include="Genetics">
-      <HintPath>..\packages\Genetics.1.1.0.50\lib\MonoAndroid\Genetics.dll</HintPath>
     </Reference>
     <Reference Include="UniversalImageLoader">
       <HintPath>..\Components\UniversalImageLoader-1.9.4.1\lib\android\UniversalImageLoader.dll</HintPath>
@@ -136,7 +136,6 @@
     <Compile Include="ImagePreview.cs" />
     <Compile Include="Utils\BitmapHelpers.cs" />
     <Compile Include="Utils\ImageHelpers.cs" />
-    <Compile Include="Utils\Settings.cs" />
     <Compile Include="Controls\InfoBoxControl.cs" />
   </ItemGroup>
   <ItemGroup>
