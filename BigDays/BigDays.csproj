@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BigDays</RootNamespace>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AssemblyName>BigDays</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>    
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__ANDROID__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+    <AndroidSigningKeyStore>D:\Dev\BigDays\BigDays_PaidVersion\BigDays_PaidVersion\trunk\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
+    <DebugType></DebugType>
+    <AndroidKeyStore>True</AndroidKeyStore>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release Amazon</OutputPath>
+    <DefineConstants>__MOBILE__;__ANDROID__;__AMAZON__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidSigningKeyStore>D:\Dev\BigDays\BigDays_PaidVersion\BigDays_PaidVersion\trunk\BigDays\Key\key_amazon_full.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
+    <AndroidKeyStore>True</AndroidKeyStore>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Free|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release Free</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidSigningKeyStore>F:\dev\SourseSVN\bigdays\New\svn\bigdays\trunk\BigDays\Key\key_bigdays_free.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
+    <DefineConstants>__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Data.Sqlite" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows" />
+    <Reference Include="AppfireworksXamarin">
+      <HintPath>Lib\AppfireworksXamarin.dll</HintPath>
+    </Reference>
+    <Reference Include="LeadboltXamarin">
+      <HintPath>Lib\LeadboltXamarin.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Facebook">
+      <HintPath>Lib\Xamarin.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="AdBuddiz.Xamarin.Android">
+      <HintPath>Lib\AdBuddiz.Xamarin.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="GooglePlayServicesLib">
+      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\GooglePlayServicesLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
+      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
+    <Reference Include="Genetics">
+      <HintPath>..\packages\Genetics.1.1.0.50\lib\MonoAndroid\Genetics.dll</HintPath>
+    </Reference>
+    <Reference Include="UniversalImageLoader">
+      <HintPath>..\Components\UniversalImageLoader-1.9.4.1\lib\android\UniversalImageLoader.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ListActivity.cs" />
+    <Compile Include="BigDaysListAdapter.cs" />
+    <Compile Include="BigDaysDB.cs" />
+    <Compile Include="BigDaysItem.cs" />
+    <Compile Include="NewBigDays.cs" />
+    <Compile Include="DefaultImagesSelect.cs" />
+    <Compile Include="DefaultImagesAdapter.cs" />
+    <Compile Include="Share.cs" />
+    <Compile Include="RepeatSelect.cs" />
+    <Compile Include="RepeatListAdapter.cs" />
+    <Compile Include="Alerts.cs" />
+    <Compile Include="NotificationView.cs" />
+    <Compile Include="Feedback.cs" />
+    <Compile Include="LoadAppScreen.cs" />
+    <Compile Include="AlertDlg.cs" />
+    <Compile Include="NotificationMainView.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Ad\AdListener.cs" />
+    <Compile Include="FacebookScreen.cs" />
+    <Compile Include="Enums\RequestCode.cs" />
+    <Compile Include="Controls\ScaleImageView.cs" />
+    <Compile Include="ImagePreview.cs" />
+    <Compile Include="Utils\BitmapHelpers.cs" />
+    <Compile Include="Utils\ImageHelpers.cs" />
+    <Compile Include="Utils\Settings.cs" />
+    <Compile Include="Controls\InfoBoxControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Key\key_bigdays_free.keystore" />
+    <None Include="Lib\AppfireworksXamarin.dll" />
+    <None Include="Lib\LeadboltXamarin.dll" />
+    <None Include="Lib\Xamarin.Android.Support.v4.dll" />
+    <None Include="Lib\Xamarin.Facebook.dll" />
+    <None Include="Key\key_bigdays_full.keystore">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Key\key_amazon_full.keystore" />
+    <None Include="Lib\AdBuddiz.Xamarin.Android.dll" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values-v11\styles.xml" />
+    <AndroidResource Include="Resources\menu\main.xml" />
+    <AndroidResource Include="Resources\drawable\Icon62.png" />
+    <AndroidResource Include="Resources\drawable\add.png" />
+    <AndroidResource Include="Resources\drawable\AddBig.png" />
+    <AndroidResource Include="Resources\drawable\ArrowRight.png" />
+    <AndroidResource Include="Resources\drawable\buynow.png" />
+    <AndroidResource Include="Resources\drawable\Facebook.png" />
+    <AndroidResource Include="Resources\drawable\Feedback.png" />
+    <AndroidResource Include="Resources\drawable\List.png" />
+    <AndroidResource Include="Resources\drawable\Mail.png" />
+    <AndroidResource Include="Resources\drawable\Message.png" />
+    <AndroidResource Include="Resources\drawable\Save.png" />
+    <AndroidResource Include="Resources\drawable\Share.png" />
+    <AndroidResource Include="Resources\drawable\Twitter.png" />
+    <AndroidResource Include="Resources\drawable\Edit.png" />
+    <AndroidResource Include="Resources\drawable\EditSmall.png" />
+    <AndroidResource Include="Resources\drawable\AddSmall.png" />
+    <AndroidResource Include="Resources\drawable\FeedbackSmall.png" />
+    <AndroidResource Include="Resources\drawable\ShareSmall.png" />
+    <AndroidResource Include="Resources\drawable\ListSmall.png" />
+    <AndroidResource Include="Resources\layout\List.axml" />
+    <AndroidResource Include="Resources\layout\BigDaysListItem.axml" />
+    <AndroidResource Include="Resources\drawable\Background.png" />
+    <AndroidResource Include="Resources\drawable\BackgroundLight.png" />
+    <AndroidResource Include="Resources\layout\NewBigDays.axml" />
+    <AndroidResource Include="Resources\drawable\img17small.jpg" />
+    <AndroidResource Include="Resources\drawable\editbtnbg.png" />
+    <AndroidResource Include="Resources\drawable\alertbtnbg.png" />
+    <AndroidResource Include="Resources\layout\DefaultImagesSelect.axml" />
+    <AndroidResource Include="Resources\layout\Share.axml" />
+    <AndroidResource Include="Resources\layout\RepeatSelect.axml" />
+    <AndroidResource Include="Resources\layout\Alerts.axml" />
+    <AndroidResource Include="Resources\layout\NumberPickerDlg.axml" />
+    <AndroidResource Include="Resources\drawable\img1.jpg" />
+    <AndroidResource Include="Resources\layout\Feedback.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_new.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_edit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_edit.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_edit.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_edit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_view_as_list.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_view_as_list.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_view_as_list.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_view_as_list.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_group.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_group.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_group.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_group.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_storage.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_storage.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_storage.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_storage.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_share.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_share.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_share.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_share.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_about.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_about.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_about.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_about.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_accept.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_cancel.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_cancel.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_cancel.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_cancel.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_discard.png" />
+    <AndroidResource Include="Resources\drawable\img1small.jpg" />
+    <AndroidResource Include="Resources\drawable\img2.jpg" />
+    <AndroidResource Include="Resources\drawable\img2small.jpg" />
+    <AndroidResource Include="Resources\drawable\img3.jpg" />
+    <AndroidResource Include="Resources\drawable\img3small.jpg" />
+    <AndroidResource Include="Resources\drawable\img4.jpg" />
+    <AndroidResource Include="Resources\drawable\img4small.jpg" />
+    <AndroidResource Include="Resources\drawable\img5.jpg" />
+    <AndroidResource Include="Resources\drawable\img5small.jpg" />
+    <AndroidResource Include="Resources\drawable\img6.jpg" />
+    <AndroidResource Include="Resources\drawable\img6small.jpg" />
+    <AndroidResource Include="Resources\drawable\img7.jpg" />
+    <AndroidResource Include="Resources\drawable\img7small.jpg" />
+    <AndroidResource Include="Resources\drawable\img8.jpg" />
+    <AndroidResource Include="Resources\drawable\img8small.jpg" />
+    <AndroidResource Include="Resources\drawable\img9.jpg" />
+    <AndroidResource Include="Resources\drawable\img9small.jpg" />
+    <AndroidResource Include="Resources\drawable\img10.jpg" />
+    <AndroidResource Include="Resources\drawable\img10small.jpg" />
+    <AndroidResource Include="Resources\drawable\img11.jpg" />
+    <AndroidResource Include="Resources\drawable\img11small.jpg" />
+    <AndroidResource Include="Resources\drawable\img12.jpg" />
+    <AndroidResource Include="Resources\drawable\img12small.jpg" />
+    <AndroidResource Include="Resources\drawable\img13.jpg" />
+    <AndroidResource Include="Resources\drawable\img13small.jpg" />
+    <AndroidResource Include="Resources\drawable\img14.jpg" />
+    <AndroidResource Include="Resources\drawable\img14small.jpg" />
+    <AndroidResource Include="Resources\drawable\img15.jpg" />
+    <AndroidResource Include="Resources\drawable\img15small.jpg" />
+    <AndroidResource Include="Resources\drawable\img16.jpg" />
+    <AndroidResource Include="Resources\drawable\img16small.jpg" />
+    <AndroidResource Include="Resources\drawable\img17.jpg" />
+    <AndroidResource Include="Resources\layout\LoadAppScreen.axml" />
+    <AndroidResource Include="Resources\drawable\splashscreen.jpg" />
+    <AndroidResource Include="Resources\drawable\button_custom.xml" />
+    <AndroidResource Include="Resources\drawable\border_buttons.xml" />
+    <AndroidResource Include="Resources\layout-large-port-xhdpi\Main.axml" />
+    <AndroidResource Include="Resources\layout-xlarge-port-xxhdpi\Main.axml" />
+    <AndroidResource Include="Resources\layout-small-port-mdpi\Main.axml" />
+    <AndroidResource Include="Resources\layout-normal-port-hdpi\Main.axml" />
+    <AndroidResource Include="Resources\drawable\icon.png" />
+    <AndroidResource Include="Resources\drawable\Big_Day_Countdown_icon_app_1.png" />
+    <AndroidResource Include="Resources\drawable\AdBannerDefault.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_action_download.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_action_download.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_action_download.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_download.png" />
+    <AndroidResource Include="Resources\layout\BigDaysListItemTrial.axml" />
+    <AndroidResource Include="Resources\drawable\Icon99x99.png" />
+    <AndroidResource Include="Resources\layout\FacebookScreen.axml" />
+    <AndroidResource Include="Resources\drawable\Big_Day_Countdown_icon_appSmail.png" />
+    <AndroidResource Include="Resources\drawable\Big_Day_Countdown_icon_appSupper_99_99.png" />
+    <AndroidResource Include="Resources\layout\ImagePreview.axml" />
+    <AndroidResource Include="Resources\drawable\rotate.png" />
+    <AndroidResource Include="Resources\drawable\colorChart.png" />
+    <AndroidResource Include="Resources\drawable\img_help_resize.png" />
+    <AndroidResource Include="Resources\layout\InfoBoxViewControl.axml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\values-v11\" />
+    <Folder Include="Resources\menu\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Key\" />
+    <Folder Include="Lib\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="googleplayservices">
+      <Version>19.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="UniversalImageLoader">
+      <Version>1.9.4.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+</Project>

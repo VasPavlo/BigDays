@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@drawable/Background">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1"
+        android:padding="10dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Remind before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:text="Off"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alertOneIndTitle"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/alertOneInd"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertOneNum"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:editable="false"
+                android:visibility="gone" />
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertOneStr"
+                android:layout_marginLeft="10dp"
+                android:text="Secs"
+                android:focusable="false"
+                android:editable="false"
+                android:clickable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Remind before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:text="Off"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alertTwoIndTitle"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/alertTwoInd"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertTwoNum"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:editable="false"
+                android:visibility="gone" />
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertTwoStr"
+                android:layout_marginLeft="10dp"
+                android:text="Secs"
+                android:focusable="false"
+                android:editable="false"
+                android:clickable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Remind before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:text="Off"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alertThreeIndTitle"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/alertThreeInd"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertThreeNum"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:editable="false"
+                android:visibility="gone" />
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertThreeStr"
+                android:layout_marginLeft="10dp"
+                android:text="Secs"
+                android:focusable="false"
+                android:editable="false"
+                android:clickable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Remind before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:text="Off"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alertForeIndTitle"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/alertForeInd"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertForeNum"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:editable="false"
+                android:visibility="gone" />
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertForeStr"
+                android:layout_marginLeft="10dp"
+                android:text="Secs"
+                android:focusable="false"
+                android:editable="false"
+                android:clickable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="Remind before"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:text="Off"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alertFiveIndTitle"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/alertFiveInd"
+                android:layout_marginLeft="10dp" />
+            <EditText
+                android:inputType="numberDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertFiveNum"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:editable="false"
+                android:visibility="gone" />
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/alertFiveStr"
+                android:layout_marginLeft="10dp"
+                android:text="Secs"
+                android:focusable="false"
+                android:editable="false"
+                android:clickable="true"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout1"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="#4D000000">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addNewBigDays"
+            android:gravity="center">
+            <ImageButton
+                android:src="@drawable/ic_action_accept"
+                android:id="@+id/AlertOk"
+                android:background="@drawable/button_custom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:background="@drawable/Background">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1"
+        android:padding="10dp">
+        <Button
+            android:text="Send Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sendEmail"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:text="Send SMS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sendSMS"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:text="Facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/FacebookBtn"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:text="Twitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TwitterBtn"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+</RelativeLayout>
