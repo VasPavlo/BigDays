@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +16,7 @@
     <AssemblyName>BigDays</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>    
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -41,7 +41,8 @@
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
-    <DebugType></DebugType>
+    <DebugType>
+    </DebugType>
     <AndroidKeyStore>True</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
@@ -109,6 +110,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BitmapToBase64Converter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,18 +295,7 @@
     <AndroidResource Include="Resources\layout\InfoBoxViewControl.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Resources\values-v11\" />
-    <Folder Include="Resources\menu\" />
-    <Folder Include="Resources\drawable-hdpi\" />
-    <Folder Include="Resources\drawable-xhdpi\" />
-    <Folder Include="Resources\drawable-xxhdpi\" />
-    <Folder Include="Key\" />
-    <Folder Include="Lib\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Controls\" />
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <XamarinComponentReference Include="googleplayservices">
       <Version>19.0.0</Version>

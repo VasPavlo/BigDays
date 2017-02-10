@@ -19,8 +19,12 @@ namespace BigDays
 	{
 		BigDaysItem[] items;
 		Activity context;
+        private TextView _countDownDays;
+        private TextView _countDownHours;
+        private TextView _countDownMin;
+        private TextView _countDownSec;
 
-		public BigDaysListAdapter(Activity context, BigDaysItem[] items) : base() {
+        public BigDaysListAdapter(Activity context, BigDaysItem[] items) : base() {
 			this.context = context;
 			this.items = items;
 		}
@@ -54,46 +58,35 @@ namespace BigDays
 
 			//if (items [position]._Name.Length < 15)
 				view.FindViewById<TextView> (Resource.Id.name).Text = items [position]._Name;
-			/*else {
+            /*else {
 				string title = items [position]._Name.Substring (0, 12);
 				title += "...";
 				view.FindViewById<TextView> (Resource.Id.name).Text = title;
 			}*/
 
-			if (items [position]._Repeat != 0) {
+            _countDownDays = view.FindViewById<TextView>(Resource.Id.CountDownDays);
+            _countDownHours = view.FindViewById<TextView>(Resource.Id.CountDownHours);
+            _countDownMin = view.FindViewById<TextView>(Resource.Id.CountDownMin);
+            _countDownSec = view.FindViewById<TextView>(Resource.Id.CountDownSec);
+
+            if (items [position]._Repeat != 0) {
 				items [position] = MainActivity._BDDB.CheckRepeat (items [position]);
 			}
 
 			TimeSpan ts = items [position]._EndDate.Subtract (DateTime.Now);
 			if (ts.Ticks < 0) {
-				view.FindViewById<TextView> (Resource.Id.CountDownDays).SetTextColor (Color.Red);
-				view.FindViewById<TextView> (Resource.Id.CountDownHours).SetTextColor (Color.Red);
-				view.FindViewById<TextView> (Resource.Id.CountDownMin).SetTextColor (Color.Red);
-				view.FindViewById<TextView> (Resource.Id.CountDownSec).SetTextColor (Color.Red);
-
-				string DaysTo = String.Format ("{0:0000}", -ts.Days);
-				view.FindViewById<TextView> (Resource.Id.CountDownDays).Text = DaysTo;
-				string HoursTo = String.Format ("{0:00}", -ts.Hours);
-				view.FindViewById<TextView> (Resource.Id.CountDownHours).Text = HoursTo;
-				string MinTo = String.Format ("{0:00}", -ts.Minutes);
-				view.FindViewById<TextView> (Resource.Id.CountDownMin).Text = MinTo;
-				string SecTo = String.Format ("{0:00}", -ts.Seconds);
-				view.FindViewById<TextView> (Resource.Id.CountDownSec).Text = SecTo;
-			} else {
-				view.FindViewById<TextView> (Resource.Id.CountDownDays).SetTextColor (Color.White);
-				view.FindViewById<TextView> (Resource.Id.CountDownHours).SetTextColor (Color.White);
-				view.FindViewById<TextView> (Resource.Id.CountDownMin).SetTextColor (Color.White);
-				view.FindViewById<TextView> (Resource.Id.CountDownSec).SetTextColor (Color.White);
-
-				string DaysTo = String.Format ("{0:0000}", ts.Days);
-				view.FindViewById<TextView> (Resource.Id.CountDownDays).Text = DaysTo;
-				string HoursTo = String.Format ("{0:00}", ts.Hours);
-				view.FindViewById<TextView> (Resource.Id.CountDownHours).Text = HoursTo;
-				string MinTo = String.Format ("{0:00}", ts.Minutes);
-				view.FindViewById<TextView> (Resource.Id.CountDownMin).Text = MinTo;
-				string SecTo = String.Format ("{0:00}", ts.Seconds);
-				view.FindViewById<TextView> (Resource.Id.CountDownSec).Text = SecTo;
-			}
+                SetTextColorInAllTextView(Color.Red);
+                _countDownDays.Text = String.Format("{0:0000}", -ts.Days);
+                _countDownHours.Text = String.Format("{0:00}", -ts.Hours);
+                _countDownMin.Text = String.Format("{0:00}", -ts.Minutes);
+                _countDownSec.Text = String.Format("{0:00}", -ts.Seconds);
+            } else {
+                SetTextColorInAllTextView(Color.White);
+                _countDownDays.Text = String.Format("{0:0000}", ts.Days);
+                _countDownHours.Text = String.Format("{0:00}", ts.Hours);
+                _countDownMin.Text = String.Format("{0:00}", ts.Minutes);
+                _countDownSec.Text = String.Format("{0:00}", ts.Seconds);
+            }
 
 			view.FindViewById<TextView> (Resource.Id.EndDate).Text = items [position]._EndDate.ToString ("dd/MM/yyyy hh:mm:ss tt");
 			if (!items [position]._IsSetImage) {
@@ -103,6 +96,13 @@ namespace BigDays
 
 			return view;
 		}
-	}
+        public void SetTextColorInAllTextView(Color color)
+        {
+            _countDownDays.SetTextColor(color);
+            _countDownHours.SetTextColor(color);
+            _countDownMin.SetTextColor(color);
+            _countDownSec.SetTextColor(color);
+        }
+    }
 }
 
