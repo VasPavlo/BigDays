@@ -25,6 +25,7 @@ using BigDays.Enums;
 using BigDays.Controls;
 using Android.Util;
 using UniversalImageLoader.Core;
+using BigDays.Models;
 
 namespace BigDays
 {
@@ -51,7 +52,7 @@ namespace BigDays
 
 		private bool _Edit = false;
 
-		private BigDaysItem _Item;
+		private BigDaysItemModel _Item;
 		private int _ID;
 
 	
@@ -378,7 +379,7 @@ namespace BigDays
 			{
 				if (_Edit)
 				{
-					_Item = new BigDaysItem();
+					_Item = new BigDaysItemModel();
 					_Item._ID = _ID;
 					_Item._Name = _UiName.Text.ToString();
 					DateTime d = Convert.ToDateTime(_UiDateEdit.Text.ToString());
@@ -474,7 +475,7 @@ namespace BigDays
 					Finish();
 				}
 				else {
-					_Item = new BigDaysItem();
+					_Item = new BigDaysItemModel();
 					_Item._Name = _UiName.Text.ToString();
 					DateTime d = Convert.ToDateTime(_UiDateEdit.Text.ToString());
 					DateTime t = Convert.ToDateTime(_UiTimeEdit.Text.ToString());
@@ -550,7 +551,7 @@ namespace BigDays
 					}
 					MainActivity._BDDB.Insert(_Item);
 
-					List<BigDaysItem> items = MainActivity._BDDB.SelectBDItems();
+					List<BigDaysItemModel> items = MainActivity._BDDB.SelectBDItems();
 					if (items.Count == 1)
 						MainActivity._BDDB.SetActive(items[0]._ID);
 
@@ -589,7 +590,7 @@ namespace BigDays
 							MainActivity._BDitems.RemoveAt(i);
 
 
-					List<BigDaysItem> items = MainActivity._BDDB.SelectBDItems();
+					List<BigDaysItemModel> items = MainActivity._BDDB.SelectBDItems();
 					if (items.Count > 0)
 						MainActivity._BDDB.SetActive(items[0]._ID);
 

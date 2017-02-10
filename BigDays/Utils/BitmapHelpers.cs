@@ -6,14 +6,15 @@ using Java.Lang;
 
 namespace BigDays
 {
-	using System;
-	using System.IO;
+    using System;
+    using System.IO;
 
-	using Android.Graphics;
-	using Android.Net;
-	using Java.IO;
+    using Android.Graphics;
+    using Android.Net;
+    using Java.IO;
+    using Models;
 
-	public static class BitmapHelpers
+    public static class BitmapHelpers
     {
 		public static int SAVE = 1;
 		public static int InSampleSize = 0;
@@ -149,14 +150,14 @@ namespace BigDays
 			return null;
 		}
 
-		public static void LoadImages(Activity context, List<BigDaysItem> items){
+		public static void LoadImages(Activity context, List<BigDaysItemModel> items){
 			foreach (var item in items) 
 			{
 				LoadImage(context, item);
 			}
 		}
 
-		public static void LoadImage(Activity context, BigDaysItem item){
+		public static void LoadImage(Activity context, BigDaysItemModel item){
 				switch (item._ImageStorage) {
 				case 1:
 					string path_main_bg_def = item._Image.Replace ("small", "");

@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Timers;
+using BigDays.Models;
 
 namespace BigDays
 {
@@ -38,8 +39,8 @@ namespace BigDays
 		{
 			base.OnActivityResult(requestCode, resultCode, data);
 			if ((requestCode == 0) &&(resultCode == Result.Ok) && (data != null)) {
-				List<BigDaysItem> items = MainActivity._BDDB.SelectBDItems ();
-				BigDaysItem item = MainActivity._BDDB.GetLastAddItem ();
+				List<BigDaysItemModel> items = MainActivity._BDDB.SelectBDItems ();
+                BigDaysItemModel item = MainActivity._BDDB.GetLastAddItem ();
 				BitmapHelpers.LoadImage (this, item);
 				MainActivity._BDitems.Add( item );
 				MainActivity._BDitems = MainActivity._BDitems.OrderBy(o=>o._EndDate).ToList();

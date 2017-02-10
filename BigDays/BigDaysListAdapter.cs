@@ -12,19 +12,20 @@ using Android.Graphics.Drawables;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Provider;
+using BigDays.Models;
 
 namespace BigDays
 {
 	public class BigDaysListAdapter: BaseAdapter
 	{
-		BigDaysItem[] items;
+        BigDaysItemModel[] items;
 		Activity context;
         private TextView _countDownDays;
         private TextView _countDownHours;
         private TextView _countDownMin;
         private TextView _countDownSec;
 
-        public BigDaysListAdapter(Activity context, BigDaysItem[] items) : base() {
+        public BigDaysListAdapter(Activity context, BigDaysItemModel[] items) : base() {
 			this.context = context;
 			this.items = items;
 		}
@@ -45,7 +46,7 @@ namespace BigDays
 			Array.Clear(items, 0, items.Length);
 		}
 
-		public void Update(BigDaysItem[] items){
+		public void Update(BigDaysItemModel[] items){
 			this.items = items;
 		}
 
