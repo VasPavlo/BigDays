@@ -3,3 +3,8 @@
 ################################################################################
 
 /BigDays/bin/Debug
+/Components
+/packages
+/Tools
+/BigDays/obj/Debug
+/.vs/BigDays/v14
