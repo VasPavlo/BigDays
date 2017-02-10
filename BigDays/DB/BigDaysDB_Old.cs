@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using Mono.Data.Sqlite;
+using BigDays.DB;
+using BigDays.Models;
 
 namespace BigDays
 {
-	public class BigDaysDB
-	{
+	public class BigDaysDB_Old : IBigDaysDB
+    {
 		private SqliteConnection _connection;
 		private bool _FileExists;
 
@@ -36,7 +38,7 @@ namespace BigDays
 					}
 					_connection.Close ();
 					Random random = new Random();
-					BigDaysItem test = new BigDaysItem () {
+                    var test = new BigDaysItemModel() {
 						_Name = "Weekend Paris",
 						_Notification = random.Next(0, 999999),
 						_EndDate = DateTime.Now.AddYears(1),
@@ -78,7 +80,7 @@ namespace BigDays
 			}
 		}
 			
-		public bool Insert(BigDaysItem[] BDItems){
+		public bool Insert(BigDaysItemModel[] BDItems){
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -97,7 +99,7 @@ namespace BigDays
 			return _FileExists;
 		}
 
-		public bool Insert(BigDaysItem BDItems){
+		public bool Insert(BigDaysItemModel BDItems){
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -114,7 +116,7 @@ namespace BigDays
 			return _FileExists;
 		}
 
-		public bool Update(BigDaysItem BDItems){
+		public bool Update(BigDaysItemModel BDItems){
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -129,7 +131,7 @@ namespace BigDays
 			return _FileExists;
 		}
 
-		public bool UpdatePos(BigDaysItem BDItems){
+		public bool UpdatePos(BigDaysItemModel BDItems){
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -144,8 +146,8 @@ namespace BigDays
 			return _FileExists;
 		}
 
-		public List<BigDaysItem> SelectBDItems(){
-			List<BigDaysItem> BDitems = new List<BigDaysItem>();
+		public List<BigDaysItemModel> SelectBDItems(){
+			List<BigDaysItemModel> BDitems = new List<BigDaysItemModel>();
 
 			if (_FileExists) {
 				_connection.Open ();
@@ -155,7 +157,7 @@ namespace BigDays
 
 					var r = contents.ExecuteReader ();
 					while (r.Read ())
-						BDitems.Add ( new BigDaysItem(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
+						BDitems.Add ( new BigDaysItemModel(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
 							_Name = r ["_Name"].ToString (), 
 							_Notification = Convert.ToInt32(r ["_Notification"].ToString ()),
 							_EndDate = Convert.ToDateTime(r ["_EndDate"].ToString ()), 
@@ -176,8 +178,8 @@ namespace BigDays
 			return BDitems;
 		}
 
-		public BigDaysItem SelectItem(int ID){
-			BigDaysItem BDItem = new BigDaysItem();
+		public BigDaysItemModel SelectItem(int ID){
+            var BDItem = new BigDaysItemModel();
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -186,7 +188,7 @@ namespace BigDays
 
 					var r = contents.ExecuteReader ();
 					while (r.Read ())
-						BDItem = new BigDaysItem(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
+						BDItem = new BigDaysItemModel(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
 							_Name = r ["_Name"].ToString (), 
 							_Notification = Convert.ToInt32(r ["_Notification"].ToString ()),
 							_EndDate = Convert.ToDateTime(r ["_EndDate"].ToString ()), 
@@ -206,8 +208,8 @@ namespace BigDays
 			return BDItem;
 		}
 
-		public BigDaysItem GetLastAddItem(){
-			BigDaysItem BDItem = new BigDaysItem();
+		public BigDaysItemModel GetLastAddItem(){
+			var BDItem = new BigDaysItemModel();
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -216,7 +218,7 @@ namespace BigDays
 
 					var r = contents.ExecuteReader ();
 					while (r.Read ())
-						BDItem = new BigDaysItem(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
+						BDItem = new BigDaysItemModel(){ _ID = Convert.ToInt16(r ["_ID"].ToString()), 
 						_Name = r ["_Name"].ToString (), 
 						_Notification = Convert.ToInt32(r ["_Notification"].ToString ()),
 						_EndDate = Convert.ToDateTime(r ["_EndDate"].ToString ()), 
@@ -257,8 +259,8 @@ namespace BigDays
 			return ret;
 		}
 
-		public BigDaysItem GetCurrentItem(){
-			BigDaysItem BDItem = new BigDaysItem();
+		public BigDaysItemModel GetCurrentItem(){
+			var BDItem = new BigDaysItemModel();
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -267,7 +269,7 @@ namespace BigDays
 
 					var r = contents.ExecuteReader ();
 					while (r.Read ()) {
-						BDItem = new BigDaysItem () { _ID = Convert.ToInt16 (r ["_ID"].ToString ()), 
+						BDItem = new BigDaysItemModel() { _ID = Convert.ToInt16 (r ["_ID"].ToString ()), 
 							_Name = r ["_Name"].ToString (), 
 							_Notification = Convert.ToInt32(r ["_Notification"].ToString ()),
 							_EndDate = Convert.ToDateTime (r ["_EndDate"].ToString ()), 
@@ -306,7 +308,7 @@ namespace BigDays
 		}
 
 		public void SetActive(int ID){
-			BigDaysItem CurrItem = GetCurrentItem ();
+            BigDaysItemModel CurrItem = GetCurrentItem ();
 			if (_FileExists) {
 				_connection.Open ();
 
@@ -324,17 +326,17 @@ namespace BigDays
 		}
 
 		public void CheckRepeats(){
-			List<BigDaysItem> BDitems = this.SelectBDItems ();
+			List<BigDaysItemModel> BDitems = this.SelectBDItems ();
 
 			foreach (var item in BDitems) {
 				if (item._Repeat != 0) {
-					BigDaysItem nItem = this.CheckRepeat (item);
+                    var nItem = this.CheckRepeat (item);
 					this.Update (nItem);
 				}
 			}
 		}
 
-		public BigDaysItem CheckRepeat( BigDaysItem item ){
+		public BigDaysItemModel CheckRepeat(BigDaysItemModel item ){
 			switch (item._Repeat) {
 			case 1:
 				while (true) {

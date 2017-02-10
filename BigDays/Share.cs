@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using Android.Content.PM;
+using BigDays.Models;
 
 namespace BigDays
 {
@@ -11,7 +12,7 @@ namespace BigDays
 	public class Share : Activity
 	{
 		private int _ID;
-		private BigDaysItem _Item;
+		private BigDaysItemModel _Item;
 
 		protected override void OnCreate (Bundle bundle)
 		{

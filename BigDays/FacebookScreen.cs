@@ -10,6 +10,7 @@ using Xamarin.Facebook;
 using Xamarin.Facebook.Model;
 using Xamarin.Facebook.Widget;
 using Android.Views.InputMethods;
+using BigDays.Models;
 
 #if DEBUG
 [assembly:MetaData ("com.facebook.sdk.ApplicationId", Value ="@string/facebook_app_id_debug")]
@@ -28,7 +29,7 @@ namespace BigDays
 	public class FacebookScreen : FragmentActivity
 	{
 		private int _ID;
-		private BigDaysItem _Item;
+		private BigDaysItemModel _Item;
 		private UiLifecycleHelper _uiHelper;
 		private static readonly string[] PERMISSIONS = new String [] { "publish_actions" };
 		private readonly String PENDING_ACTION_BUNDLE_KEY = "com.prosellersworld.bigdaysfree:PendingAction";

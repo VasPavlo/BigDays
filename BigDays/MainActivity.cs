@@ -14,6 +14,9 @@ using LeadboltXamarin;
 using AdBuddiz.Xamarin;
 using System.IO;
 using Android.Util;
+using BigDays.Services;
+using BigDays.DB;
+using BigDays.Models;
 
 namespace BigDays
 {
@@ -30,10 +33,10 @@ namespace BigDays
 		private float _viewY;
 		public static int _DisplayWidth;
 		public static int _DisplayHeight;
-		public static BigDaysDB _BDDB;
+		public static IBigDaysDB _BDDB;
 		private Handler _TimerHandler;
 		public int _ActiveBD;
-		private BigDaysItem _CurrentItem;
+		private BigDaysItemModel _CurrentItem;
 		private static string _CurrentImgStr;
 		public static int _InfoBoxLeft = 0;
 		public static int _InfoBoxTop = 0;
@@ -48,10 +51,11 @@ namespace BigDays
 		const int ADDNEW_ID = 2;
 		public static List<AlarmManager> _amMains = new List<AlarmManager> (); 
 		public static List<PendingIntent> _PIMains = new List<PendingIntent> ();
-		public static List<BigDaysItem> _BDitems; 
+		public static List<BigDaysItemModel> _BDitems;
+        public static DataService DataService;
 
 
-		protected override void OnCreate (Bundle bundle)
+        protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
@@ -129,8 +133,17 @@ namespace BigDays
 
 			long max_memory = Runtime.GetRuntime().MaxMemory();
 			long total_memory = Runtime.GetRuntime().TotalMemory();
-			_BDDB = new BigDaysDB();
-			_BDDB.ConnectToDB ("BigDays.db3");
+
+            DataService = new DataService();
+            //var eee1 = DataService.CreateDatabase("BigDaysNew.db3");
+            //var eee2 =  DataService.InsertUpdateData(new BigDaysItem { _Name = "Test" });
+            //var eee3 = DataService.GetAll();
+
+
+            //_BDDB = new BigDaysDB();
+
+            _BDDB = new DataService();
+            _BDDB.ConnectToDB ("BigDays.db3");
 			_BDDB.CreateTable ();
 			_BDDB.CheckRepeats ();
 			_BDitems = MainActivity._BDDB.SelectBDItems ();
@@ -274,7 +287,7 @@ namespace BigDays
 					for (int i = 0; i < _BDitems.Count; i++)
 						if (_BDitems[i]._ID == _CurrentItem._ID)
 						{
-							BigDaysItem item = _BDDB.SelectItem(_CurrentItem._ID);
+                            BigDaysItemModel item = _BDDB.SelectItem(_CurrentItem._ID);
 							BitmapHelpers.LoadImage(this, item);
 							_BDitems[i] = item;
 							this.ShowImage(item);
@@ -317,7 +330,7 @@ namespace BigDays
 			}
 			else if ((requestCode == ADDNEW_ID) && (resultCode == Result.Ok))
 			{
-				BigDaysItem item = MainActivity._BDDB.GetLastAddItem();
+                BigDaysItemModel item = MainActivity._BDDB.GetLastAddItem();
 				BitmapHelpers.LoadImage(this, item);
 				MainActivity._BDitems.Add(item);
 				_infoBoxControl.Visibility = ViewStates.Visible;
@@ -375,7 +388,7 @@ namespace BigDays
 			base.OnStop ();
 		}	
 
-		void ShowImage(BigDaysItem item){
+		void ShowImage(BigDaysItemModel item){
 			//if (_CurrentImgStr != item._Image) {
 			//_MainLayout.SetBackgroundDrawable (item._BigImg);
 			try{
