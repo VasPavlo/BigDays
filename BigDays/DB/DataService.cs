@@ -13,16 +13,28 @@ namespace BigDays.Services
     {
         private bool _FileExists;
         private string _pathToDatabase;
-        private SQLiteConnection _database;
+        private SQLiteConnection _database { get { return new SQLiteConnection(_pathToDatabase); } }
 
         public bool ConnectToDB(string sDBPath)
         {
-            _pathToDatabase = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), sDBPath);
-            _database = new SQLiteConnection(_pathToDatabase);
+            _pathToDatabase = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), sDBPath);         
             _FileExists = System.IO.File.Exists(_pathToDatabase);                     
             return _FileExists;
         }
 
+        public bool CreateTableEnpty()
+        {
+            try
+            {
+                _database.CreateTable<BigDaysItemModel>();
+                _database.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         public bool CreateTable()
         {
@@ -49,6 +61,7 @@ namespace BigDays.Services
                     _ChangePos = 0
                 };
                 _database.Insert(firstItem);
+                _database.Close();
             }
             //}
             return _FileExists;
@@ -64,35 +77,77 @@ namespace BigDays.Services
 
         public bool Insert(BigDaysItemModel BDItem)
         {
-            return InsertUpdateData(BDItem);
+            try
+            {
+                var db = new SQLiteConnection(_pathToDatabase);
+                db.Insert(BDItem);
+                _database.Close();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                return false;
+            }          
         }
 
         public bool Insert(BigDaysItemModel[] BDItems)
         {
-            return InsertUpdateAllData(BDItems);
+            try
+            {
+                var db = new SQLiteConnection(_pathToDatabase);
+                db.InsertAll(BDItems);
+                _database.Close();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                return false;
+            }
         }
 
 
         public bool Update(BigDaysItemModel BDItem)
         {
-            return InsertUpdateData(BDItem);
+            try
+            {
+                var db = new SQLiteConnection(_pathToDatabase);
+                db.Update(BDItem);
+                _database.Close();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                return false;
+            }
         }
 
         public bool UpdatePos(BigDaysItemModel BDItem)
-        {
-            BDItem._ChangePos = 1;
-            return InsertUpdateData(BDItem);
+        {            
+            try
+            {
+                BDItem._ChangePos = 1;
+                var db = new SQLiteConnection(_pathToDatabase);
+                db.Update(BDItem);
+                _database.Close();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                return false;
+            }            
         }
 
         public BigDaysItemModel SelectItem(int ID)
         {           
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == ID);
+            _database.Close();
             return data;
         }
 
         public List<BigDaysItemModel> SelectBDItems()
         {                 
             var data = _database.Table<BigDaysItemModel>().OrderByDescending(x=>x._Name).ToList();
+            _database.Close();
             return data;
         }
 
@@ -100,20 +155,23 @@ namespace BigDays.Services
         public BigDaysItemModel GetLastAddItem()
         {            
             var data = _database.Table<BigDaysItemModel>().LastOrDefault();
+            _database.Close();
             return data;
         }
 
         public int GetLastID()
         {          
-            var data = _database.Table<BigDaysItemModel>().OrderBy(x=>x._ID).LastOrDefault();            
+            var data = _database.Table<BigDaysItemModel>().OrderBy(x=>x._ID).LastOrDefault();
+            _database.Close();
             return data != null ? data._ID : 0;
         }
 
 
         public BigDaysItemModel GetCurrentItem()
         {           
-           //var n = _database.Table<BigDaysItem>();
+           var n = _database.Table<BigDaysItemModel>();
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x=>x._Active == 1);
+            _database.Close();
             return data;
         }
 
@@ -122,6 +180,7 @@ namespace BigDays.Services
         {           
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == ID);
             _database.Delete(data);
+            _database.Close();
         }
 
 
@@ -130,7 +189,8 @@ namespace BigDays.Services
             SetDeActivate();                      
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == ID);
             data._Active = 1;
-            _database.Update(data);           
+            _database.Update(data);
+            _database.Close();
         }
 
         public void SetDeActivate()
@@ -141,6 +201,7 @@ namespace BigDays.Services
                 var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == CurrItem._ID);
                 data._Active = 0;
                 _database.Update(data);
+                _database.Close();
             }
         }
 
@@ -156,7 +217,7 @@ namespace BigDays.Services
                     var nItem = this.CheckRepeat(item);
                     this.Update(nItem);
                 }
-            }
+            }            
         }
 
         public BigDaysItemModel CheckRepeat(BigDaysItemModel item)
@@ -210,42 +271,6 @@ namespace BigDays.Services
             }
             return item;
         }
-
-       
-
-
-
-
-        public bool InsertUpdateData(BigDaysItemModel data)
-        {
-            try
-            {
-                var db = new SQLiteConnection(_pathToDatabase);
-                if (db.Insert(data) != 0)
-                    db.Update(data);
-                return true;
-            }
-            catch (SQLiteException ex)
-            {
-                return false;
-            }
-        }
-
-        public bool InsertUpdateAllData(IEnumerable<BigDaysItemModel> data)
-        {
-            try
-            {
-                var db = new SQLiteConnection(_pathToDatabase);
-                if (db.InsertAll(data) != 0)
-                    db.UpdateAll(data);
-                return true;
-            }
-            catch (SQLiteException ex)
-            {
-                return false;
-            }
-        }
-
 
 
        //private bool _FileExists;

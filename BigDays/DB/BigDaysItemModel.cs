@@ -25,7 +25,7 @@ namespace BigDays.Models
         public int _ImageStorage { get; set; }
         public int _Repeat { get; set; }
         public string _Alerts { get; set; }
-        public bool _IsSetImage = false;
+        public bool _IsSetImage { get; set; }
         public int _Active { get; set; }
         public string ImageBase64 { get; set; }
         [Ignore]

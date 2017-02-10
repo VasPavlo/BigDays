@@ -130,13 +130,17 @@ namespace BigDays
 
 
 			long max_memory = Runtime.GetRuntime().MaxMemory();
-			long total_memory = Runtime.GetRuntime().TotalMemory();                     
+			long total_memory = Runtime.GetRuntime().TotalMemory();
 
-            //_BDDB = new BigDaysDB_Old();
+            new MigrationDB_OldInNew("BigDays.db3", "BigDaysNew.db3");
 
             _BDDB = new DataService();
-            _BDDB.ConnectToDB ("BigDaysNew.db3");
-			_BDDB.CreateTable ();
+            _BDDB.ConnectToDB("BigDaysNew.db3");
+
+            //_BDDB = new BigDaysDB_Old();
+            //_BDDB.ConnectToDB("BigDays.db3");
+
+            _BDDB.CreateTable ();
 			_BDDB.CheckRepeats ();
 			_BDitems = MainActivity._BDDB.SelectBDItems ();
 			for (int i = 0; i < _BDitems.Count; i++)

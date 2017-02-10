@@ -378,8 +378,7 @@ namespace BigDays
 			_UiSeveOrEdit.Click += (sender, e) =>
 			{
 				if (_Edit)
-				{
-					_Item = new BigDaysItemModel();
+				{					
 					_Item._ID = _ID;
 					_Item._Name = _UiName.Text.ToString();
 					DateTime d = Convert.ToDateTime(_UiDateEdit.Text.ToString());
