@@ -14,13 +14,18 @@ using Java.Security;
 
 namespace BigDays
 {
-	[Activity (Label = "Feedback", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class Feedback : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Feedback);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarFeedback);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Feedback";
+
 			// Create your application here
 
 			var ui_rateBtn = FindViewById<Button> (Resource.Id.rateBtn);

@@ -1,14 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <!-- the theme applied to the application or activity --> 
-	<style name="CustomActionBarTheme" parent="@android:style/Theme.Light">
-     <item name="android:windowActionBarOverlay">true</item>
+	<style name="CustomActionBarTheme" parent="@android:style/Theme.Material.Light">
+
+	 <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+     <!--<item name="android:windowActionBarOverlay">true</item>-->
+		
 <!--	<item name="android:actionBarStyle">@style/ActionBarStyle</item>-->
     <item name="android:statusBarColor">#FF000000</item>
 <!--    <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
    </style> 
 
-     <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar">     
+     <style name="ActionBarStyle" parent="@android:style/Widget.Material.ActionBar">     
        <!--<item name="android:background">@android:color/transparent</item>-->
        <item name="android:backgroundSplit">#66000000</item>
        <item name="android:height">0dp</item>
@@ -26,16 +30,6 @@
       <item name="android:windowNoTitle">true</item>
 	      <item name="android:windowFullscreen">true</item>
 	  </style>
-
-
-	<!--<style name="Theme.Transparent" parent="android:Theme">
-    <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowBackground">@android:color/transparent</item>
-    <item name="android:windowContentOverlay">@null</item>
-    <item name="android:windowNoTitle">true</item>
-    <item name="android:windowIsFloating">false</item>
-    <item name="android:backgroundDimEnabled">false</item>
-</style>-->    
 
 </resources>
 

@@ -39,8 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:maxWidth="25px"
-                android:maxHeight="25px"
                 android:layout_margin="3dp"
                 android:background="#ffebe1e1">
                 <ImageView
@@ -51,9 +49,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:maxWidth="25px"
-                    android:maxHeight="25px">
+                    android:orientation="vertical">
                     <TextView
                         android:text="Big Days of Our Lives Countdown for Android"
                         android:layout_width="match_parent"

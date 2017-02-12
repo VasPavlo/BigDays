@@ -2,28 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px"
     android:background="@drawable/Background">
+    <include
+        android:id="@+id/toolbarAlerts"
+        layout="@layout/toolbar" />
     <LinearLayout
         android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/linearLayout1"
+        android:layout_below="@+id/toolbarAlerts"
         android:padding="10dp">
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout3">
             <LinearLayout
                 android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -33,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="12sp"
+                    android:textColor="@color/@android:color/darker_gray"
                     android:layout_marginTop="5dp" />
                 <TextView
                     android:text="Off"
@@ -50,9 +47,11 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:inputType="numberDecimal"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:gravity="center"
                 android:id="@+id/alertOneNum"
+                android:background="@android:color/white"
                 android:text="1"
                 android:layout_marginLeft="10dp"
                 android:focusable="false"
@@ -60,9 +59,11 @@
                 android:editable="false"
                 android:visibility="gone" />
             <AutoCompleteTextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center"
                 android:id="@+id/alertOneStr"
+                android:background="@android:color/white"
                 android:layout_marginLeft="10dp"
                 android:text="Secs"
                 android:focusable="false"
@@ -91,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="12sp"
+                    android:textColor="@color/@android:color/darker_gray"
                     android:layout_marginTop="5dp" />
                 <TextView
                     android:text="Off"
@@ -108,24 +110,28 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:inputType="numberDecimal"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:gravity="center"
                 android:id="@+id/alertTwoNum"
                 android:text="1"
                 android:layout_marginLeft="10dp"
                 android:focusable="false"
                 android:clickable="true"
                 android:editable="false"
+                android:background="@android:color/white"
                 android:visibility="gone" />
             <AutoCompleteTextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center"
                 android:id="@+id/alertTwoStr"
                 android:layout_marginLeft="10dp"
                 android:text="Secs"
                 android:focusable="false"
                 android:editable="false"
                 android:clickable="true"
+                android:background="@android:color/white"
                 android:visibility="gone" />
         </LinearLayout>
         <LinearLayout
@@ -149,6 +155,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="12sp"
+                    android:textColor="@color/@android:color/darker_gray"
                     android:layout_marginTop="5dp" />
                 <TextView
                     android:text="Off"
@@ -166,38 +173,38 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:inputType="numberDecimal"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:gravity="center"
                 android:id="@+id/alertThreeNum"
                 android:text="1"
                 android:layout_marginLeft="10dp"
                 android:focusable="false"
                 android:clickable="true"
                 android:editable="false"
+                android:background="@android:color/white"
                 android:visibility="gone" />
             <AutoCompleteTextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center"
                 android:id="@+id/alertThreeStr"
                 android:layout_marginLeft="10dp"
                 android:text="Secs"
                 android:focusable="false"
                 android:editable="false"
                 android:clickable="true"
+                android:background="@android:color/white"
                 android:visibility="gone" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout3"
             android:layout_marginTop="10dp">
             <LinearLayout
                 android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -207,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="12sp"
+                    android:textColor="@color/@android:color/darker_gray"
                     android:layout_marginTop="5dp" />
                 <TextView
                     android:text="Off"
@@ -224,38 +232,38 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:inputType="numberDecimal"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:gravity="center"
                 android:id="@+id/alertForeNum"
                 android:text="1"
                 android:layout_marginLeft="10dp"
                 android:focusable="false"
                 android:clickable="true"
                 android:editable="false"
+                android:background="@android:color/white"
                 android:visibility="gone" />
             <AutoCompleteTextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center"
                 android:id="@+id/alertForeStr"
                 android:layout_marginLeft="10dp"
                 android:text="Secs"
                 android:focusable="false"
                 android:editable="false"
                 android:clickable="true"
+                android:background="@android:color/white"
                 android:visibility="gone" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout3"
             android:layout_marginTop="10dp">
             <LinearLayout
                 android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
@@ -265,6 +273,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView1"
                     android:textSize="12sp"
+                    android:textColor="@color/@android:color/darker_gray"
                     android:layout_marginTop="5dp" />
                 <TextView
                     android:text="Off"
@@ -282,30 +291,32 @@
                 android:layout_marginLeft="10dp" />
             <EditText
                 android:inputType="numberDecimal"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:gravity="center"
                 android:id="@+id/alertFiveNum"
                 android:text="1"
                 android:layout_marginLeft="10dp"
                 android:focusable="false"
                 android:clickable="true"
                 android:editable="false"
+                android:background="@android:color/white"
                 android:visibility="gone" />
             <AutoCompleteTextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:gravity="center"
                 android:id="@+id/alertFiveStr"
                 android:layout_marginLeft="10dp"
                 android:text="Secs"
                 android:focusable="false"
                 android:editable="false"
                 android:clickable="true"
+                android:background="@android:color/white"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout1"
@@ -315,8 +326,6 @@
         android:background="#4D000000">
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addNewBigDays"

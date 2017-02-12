@@ -8,7 +8,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity (Label = "Share", Theme = "@style/CustomActionBarTheme", ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Theme = "@style/CustomActionBarTheme", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class Share : Activity
 	{
 		private int _ID;
@@ -18,6 +18,10 @@ namespace BigDays
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Share);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarShare);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Share";
 
 			_ID = Intent.GetIntExtra ("ID", 0);
 
