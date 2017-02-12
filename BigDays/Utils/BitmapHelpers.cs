@@ -19,7 +19,6 @@ namespace BigDays
 		public static int SAVE = 1;
 		public static int InSampleSize = 0;
 
-
 		public static Bitmap LoadAndResizeBitmap(this string fileName, int width, int height)
         {
             // First we get the the dimensions of the file on disk

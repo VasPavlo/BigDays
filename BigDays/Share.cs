@@ -8,7 +8,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity (Label = "Share", ScreenOrientation = ScreenOrientation.Portrait)]			
+	[Activity (Label = "Share", Theme = "@style/CustomActionBarTheme", ScreenOrientation = ScreenOrientation.Portrait)]			
 	public class Share : Activity
 	{
 		private int _ID;

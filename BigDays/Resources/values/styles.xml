@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <!-- the theme applied to the application or activity --> 
-	<style name="CustomActionBarTheme"
-           parent="@android:style/Theme.Light">
-        <item name="android:windowActionBarOverlay">true</item>
-		<item name="android:actionBarStyle">@style/ActionBarStyle</item>
-    </style> 
+	<style name="CustomActionBarTheme" parent="@android:style/Theme.Light">
+     <item name="android:windowActionBarOverlay">true</item>
+<!--	<item name="android:actionBarStyle">@style/ActionBarStyle</item>-->
+    <item name="android:statusBarColor">#FF000000</item>
+<!--    <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+   </style> 
 
      <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar">     
        <!--<item name="android:background">@android:color/transparent</item>-->
        <item name="android:backgroundSplit">#66000000</item>
        <item name="android:height">0dp</item>
        <item name="android:icon">@android:color/transparent</item>
-       <item name="android:background">@drawable/splashscreen</item>
+<!--       <item name="android:background">@drawable/splashscreen</item>       -->
      </style>
 
      <style name="Theme.Splash" parent="android:Theme">
@@ -21,11 +22,9 @@
 	    <item name="android:windowFullscreen">true</item>
 	  </style>
 
-  <!--android:Theme-->
-  <style name="CustomActionBarTheme.ImagePreview" parent="CustomActionBarTheme">
-   
-    <item name="android:windowNoTitle">true</item>
-	    <item name="android:windowFullscreen">true</item>
+    <style name="CustomActionBarTheme.ImagePreview" parent="CustomActionBarTheme">   
+      <item name="android:windowNoTitle">true</item>
+	      <item name="android:windowFullscreen">true</item>
 	  </style>
 
 

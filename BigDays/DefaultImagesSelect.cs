@@ -14,7 +14,7 @@ using Android.Util;
 
 namespace BigDays
 {
-	[Activity (Label = "Select from default images", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "Select from default images", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class DefaultImagesSelect : Activity
 	{
 		// Number of columns of Grid View

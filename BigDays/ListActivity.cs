@@ -13,7 +13,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity (Label = "Big Days", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "Big Days", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class ListActivity : Activity
 	{
 		private ListView _UiBigDaysListView;

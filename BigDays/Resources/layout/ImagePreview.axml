@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout1311"
             android:gravity="center">
-            <ImageButton 
+            <ImageButton
                 android:src="@drawable/rotate"
                 android:id="@+id/btnRotate"
                 android:background="@drawable/button_custom"

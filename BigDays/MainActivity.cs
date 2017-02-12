@@ -20,9 +20,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-
-	[Activity (Label = "BigDays", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-	//, Theme = "@style/CustomActionBarTheme"
+	[Activity (Label = "BigDays", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]	
 	public class MainActivity : Activity, View.IOnTouchListener , IAppModuleListener
 	{
 		private System.Timers.Timer _timer;
@@ -73,13 +71,17 @@ namespace BigDays
 			SetContentView (Resource.Layout.Main);
 
 			_infoBoxControl = (InfoBoxControl)FindViewById(Resource.Id.NewInfoBoxControl);
-
 			_timer = new System.Timers.Timer();
 
-			//ActionBar.SetDisplayShowHomeEnabled (false);
-			//ActionBar.SetDisplayShowTitleEnabled (false);
+            //Window window = this.Window;
+            //window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            //window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            //window.SetStatusBarColor(Color.Black);
 
-			#if _TRIAL_
+            //ActionBar.SetDisplayShowHomeEnabled (false);
+            //ActionBar.SetDisplayShowTitleEnabled (false);
+
+#if _TRIAL_
 			try
 			{
 				var ad = new AdView(this);
@@ -108,9 +110,9 @@ namespace BigDays
 			{
 				int i = 5;
 			}
-			#endif
+#endif
 
-			var trialMainImg = (ImageView)FindViewById (Resource.Id.trialMainImg);
+            var trialMainImg = (ImageView)FindViewById (Resource.Id.trialMainImg);
 			var shopping = FindViewById<ImageButton> (Resource.Id.shopping);
 
 			#if _TRIAL_

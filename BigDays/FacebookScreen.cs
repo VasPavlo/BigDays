@@ -25,7 +25,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity (Label = "@string/app_name", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustResize)]
+	[Activity (Label = "@string/app_name", Theme = "@style/CustomActionBarTheme", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustResize)]
 	public class FacebookScreen : FragmentActivity
 	{
 		private int _ID;

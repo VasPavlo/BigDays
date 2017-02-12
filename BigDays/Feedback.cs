@@ -14,7 +14,7 @@ using Java.Security;
 
 namespace BigDays
 {
-	[Activity (Label = "Feedback", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "Feedback", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class Feedback : Activity
 	{
 		protected override void OnCreate (Bundle bundle)

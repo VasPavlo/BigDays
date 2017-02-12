@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace BigDays
 {
-	[Activity (Label = "Alerts", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Label = "Alerts", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class Alerts : Activity
 	{
 		private string _AlertStr;

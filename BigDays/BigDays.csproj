@@ -174,7 +174,6 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\values-v11\styles.xml" />
     <AndroidResource Include="Resources\menu\main.xml" />
     <AndroidResource Include="Resources\drawable\Icon62.png" />
     <AndroidResource Include="Resources\drawable\add.png" />
@@ -199,7 +198,9 @@
     <AndroidResource Include="Resources\layout\BigDaysListItem.axml" />
     <AndroidResource Include="Resources\drawable\Background.png" />
     <AndroidResource Include="Resources\drawable\BackgroundLight.png" />
-    <AndroidResource Include="Resources\layout\NewBigDays.axml" />
+    <AndroidResource Include="Resources\layout\NewBigDays.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\img17small.jpg" />
     <AndroidResource Include="Resources\drawable\editbtnbg.png" />
     <AndroidResource Include="Resources\drawable\alertbtnbg.png" />

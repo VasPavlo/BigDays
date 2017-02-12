@@ -29,21 +29,16 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity(Label = "New Big Day", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity(Label = "New Big Day", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class NewBigDays : Activity
 	{
 		[Splice(Resource.Id.photo_AlbumBtn)]
 		private Button photo_AlbumBtn;
 
-
 		[SpliceClick(Resource.Id.photo_AlbumBtn)]
 		void OnPhotoClicked(object sender, EventArgs e)
 		{
-			//Intent photoPickerIntent = new Intent("android.intent.action.GET_CONTENT");
-			//photoPickerIntent.SetType("image/*");
-			//StartActivityForResult(photoPickerIntent, (int)RequestCode.PickImage);
-
-			Intent = new Intent();
+            Intent = new Intent();
 			Intent.SetType("image/*");
 			Intent.SetAction(Intent.ActionGetContent);
 			Intent.AddCategory(Intent.CategoryOpenable);
@@ -94,7 +89,6 @@ namespace BigDays
 		private DateTime date;
 
 		private int[] garbage = new int[6];
-
 
 		NotificationManager _NM;
 
@@ -263,7 +257,7 @@ namespace BigDays
 			_UiTimeEdit.Click += (o, e) => ShowDialog(TIME_DIALOG_ID);
 
 			_UiDateEdit = FindViewById<EditText>(Resource.Id.dateEdit);
-			_UiDateEdit.Click += delegate { ShowDialog(DATE_DIALOG_ID); };
+			_UiDateEdit.Click += (o, e) => { ShowDialog(DATE_DIALOG_ID); };
 
 			_UiEditRepeat = FindViewById<EditText>(Resource.Id.editRepeat);
 			_UiEditRepeat.Click += (sender, e) =>
@@ -296,7 +290,6 @@ namespace BigDays
 
 				if (_ID != 0)
 				{
-
 					_Item = MainActivity._BDDB.SelectItem(_ID);
 
 					_UiName.Text = _Item._Name;
@@ -363,8 +356,6 @@ namespace BigDays
 				var IntentDefaultImagesSelect = new Intent(this, typeof(DefaultImagesSelect));
 				StartActivityForResult(IntentDefaultImagesSelect, 0);
 			};
-
-
 
 			if (IsThereAnAppToTakePictures())
 			{
@@ -672,9 +663,9 @@ namespace BigDays
 		protected override Dialog OnCreateDialog(int id)
 		{
 			if (id == TIME_DIALOG_ID)
-				return new TimePickerDialog(this, TimePickerCallback, hour, minute, false);
+				return new TimePickerDialog(this, AlertDialog.ThemeDeviceDefaultLight, TimePickerCallback, hour, minute, false);
 			else if (id == DATE_DIALOG_ID)
-				return new DatePickerDialog(this, OnDateSet, date.Year, date.Month - 1, date.Day);
+				return new DatePickerDialog(this, AlertDialog.ThemeDeviceDefaultLight, OnDateSet, date.Year, date.Month - 1, date.Day);
 
 			return null;
 		}
