@@ -8,9 +8,7 @@ namespace BigDays
 	[BroadcastReceiver]
 	public class NotificationView: BroadcastReceiver
 	{
-        public IBigDaysDB _BDDB;
-        public NotificationView(){
-		}
+        public IBigDaysDB _BDDB;       
 
 		public override void OnReceive(Context context, Intent intent) {
 			NotificationManager mNM;
@@ -27,6 +25,8 @@ namespace BigDays
              _BDDB.SetActive(ItemID);            
 
             Notification n = new Notification(Resource.Drawable.Icon62, message, Java.Lang.JavaSystem.CurrentTimeMillis());
+			n.Flags = NotificationFlags.AutoCancel;
+
 			Intent i = new Intent (context, typeof(MainActivity));
 			i.PutExtra ("ItemID", ItemID);
 			i.SetFlags (ActivityFlags.ClearTop | ActivityFlags.SingleTop);

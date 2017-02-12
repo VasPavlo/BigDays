@@ -1,15 +1,20 @@
 ﻿<Properties StartupConfiguration="{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.ItemProperties.BigDays AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.4d0024c8b4b5901d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\Dev\BigDays\BIgDays\BigDays\ImagePreview.cs" line="187" column="1" />
+      <Breakpoint file="D:\Dev\BigDays\BIgDays\BigDays\Utils\ImageHelpers.cs" line="109" column="32" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\NewBigDays.cs">
     <Files>
       <File FileName="BigDays\ListActivity.cs" Line="57" Column="52" />
-      <File FileName="BigDays\NewBigDays.cs" Line="561" Column="5" NotebookId="1" />
+      <File FileName="BigDays\ImagePreview.cs" Line="187" Column="1" />
+      <File FileName="BigDays\NewBigDays.cs" Line="557" Column="4" NotebookId="1" />
       <File FileName="BigDays\Feedback.cs" Line="25" Column="67" NotebookId="1" />
+      <File FileName="BigDays\Notifications\NotificationView.cs" Line="11" Column="33" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>

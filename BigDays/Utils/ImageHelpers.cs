@@ -104,9 +104,9 @@ namespace BigDays
 			cursor.MoveToFirst();
 
 			var path =  cursor.GetString(column_index);
-			var nameFile = "jnhguigh";//cursor.GetString(column_DisplayName);
+			string filename = System.IO.Path.GetFileName(contentUri.Path);
 
-			return Tuple.Create(nameFile, path);
+			return Tuple.Create(filename, path);
 		}
 
 

@@ -386,7 +386,7 @@ namespace BigDays
 					DateTime d1Main = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 					TimeSpan tsMain = new TimeSpan(_Item._EndDate.ToFileTimeUtc() - d1Main.Ticks);
 					long whensysMain = (long)_Item._EndDate.ToUniversalTime().Subtract(d1Main).TotalMilliseconds;
-					Intent IntentMainNot = new Intent(this, typeof(NotificationMainView));
+					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
 					IntentMainNot.PutExtra("ID", _Item._Notification);
 					IntentMainNot.PutExtra("ItemID", _Item._ID);
 					IntentMainNot.PutExtra("Title", _Item._Name);
@@ -480,7 +480,7 @@ namespace BigDays
 					DateTime d1Main = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 					TimeSpan tsMain = new TimeSpan(_Item._EndDate.ToFileTimeUtc() - d1Main.Ticks);
 					long whensysMain = (long)_Item._EndDate.ToUniversalTime().Subtract(d1Main).TotalMilliseconds;
-					Intent IntentMainNot = new Intent(this, typeof(NotificationMainView));
+					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
 					int ItemID = MainActivity._BDDB.GetLastID() + 1;
 					IntentMainNot.PutExtra("ID", _Item._Notification);
 					IntentMainNot.PutExtra("ItemID", ItemID);
@@ -559,7 +559,7 @@ namespace BigDays
 			{
 				if (_Edit)
 				{
-					Intent IntentMainNot = new Intent(this, typeof(NotificationMainView));
+					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
 					PendingIntent mAlarmMainSenderCansel = PendingIntent.GetBroadcast(this, _Notification, IntentMainNot, PendingIntentFlags.UpdateCurrent);
 					AlarmManager amMain = (AlarmManager)GetSystemService(Context.AlarmService);
 					amMain.Cancel(mAlarmMainSenderCansel);

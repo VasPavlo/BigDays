@@ -44,7 +44,7 @@
     <DebugType>
     </DebugType>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -142,7 +142,6 @@
     <Compile Include="Feedback.cs" />
     <Compile Include="LoadAppScreen.cs" />
     <Compile Include="AlertDlg.cs" />
-    <Compile Include="Notifications\NotificationMainView.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Ad\AdListener.cs" />
     <Compile Include="FacebookScreen.cs" />
