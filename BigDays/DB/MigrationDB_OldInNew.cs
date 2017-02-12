@@ -23,6 +23,8 @@ namespace BigDays.DB
         private bool _FileExists;
         public MigrationDB_OldInNew(string sDBPathOld, string sDBPathNew)
         {
+            try
+            {            
             string dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), sDBPathOld);
             _FileExists = System.IO.File.Exists(dbPath);
 
@@ -41,6 +43,12 @@ namespace BigDays.DB
 
                     System.IO.File.Delete(dbPath);
                 }
+            }
+
+            }
+            catch (Exception)
+            {
+                //              
             }
         }
     }

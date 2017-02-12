@@ -21,20 +21,22 @@
 	    <item name="android:windowFullscreen">true</item>
 	  </style>
 
-	<style name="Theme.ImagePreview" parent="android:Theme">
-	    <item name="android:windowNoTitle">true</item>
+  <!--android:Theme-->
+  <style name="CustomActionBarTheme.ImagePreview" parent="CustomActionBarTheme">
+   
+    <item name="android:windowNoTitle">true</item>
 	    <item name="android:windowFullscreen">true</item>
 	  </style>
 
 
-	<style name="Theme.Transparent" parent="android:Theme">
+	<!--<style name="Theme.Transparent" parent="android:Theme">
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsFloating">false</item>
     <item name="android:backgroundDimEnabled">false</item>
-</style>    
+</style>-->    
 
 </resources>
 

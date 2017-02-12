@@ -2823,6 +2823,9 @@ namespace BigDays
 			// aapt resource value: 0x7f060097
 			public const int CustomActionBarTheme = 2131099799;
 			
+			// aapt resource value: 0x7f06009a
+			public const int CustomActionBarTheme_ImagePreview = 2131099802;
+			
 			// aapt resource value: 0x7f060067
 			public const int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 2131099751;
 			
@@ -3009,9 +3012,6 @@ namespace BigDays
 			// aapt resource value: 0x7f06008f
 			public const int Theme_IAPTheme = 2131099791;
 			
-			// aapt resource value: 0x7f06009a
-			public const int Theme_ImagePreview = 2131099802;
-			
 			// aapt resource value: 0x7f060002
 			public const int Theme_MediaRouter = 2131099650;
 			
@@ -3020,9 +3020,6 @@ namespace BigDays
 			
 			// aapt resource value: 0x7f060099
 			public const int Theme_Splash = 2131099801;
-			
-			// aapt resource value: 0x7f06009b
-			public const int Theme_Transparent = 2131099803;
 			
 			// aapt resource value: 0x7f060092
 			public const int WalletFragmentDefaultButtonTextAppearance = 2131099794;

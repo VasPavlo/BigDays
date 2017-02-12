@@ -15,7 +15,7 @@ using UniversalImageLoader.Core;
 
 namespace BigDays
 {
-	[Activity(Theme = "@style/Theme.ImagePreview", Label = "Image Preview", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity(Theme = "@style/CustomActionBarTheme.ImagePreview", Label = "Image Preview", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class ImagePreview : Activity
 	{
 		private Bitmap _bmp;
@@ -35,10 +35,10 @@ namespace BigDays
 			helpRelaLayout.Click += (sender, e) => 
 			{
 				helpRelaLayout.Visibility = ViewStates.Gone;
-			}; 
+			};
+            _scaleImageView = FindViewById<ScaleImageView>(Resource.Id.scaleImageView);
 
-
-			var btnRotate = FindViewById<ImageButton>(Resource.Id.btnRotate);
+            var btnRotate = FindViewById<ImageButton>(Resource.Id.btnRotate);
 			//btnRotate.Click += (sender, e) => 
 			//{
 			//	try
@@ -79,44 +79,44 @@ namespace BigDays
 			{
 				try
 				{
-					DisplayMetrics displaymetrics = new DisplayMetrics();
-					WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
+                    //DisplayMetrics displaymetrics = new DisplayMetrics();
+                    //WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
 
-					float WidthPixels = displaymetrics.WidthPixels;
-					float HeightPixels = displaymetrics.HeightPixels;
-					int x = ((int)(_scaleImageView.MtransX / _scaleImageView.Scale) * -1);
-					int y = ((int)(_scaleImageView.MtransY / _scaleImageView.Scale) * -1);
-					int Width = (int)(WidthPixels / _scaleImageView.Scale);
-					int Height = (int)(HeightPixels / _scaleImageView.Scale);
+                    //float WidthPixels = displaymetrics.WidthPixels;
+                    //float HeightPixels = displaymetrics.HeightPixels;
+                    //int x = ((int)(_scaleImageView.MtransX / _scaleImageView.Scale) * -1);
+                    //int y = ((int)(_scaleImageView.MtransY / _scaleImageView.Scale) * -1);
+                    //int Width = (int)(WidthPixels / _scaleImageView.Scale);
+                    //int Height = (int)(HeightPixels / _scaleImageView.Scale);
 
-					//TypedValue tv = new TypedValue();
-					//if (Theme.ResolveAttribute(Android.Resource.Attribute.ActionBarSize, tv, true))
-					//{
-					//	var actionBarHeight = TypedValue.ComplexToDimensionPixelSize(tv.Data, Resources.DisplayMetrics);
-					//}
+                    ////TypedValue tv = new TypedValue();
+                    ////if (Theme.ResolveAttribute(Android.Resource.Attribute.ActionBarSize, tv, true))
+                    ////{
+                    ////	var actionBarHeight = TypedValue.ComplexToDimensionPixelSize(tv.Data, Resources.DisplayMetrics);
+                    ////}
 
-					//Width = (Width > _bitmap.Width) ? _bitmap.Width : Width;
-					//Height = (Height > _bitmap.Height) ? _bitmap.Height : Height;
+                    ////Width = (Width > _bitmap.Width) ? _bitmap.Width : Width;
+                    ////Height = (Height > _bitmap.Height) ? _bitmap.Height : Height;
 
-					x = (x < 0) ? 0 : x;
-					y = (y < 0) ? 0 : y;
+                    //x = (x < 0) ? 0 : x;
+                    //y = (y < 0) ? 0 : y;
 
-					_bmp = Bitmap.CreateBitmap(_bmp, x, y, Width, Height);
+                    //_bmp = Bitmap.CreateBitmap(_bmp, x, y, Width, Height);
 
-					_bmp = Bitmap.CreateScaledBitmap(_bmp, (int)WidthPixels,(int) HeightPixels, true);
-					//_scaleImageView.SetImageBitmap(_bmp);
+                    //_bmp = Bitmap.CreateScaledBitmap(_bmp, (int)WidthPixels,(int) HeightPixels, true);
+                    ////_scaleImageView.SetImageBitmap(_bmp);
 
-					//var _timer2 = new System.Threading.Timer((o) =>
-					// {
-					//	 RunOnUiThread(() =>
-					//	 {
-					//		_scaleImageView.MinZoom();
-					//	 });
-					//	}
-					// , null, 100, 0);
+                    ////var _timer2 = new System.Threading.Timer((o) =>
+                    //// {
+                    ////	 RunOnUiThread(() =>
+                    ////	 {
+                    ////		_scaleImageView.MinZoom();
+                    ////	 });
+                    ////	}
+                    //// , null, 100, 0);
 
-
-					var path=  saveToInternalStorage(_bmp);
+                    _bmp = ScreenShot(_scaleImageView);
+                    var path=  saveToInternalStorage(_bmp);
 
 					Intent returnIntent = new Intent();
 					returnIntent.PutExtra("result", path);
@@ -140,7 +140,7 @@ namespace BigDays
 				}
 			};
 
-			_scaleImageView = FindViewById<ScaleImageView>(Resource.Id.scaleImageView);		
+				
 
 			_imageHelpers = new ImageHelpers(this);
 
@@ -152,19 +152,19 @@ namespace BigDays
 			if (Constants.ImageBtm != null)
 			{
 
-				_bmp = Compress(Constants.ImageBtm);
+				//_bmp = Compress(Constants.ImageBtm);
 
-				_scaleImageView.SetImageBitmap(_bmp);
+				_scaleImageView.SetImageBitmap(Constants.ImageBtm);
 
-				var _timer = new System.Threading.Timer((o) =>
-				 {
-					 RunOnUiThread(() =>
-					 {
-						 _bmp = _imageHelpers.BitmapFitScreenSize(_scaleImageView, _bmp);
-						 _scaleImageView.SetImageBitmap(_bmp);
-					 });
-				 }
-				 , null, 30, 0);
+				//var _timer = new System.Threading.Timer((o) =>
+				// {
+				//	 RunOnUiThread(() =>
+				//	 {
+				//		 _bmp = _imageHelpers.BitmapFitScreenSize(_scaleImageView, _bmp);
+				//		 _scaleImageView.SetImageBitmap(_bmp);
+				//	 });
+				// }
+				// , null, 30, 0);
 			}
 			else 
 			{
@@ -231,19 +231,29 @@ namespace BigDays
 		}
 
 
-		//public static void initImageLoader(Context context)
-		//{		
-		//	var config = new ImageLoaderConfiguration.Builder(context);
 
-		//	config.ThreadPriority(Thread.NormPriority - 2);
-		//	config.DenyCacheImageMultipleSizesInMemory();
-		//	config.DiskCacheFileNameGenerator(new Md5FileNameGenerator());
-		//	config.DiskCacheSize(50 * 1024 * 1024);//50Mbi
-		//	config.TasksProcessingOrder(QueueProcessingType.Lifo);
-		//	config.WriteDebugLogs();
-		
-		//	ImageLoader.Instance.Init(config.Build());
-		//}
+        public Bitmap ScreenShot(View view)
+        {
+            Bitmap bitmap = Bitmap.CreateBitmap(view.Width, view.Height, Bitmap.Config.Argb8888);
+            Canvas canvas = new Canvas(bitmap);
+            view.Draw(canvas);
+            return bitmap;
+        }
 
-	}
+
+        //public static void initImageLoader(Context context)
+        //{		
+        //	var config = new ImageLoaderConfiguration.Builder(context);
+
+        //	config.ThreadPriority(Thread.NormPriority - 2);
+        //	config.DenyCacheImageMultipleSizesInMemory();
+        //	config.DiskCacheFileNameGenerator(new Md5FileNameGenerator());
+        //	config.DiskCacheSize(50 * 1024 * 1024);//50Mbi
+        //	config.TasksProcessingOrder(QueueProcessingType.Lifo);
+        //	config.WriteDebugLogs();
+
+        //	ImageLoader.Instance.Init(config.Build());
+        //}
+
+    }
 }

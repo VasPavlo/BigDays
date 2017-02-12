@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout1311"
             android:gravity="center">
-            <ImageButton
+            <ImageButton 
                 android:src="@drawable/rotate"
                 android:id="@+id/btnRotate"
                 android:background="@drawable/button_custom"
@@ -38,8 +38,7 @@
                 android:paddingBottom="5dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
-                xmlns:tools="http://schemas.android.com/tools"
-                tools:visibility="gone" />
+                android:visibility="gone" />
             <ImageButton
                 android:src="@drawable/ic_action_accept"
                 android:id="@+id/btnSave"

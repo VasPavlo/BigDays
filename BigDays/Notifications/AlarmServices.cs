@@ -16,7 +16,7 @@ namespace BigDays.Notifications
     {
         public void SetAlarm()
         {
-
+		//TODO:We must move from "NewBigDays.cs" entire logic "Alert & Notification"
         }
     }
 }
