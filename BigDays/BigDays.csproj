@@ -37,13 +37,14 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
-    <AndroidSigningKeyStore>D:\Dev\BigDays\BigDays_PaidVersion\BigDays_PaidVersion\trunk\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>D:\Dev\BigDays\BIgDays\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
     <DebugType>
     </DebugType>
     <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -308,6 +309,7 @@
     <AndroidResource Include="Resources\drawable\colorChart.png" />
     <AndroidResource Include="Resources\drawable\img_help_resize.png" />
     <AndroidResource Include="Resources\layout\InfoBoxViewControl.axml" />
+    <AndroidResource Include="Resources\layout\toolbar.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup />

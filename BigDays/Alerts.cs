@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace BigDays
 {
-	[Activity (Label = "Alerts", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class Alerts : Activity
 	{
 		private string _AlertStr;
@@ -52,6 +52,11 @@ namespace BigDays
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Alerts);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarAlerts);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Alerts";
+
 			// Create your application here
 			_AlertStr = Intent.GetStringExtra ("Alert");
 			string[] StrValueNames = { "Secs", "Mins", "Hours", "Days", "Weeks", "Months", "Years" };

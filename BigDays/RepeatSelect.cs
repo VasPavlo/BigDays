@@ -11,7 +11,7 @@ using Android.Widget;
 
 namespace BigDays
 {
-	[Activity (Label = "Select Repeat", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity ( Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class RepeatSelect : Activity
 	{
 		private RepeatListAdapter _RepeatListAdapter;
@@ -22,6 +22,11 @@ namespace BigDays
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.RepeatSelect);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarSelectRepeat);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Select Repeat";
+
 			var checkedNum = Intent.GetIntExtra ("Num", 0);
 			_RepeatList = FindViewById<ListView> (Resource.Id.listRepeat);
 			_RepeatList.SetPadding((int) _RepeatList.PaddingLeft, (int) _RepeatList.PaddingTop, (int) _RepeatList.PaddingRight, (int) 5);

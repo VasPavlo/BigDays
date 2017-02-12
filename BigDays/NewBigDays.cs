@@ -29,7 +29,7 @@ using BigDays.Models;
 
 namespace BigDays
 {
-	[Activity(Label = "New Big Day", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity(Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
 	public class NewBigDays : Activity
 	{
 		[Splice(Resource.Id.photo_AlbumBtn)]
@@ -244,6 +244,10 @@ namespace BigDays
 			SetContentView(Resource.Layout.NewBigDays);
 
 			Geneticist.Splice(this);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Edit Big Days";
 		
 			// Create your application here
 			MainActivity._BDDB.CheckRepeats();
@@ -285,9 +289,6 @@ namespace BigDays
 			if (_Edit)
 			{
 				_ID = Intent.GetIntExtra("ID", 0);
-
-				this.Title = "Edit Big Day";
-
 				if (_ID != 0)
 				{
 					_Item = MainActivity._BDDB.SelectItem(_ID);
@@ -663,9 +664,9 @@ namespace BigDays
 		protected override Dialog OnCreateDialog(int id)
 		{
 			if (id == TIME_DIALOG_ID)
-				return new TimePickerDialog(this, AlertDialog.ThemeDeviceDefaultLight, TimePickerCallback, hour, minute, false);
+				return new TimePickerDialog(this, TimePickerCallback, hour, minute, false);
 			else if (id == DATE_DIALOG_ID)
-				return new DatePickerDialog(this, AlertDialog.ThemeDeviceDefaultLight, OnDateSet, date.Year, date.Month - 1, date.Day);
+				return new DatePickerDialog(this, OnDateSet, date.Year, date.Month - 1, date.Day);
 
 			return null;
 		}

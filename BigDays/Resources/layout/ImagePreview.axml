@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <BigDays.Controls.ScaleImageView
+        android:background="@android:color/black"
         android:id="@+id/scaleImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

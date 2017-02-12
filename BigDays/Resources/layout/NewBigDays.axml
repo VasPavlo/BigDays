@@ -4,9 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/Background">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/dateEdit"
+                        android:textColor="@android:color/holo_blue_light"
                         android:focusable="false" />
                 </LinearLayout>
                 <LinearLayout
@@ -78,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/timeEdit"
+                        android:textColor="@android:color/holo_blue_light"
                         android:focusable="false" />
                 </LinearLayout>
             </LinearLayout>

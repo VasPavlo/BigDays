@@ -14,7 +14,7 @@ using Android.Util;
 
 namespace BigDays
 {
-	[Activity (Label = "Select from default images", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
+	[Activity (Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]			
 	public class DefaultImagesSelect : Activity
 	{
 		// Number of columns of Grid View
@@ -34,6 +34,11 @@ namespace BigDays
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.DefaultImagesSelect);
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbarSelDefImg);
+			SetActionBar(toolbar);
+			ActionBar.Title = "Select from default images";
+
 			// Create your application here
 
 			_UiDefImages = (GridView) FindViewById(Resource.Id.DefImagesGrid);
