@@ -32,7 +32,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>__MOBILE__;__ANDROID__;</DefineConstants>
+    <DefineConstants>__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
@@ -102,6 +102,9 @@
     <Reference Include="Genetics">
       <HintPath>..\packages\Genetics.1.1.0.50\lib\MonoAndroid\Genetics.dll</HintPath>
     </Reference>
+    <Reference Include="UniversalImageLoader">
+      <HintPath>..\Components\UniversalImageLoader-1.9.4.1\lib\android\UniversalImageLoader.dll</HintPath>
+    </Reference>
     <Reference Include="GooglePlayServicesLib">
       <HintPath>..\Components\googleplayservices-19.0.0\lib\android\GooglePlayServicesLib.dll</HintPath>
     </Reference>
@@ -113,9 +116,6 @@
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
       <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
-    </Reference>
-    <Reference Include="UniversalImageLoader">
-      <HintPath>..\Components\UniversalImageLoader-1.9.4.1\lib\android\UniversalImageLoader.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +169,7 @@
     <None Include="Key\key_amazon_full.keystore" />
     <None Include="Lib\AdBuddiz.Xamarin.Android.dll" />
     <None Include="packages.config" />
+    <None Include="Resources\drawable\Big_Day_Countdown_icon_appSmail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -301,7 +302,6 @@
     <AndroidResource Include="Resources\layout\BigDaysListItemTrial.axml" />
     <AndroidResource Include="Resources\drawable\Icon99x99.png" />
     <AndroidResource Include="Resources\layout\FacebookScreen.axml" />
-    <AndroidResource Include="Resources\drawable\Big_Day_Countdown_icon_appSmail.png" />
     <AndroidResource Include="Resources\drawable\Big_Day_Countdown_icon_appSupper_99_99.png" />
     <AndroidResource Include="Resources\layout\ImagePreview.axml" />
     <AndroidResource Include="Resources\drawable\rotate.png" />
@@ -309,6 +309,7 @@
     <AndroidResource Include="Resources\drawable\img_help_resize.png" />
     <AndroidResource Include="Resources\layout\InfoBoxViewControl.axml" />
     <AndroidResource Include="Resources\layout\toolbar.xml" />
+    <AndroidResource Include="Resources\drawable\Big_Day_CountdownFree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup />

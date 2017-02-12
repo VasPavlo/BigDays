@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.ItemProperties.BigDays AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.4d0024c8b4b5901d" />
+  <MonoDevelop.Ide.ItemProperties.BigDays PreferredExecutionTarget="Android.4d0024c8b4b5901d" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -8,13 +8,17 @@
       <Breakpoint file="D:\Dev\BigDays\BIgDays\BigDays\Utils\ImageHelpers.cs" line="109" column="32" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\NewBigDays.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="BigDays\ListActivity.cs" Line="57" Column="52" />
+      <File FileName="BigDays\ListActivity.cs" Line="75" Column="9" />
       <File FileName="BigDays\ImagePreview.cs" Line="187" Column="1" />
-      <File FileName="BigDays\NewBigDays.cs" Line="557" Column="4" NotebookId="1" />
-      <File FileName="BigDays\Feedback.cs" Line="25" Column="67" NotebookId="1" />
+      <File FileName="BigDays\Constants.cs" Line="33" Column="8" />
+      <File FileName="BigDays\MainActivity.cs" Line="366" Column="8" />
+      <File FileName="BigDays\FacebookScreen.cs" Line="17" Column="7" />
+      <File FileName="BigDays\NewBigDays.cs" Line="105" Column="10" NotebookId="1" />
+      <File FileName="BigDays\Feedback.cs" Line="45" Column="8" NotebookId="1" />
       <File FileName="BigDays\Notifications\NotificationView.cs" Line="11" Column="33" NotebookId="1" />
+      <File FileName="BigDays\Share.cs" Line="35" Column="16" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>
