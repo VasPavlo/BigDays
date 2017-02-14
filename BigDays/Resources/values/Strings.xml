@@ -7,8 +7,13 @@
 	<string name="adBuddiz_api_key">e3fb2fdc-db60-46ab-8dc1-26553163bd64</string>
 
 	<string name="adMob_api_key">ca-app-pub-3919550248819664/4343203230</string>
+	
 
+	<string name="adMob_tracker_id">UA-54434168-6</string>	
+	<string name="adMob_api_key">ca-app-pub-3919550248819664/4343203230</string>
+	<string name="adMob_api_interstitial_key">ca-app-pub-3919550248819664/7089879634</string>
 
+	
 	<string name="app_name">Big Days of Our Lives Countdown</string>
     <string name="cancelled">Cancelled</string>
     <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>

@@ -21,7 +21,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__;</DefineConstants>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
@@ -90,14 +90,8 @@
     <Reference Include="AppfireworksXamarin">
       <HintPath>Lib\AppfireworksXamarin.dll</HintPath>
     </Reference>
-    <Reference Include="LeadboltXamarin">
-      <HintPath>Lib\LeadboltXamarin.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Facebook">
       <HintPath>Lib\Xamarin.Facebook.dll</HintPath>
-    </Reference>
-    <Reference Include="AdBuddiz.Xamarin.Android">
-      <HintPath>Lib\AdBuddiz.Xamarin.Android.dll</HintPath>
     </Reference>
     <Reference Include="Genetics">
       <HintPath>..\packages\Genetics.1.1.0.50\lib\MonoAndroid\Genetics.dll</HintPath>
@@ -105,17 +99,14 @@
     <Reference Include="UniversalImageLoader">
       <HintPath>..\Components\UniversalImageLoader-1.9.4.1\lib\android\UniversalImageLoader.dll</HintPath>
     </Reference>
-    <Reference Include="GooglePlayServicesLib">
-      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\GooglePlayServicesLib.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
-      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    <Reference Include="Xamarin.GooglePlayServices.Basement">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\lib\MonoAndroid41\Xamarin.GooglePlayServices.Basement.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
-      <HintPath>..\Components\googleplayservices-19.0.0\lib\android\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    <Reference Include="Xamarin.GooglePlayServices.Ads">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Ads.29.0.0.2\lib\MonoAndroid41\Xamarin.GooglePlayServices.Ads.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +160,6 @@
     <None Include="Key\key_amazon_full.keystore" />
     <None Include="Lib\AdBuddiz.Xamarin.Android.dll" />
     <None Include="packages.config" />
-    <None Include="Resources\drawable\Big_Day_Countdown_icon_appSmail.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -314,10 +304,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
-    <XamarinComponentReference Include="googleplayservices">
-      <Version>19.0.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
     <XamarinComponentReference Include="sqlite-net">
       <Visible>False</Visible>
       <Version>1.0.11</Version>
@@ -326,5 +312,11 @@
       <Version>1.9.4.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+    <XamarinComponentReference Include="googleplayservices-ads">
+      <Version>29.0.0.2</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />
 </Project>

@@ -10,18 +10,17 @@ using Android.Graphics;
 using Java.Lang;
 using Android.Gms.Ads;
 using AppfireworksXamarin;
-using LeadboltXamarin;
-using AdBuddiz.Xamarin;
 using System.IO;
 using Android.Util;
 using BigDays.Services;
 using BigDays.DB;
 using BigDays.Models;
+using BigDays.Helpers;
 
 namespace BigDays
 {
 	[Activity (Label = "BigDays", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]	
-	public class MainActivity : Activity, View.IOnTouchListener , IAppModuleListener
+	public class MainActivity : Activity, View.IOnTouchListener
 	{
 		private System.Timers.Timer _timer;
 		RelativeLayout _MainLayout;
@@ -50,16 +49,14 @@ namespace BigDays
 		public static List<AlarmManager> _amMains = new List<AlarmManager> (); 
 		public static List<PendingIntent> _PIMains = new List<PendingIntent> ();
 		public static List<BigDaysItemModel> _BDitems;
+		public ImageView _trialImg;
+		public InterstitialAd interstitialAds = null;
+		protected AdView mAdView;
+
 
         protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
-			#if _AdBuddiz_
-			AdBuddizHandler.Instance.SetLogLevel(ABLogLevel.ABLogLevelInfo);
-			AdBuddizHandler.Instance.SetPublisherKey(Resources.GetString(Resource.String.adBuddiz_api_key));
-			AdBuddizHandler.Instance.CacheAds(this);
-			#endif
 
 			AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) => {
 				System.IO.File.AppendAllText("tmp.txt", args.Exception.ToString());
@@ -70,41 +67,44 @@ namespace BigDays
 			Window.RequestFeature(WindowFeatures.NoTitle);
 			SetContentView (Resource.Layout.Main);
 
+			_trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
 			_infoBoxControl = (InfoBoxControl)FindViewById(Resource.Id.NewInfoBoxControl);
-			_timer = new System.Timers.Timer();
+			_timer = new System.Timers.Timer();  
 
-            //Window window = this.Window;
-            //window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-            //window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-            //window.SetStatusBarColor(Color.Black);
-
-            //ActionBar.SetDisplayShowHomeEnabled (false);
-            //ActionBar.SetDisplayShowTitleEnabled (false);
+			mAdView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView);
+			mAdView.Visibility = ViewStates.Invisible;
 
 #if _TRIAL_
 			try
 			{
-				var ad = new AdView(this);
-				ad.Visibility = ViewStates.Invisible;
-				ad.SetBackgroundColor(Color.White);
-				ad.AdSize = AdSize.SmartBanner;
-				ad.AdUnitId = Resources.GetString(Resource.String.adMob_api_key);
+				interstitialAds = new InterstitialAd(this);   // initializing interstitial ads 
 
-				var listener = new MyAdListener();
-				listener.AdLoaded += () => 
-				{ 
+				mAdView.Visibility = ViewStates.Visible;
+				var adRequest = new Android.Gms.Ads.AdRequest.Builder();
+					#if DEBUG
+					adRequest.AddTestDevice("TEST_EMULATOR");
+					#endif
+				var build = adRequest.Build();
+				mAdView.LoadAd(build);
+
+				#if DEBUG
+				interstitialAds.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
+				#else
+				interstitialAds.AdUnitId = Resources.GetString(Resource.String.adMob_api_interstitial_key);
+				#endif
+				
+				// loading test ad using adrequest
+				interstitialAds.LoadAd(build);
+
+				var ThisAdListener = new BigDays.AdListener(this);
+				interstitialAds.AdListener = ThisAdListener;
+
+				ThisAdListener.AdLoaded += () =>
+				{
 					var trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
-					trialImg.Visibility = ViewStates.Invisible; 
-					ad.Visibility = ViewStates.Visible;
+					trialImg.Visibility = ViewStates.Invisible;
+					mAdView.Visibility = ViewStates.Visible;
 				};
-
-				ad.AdListener = listener;
-
-				var requestbuilder = new Android.Gms.Ads.AdRequest.Builder();
-				ad.LoadAd(requestbuilder.Build());
-				//requestbuilder.AddTestDevice("TEST_EMULATOR");
-				var layout = FindViewById<RelativeLayout>(Resource.Id.main_layout);
-				layout.AddView(ad);
 			}
 			catch
 			{
@@ -124,6 +124,7 @@ namespace BigDays
 			};
 			shopping.Click += (sender, e) => {
 				StartActivity(browserIntent);
+				LocalStorage.SetShowABS(false, this);
 			};
 			#else
 			trialMainImg.Visibility = ViewStates.Gone;
@@ -207,6 +208,9 @@ namespace BigDays
 			ui_showListButton.Click += (sender, e) => {
 				var IntentListActivity = new Intent(this, typeof(ListActivity));
 				StartActivityForResult(IntentListActivity, LIST_ID);
+
+				//IntentListActivity.
+				LocalStorage.SetShowABS(false, this);
 			};
 			var ui_addBigDaysBtn = FindViewById<ImageButton> (Resource.Id.mainAddBigDays);
 			ui_addBigDaysBtn.Click += (sender, e) => {
@@ -225,6 +229,7 @@ namespace BigDays
 				}else{
 					var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
 					StartActivityForResult(IntentNewBigDaysActivity, ADDNEW_ID);
+					LocalStorage.SetShowABS(false, this);
 				}
 				#else
 				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
@@ -236,6 +241,7 @@ namespace BigDays
 			ui_Feedback.Click += (sender, e) => {
 				var IntentFeedbackActivity = new Intent(this, typeof(Feedback));
 				StartActivity(IntentFeedbackActivity);
+				LocalStorage.SetShowABS(false, this);
 			};
 
 			_infoBoxControl.EditBigDaysBtn.Click += (sender, e) => {
@@ -243,12 +249,14 @@ namespace BigDays
 				IntentNewBigDaysActivity.PutExtra("Edit", true);
 				IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
 				StartActivityForResult(IntentNewBigDaysActivity, EDIT_ID);
+				LocalStorage.SetShowABS(false, this);
 			};
 
 			_infoBoxControl.ShareBigDaysBtn.Click += (sender, e) => {
 				var IntentShareActivity = new Intent(this, typeof(Share));
 				IntentShareActivity.PutExtra("ID", _CurrentItem._ID);
 				StartActivity(IntentShareActivity);
+				LocalStorage.SetShowABS(false, this);
 			};	
 
 			if (_infoBoxControl.Visibility != ViewStates.Gone) {
@@ -364,19 +372,9 @@ namespace BigDays
 		{
 			base.OnStart ();
 			#if _TRIAL_
-
-			#if _AdBuddiz_	
-			_timer.Elapsed += delegate {RunInterstitialer_AdBuddiz();};
-			#endif
-
-			#if _Leadbolt_
-			_timer.Elapsed += delegate {RunInterstitialer_leadbolt();};
-			#endif
-
 			_timer.Interval = 5000;
 			_timer.AutoReset = false;
 			_timer.Start();
-			//--
 			#endif
 		}
 
@@ -525,78 +523,105 @@ namespace BigDays
 			return true;
 		}
 
+		bool temp = true;
+		protected override void OnPostResume()
+		{
+			base.OnPostResume();
+
+				#if _TRIAL_
+					//bool abs = LocalStorage.GetShowABS(this);
+					//if (temp & abs)
+					//{
+						RunInterstitialer();
+					//}
+					//else
+					//{
+					//	temp = true;
+					//	LocalStorage.SetShowABS(true, this);
+					//}
+				#endif
+		}
 
 
-
-		public void RunInterstitialer_AdBuddiz ()
-		{	
+		public void RunInterstitialer() 
+		{
 			try
 			{
-				this.RunOnUiThread(() =>
-					{
-						// 1. Load Date setting
-						DateTime getDate = DateTime.Now.Add(new TimeSpan(30,0,0)); 
-						var	prefsGet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
-						if (prefsGet.Contains ("DateAdvertisting"))
-						{
-							getDate =  DateTime.Parse(prefsGet.GetString ("DateAdvertisting", ""));
-						}
-						//2. Run Interstitialer 
-						if (getDate.DayOfWeek != DateTime.Now.DayOfWeek)
-						{
-							AdBuddizHandler.Instance.ShowAd ();					
-						}
-						//3. Save Date in setting
-						var prefsSet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
-						var editor = prefsSet.Edit ();
-						editor.PutString ("DateAdvertisting", DateTime.Now.ToString());
-						editor.Commit ();
-					});
-			}
-			catch{}
-		}
+				//_timer = new System.Timers.Timer();
+				//_timer.Interval = 300;
+				//_timer.AutoReset = false;
+				//#if _TRIAL_
+				//_timer.Start();
+				//#endif
 
-		public void RunInterstitialer_leadbolt ()
-		{	
-			try
+				//_timer.Elapsed += delegate
+				//{
+					this.RunOnUiThread(() =>
+				{
+						//TODO:Issue #3
+						//Admob ads settings change (full screen ad showing every time the go to the full screen countdown)
+						//- Change settings Admob ads: Program it so that every time someone open the full screen countdown the full screen ad appears (now its programmed once a day per user?)
+
+						//// 1. Load Date setting
+						//DateTime getDate = DateTime.Now.AddDays(3);
+						//var	prefsGet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
+						//if (prefsGet.Contains ("DateAdvertisting"))
+						//{
+						//	getDate =  DateTime.Parse(prefsGet.GetString ("DateAdvertisting", ""));
+						//}
+						//2. Run Interstitialer 
+						//if (getDate.Day != DateTime.Now.Day)
+						//{
+						//var FinalAd = AdWrapper.ConstructFullPageAdd (this, Resources.GetString(Resource.String.adMob_api_interstitial_key));
+
+						//	var intlistener = new MyAdListener();
+						//	intlistener.AdLoaded += () =>
+						//	{
+						//		if (FinalAd.IsLoaded)
+						//			FinalAd.Show ();
+						//	};
+						//	FinalAd.AdListener = intlistener;
+						//	FinalAd.CustomBuild ();
+
+						//intlistener.AdClosed+= () => 
+						//{
+						////3. Save Date in setting
+						//var prefsSet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
+						//var editor = prefsSet.Edit ();
+						//editor.PutString ("DateAdvertisting", DateTime.Now.ToString());
+						//editor.Commit ();							 
+						//};
+						//}
+
+
+					//	if (LocalStorage.GetShowABS(this) == true)
+					//{
+						//var FinalAd = AdWrapper.ConstructFullPageAdd(this, Resources.GetString(Resource.String.adMob_api_interstitial_key));
+
+						//intlistener = new MyAdListener();
+						//intlistener.AdLoaded += () =>
+						//{
+						//	if (FinalAd.IsLoaded)
+						//		FinalAd.Show();
+						//};
+						//FinalAd.AdListener = intlistener;
+						//FinalAd.CustomBuild();
+
+						//intlistener.AdClosed += () =>
+						// {
+						//	 LocalStorage.SetShowABS(false, this);
+						//	 temp = false;
+						// };
+					//}
+				});
+
+
+				//	};
+			}
+			catch (System.Exception e)
 			{
-				this.RunOnUiThread(() =>
-					{
-						// 1. Load Date setting
-						DateTime getDate = DateTime.Now.Add(new TimeSpan(30,0,0)); 
-						var	prefsGet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
-						if (prefsGet.Contains ("DateAdvertisting"))
-						{
-							getDate =  DateTime.Parse(prefsGet.GetString ("DateAdvertisting", ""));
-						}
-
-						//2. Run Interstitialer 
-						if (getDate.DayOfWeek != DateTime.Now.DayOfWeek)
-						{
-							AdBuddizHandler.Instance.ShowAd ();
-						}
-						//3. Save Date setting
-						var prefsSet = this.GetSharedPreferences("BigDay.advertisting", FileCreationMode.Private);
-						var editor = prefsSet.Edit ();
-						editor.PutString ("DateAdvertisting", DateTime.Now.ToString());
-						editor.Commit ();
-					});
+				var ee = e;
 			}
-			catch {}
-		}
-
-		public void OnModuleCached (){}
-		public void OnModuleClosed (){}
-		public void OnModuleFailed ()
-		{
-			LoadInterstitialerDisplayAd ();
-		}
-		public void OnModuleLoaded (){}
-
-		private void LoadInterstitialerDisplayAd()
-		{
-			AdController interstitial = new AdController (this, Resources.GetString(Resource.String.leadbolt_interstitial));
-			interstitial.LoadAd ();
 		}
 
 		private int ConvertPixelsToDp(float pixelValue)
@@ -605,6 +630,7 @@ namespace BigDays
 			return dp;
 		}
 
+	
 		class GlobalLayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
 		{
 			public GlobalLayoutListener(System.Action onGlobalLayout)
