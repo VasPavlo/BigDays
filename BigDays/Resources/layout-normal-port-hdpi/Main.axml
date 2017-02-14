@@ -15,14 +15,15 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:id="@+id/trialMainImg"
-        android:scaleType="fitStart" />
+        android:scaleType="fitCenter" />
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-3919550248819664/4343203230" />
-<!--<com.google.android.gms.ads.AdView
+        ads:adUnitId="ca-app-pub-3919550248819664/2945556030" />
+<!--	Test-->
+<!--   <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

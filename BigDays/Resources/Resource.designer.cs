@@ -620,26 +620,26 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0094
 			public const int FacebookBtn = 2131361940;
 			
-			// aapt resource value: 0x7f0a007a
-			public const int Feedback = 2131361914;
+			// aapt resource value: 0x7f0a0074
+			public const int Feedback = 2131361908;
 			
 			// aapt resource value: 0x7f0a0024
 			public const int ItemImage = 2131361828;
 			
-			// aapt resource value: 0x7f0a0071
-			public const int MainCountDownDays = 2131361905;
+			// aapt resource value: 0x7f0a0078
+			public const int MainCountDownDays = 2131361912;
 			
-			// aapt resource value: 0x7f0a0072
-			public const int MainCountDownHours = 2131361906;
+			// aapt resource value: 0x7f0a0079
+			public const int MainCountDownHours = 2131361913;
 			
-			// aapt resource value: 0x7f0a0073
-			public const int MainCountDownMin = 2131361907;
+			// aapt resource value: 0x7f0a007a
+			public const int MainCountDownMin = 2131361914;
 			
-			// aapt resource value: 0x7f0a0074
-			public const int MainCountDownSec = 2131361908;
+			// aapt resource value: 0x7f0a007b
+			public const int MainCountDownSec = 2131361915;
 			
-			// aapt resource value: 0x7f0a0070
-			public const int MainCountDownTitle = 2131361904;
+			// aapt resource value: 0x7f0a0077
+			public const int MainCountDownTitle = 2131361911;
 			
 			// aapt resource value: 0x7f0a0063
 			public const int NewCountDownTitle = 2131361891;
@@ -647,8 +647,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0062
 			public const int NewInfoBox = 2131361890;
 			
-			// aapt resource value: 0x7f0a007d
-			public const int NewInfoBoxControl = 2131361917;
+			// aapt resource value: 0x7f0a0070
+			public const int NewInfoBoxControl = 2131361904;
 			
 			// aapt resource value: 0x7f0a005b
 			public const int Report = 2131361883;
@@ -659,8 +659,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0095
 			public const int TwitterBtn = 2131361941;
 			
-			// aapt resource value: 0x7f0a007c
-			public const int adView = 2131361916;
+			// aapt resource value: 0x7f0a006f
+			public const int adView = 2131361903;
 			
 			// aapt resource value: 0x7f0a0069
 			public const int addBigDays = 2131361897;
@@ -848,8 +848,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0053
 			public const int imageView1 = 2131361875;
 			
-			// aapt resource value: 0x7f0a006f
-			public const int infoBox = 2131361903;
+			// aapt resource value: 0x7f0a0076
+			public const int infoBox = 2131361910;
 			
 			// aapt resource value: 0x7f0a0022
 			public const int infoBoxListItem = 2131361826;
@@ -860,17 +860,17 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0007
 			public const int linearLayout1 = 2131361799;
 			
-			// aapt resource value: 0x7f0a0075
-			public const int linearLayout10 = 2131361909;
+			// aapt resource value: 0x7f0a007c
+			public const int linearLayout10 = 2131361916;
 			
 			// aapt resource value: 0x7f0a0064
 			public const int linearLayout11 = 2131361892;
 			
-			// aapt resource value: 0x7f0a0076
-			public const int linearLayout12 = 2131361910;
+			// aapt resource value: 0x7f0a007d
+			public const int linearLayout12 = 2131361917;
 			
-			// aapt resource value: 0x7f0a0077
-			public const int linearLayout13 = 2131361911;
+			// aapt resource value: 0x7f0a0071
+			public const int linearLayout13 = 2131361905;
 			
 			// aapt resource value: 0x7f0a005e
 			public const int linearLayout1311 = 2131361886;
@@ -902,8 +902,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0090
 			public const int listRepeat = 2131361936;
 			
-			// aapt resource value: 0x7f0a0079
-			public const int mainAddBigDays = 2131361913;
+			// aapt resource value: 0x7f0a0073
+			public const int mainAddBigDays = 2131361907;
 			
 			// aapt resource value: 0x7f0a006d
 			public const int mainImgBase = 2131361901;
@@ -962,11 +962,11 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0066
 			public const int shareBigDaysBtn = 2131361894;
 			
-			// aapt resource value: 0x7f0a007b
-			public const int shopping = 2131361915;
+			// aapt resource value: 0x7f0a0075
+			public const int shopping = 2131361909;
 			
-			// aapt resource value: 0x7f0a0078
-			public const int showListButton = 2131361912;
+			// aapt resource value: 0x7f0a0072
+			public const int showListButton = 2131361906;
 			
 			// aapt resource value: 0x7f0a0005
 			public const int small = 2131361797;

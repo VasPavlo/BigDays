@@ -15,6 +15,7 @@ using Android.Util;
 using BigDays.Services;
 using BigDays.DB;
 using BigDays.Models;
+using Android.Telephony;
 
 namespace BigDays
 {
@@ -79,7 +80,7 @@ namespace BigDays
 				mAdView.Visibility = ViewStates.Visible;
 				var adRequest = new Android.Gms.Ads.AdRequest.Builder();
 					#if DEBUG
-					adRequest.AddTestDevice("TEST_EMULATOR");
+						adRequest.AddTestDevice(Android.Gms.Ads.AdRequest.DeviceIdEmulator);//"TEST_EMULATOR"
 					#endif
 				var build = adRequest.Build();
 				mAdView.LoadAd(build);
@@ -106,7 +107,6 @@ namespace BigDays
 			}
 			catch
 			{
-				int i = 5;
 			}
 #endif
 

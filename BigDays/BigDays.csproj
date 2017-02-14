@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
-    <AndroidSigningKeyStore>D:\Dev\BigDays\BIgDays\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>D:\Dev\BigDays\BIgDays\BigDays\Key\key_bigdays_free.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
@@ -113,7 +113,6 @@
     <Compile Include="DB\IBigDaysDB.cs" />
     <Compile Include="Converters\BitmapToBase64Converter.cs" />
     <Compile Include="DB\MigrationDB_OldInNew.cs" />
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Notifications\AlarmServices.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +141,7 @@
     <Compile Include="Utils\BitmapHelpers.cs" />
     <Compile Include="Utils\ImageHelpers.cs" />
     <Compile Include="Controls\InfoBoxControl.cs" />
+    <Compile Include="MainActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
