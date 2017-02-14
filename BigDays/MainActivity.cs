@@ -15,7 +15,6 @@ using Android.Util;
 using BigDays.Services;
 using BigDays.DB;
 using BigDays.Models;
-using BigDays.Helpers;
 
 namespace BigDays
 {
@@ -73,12 +72,10 @@ namespace BigDays
 
 			mAdView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView);
 			mAdView.Visibility = ViewStates.Invisible;
-
 #if _TRIAL_
 			try
 			{
 				interstitialAds = new InterstitialAd(this);   // initializing interstitial ads 
-
 				mAdView.Visibility = ViewStates.Visible;
 				var adRequest = new Android.Gms.Ads.AdRequest.Builder();
 					#if DEBUG
@@ -88,9 +85,10 @@ namespace BigDays
 				mAdView.LoadAd(build);
 
 				#if DEBUG
-				interstitialAds.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
+					//Test
+					interstitialAds.AdUnitId = "ca-app-pub-3940256099942544/1033173712";
 				#else
-				interstitialAds.AdUnitId = Resources.GetString(Resource.String.adMob_api_interstitial_key);
+					interstitialAds.AdUnitId = Resources.GetString(Resource.String.adMob_api_interstitial_key);
 				#endif
 				
 				// loading test ad using adrequest
@@ -124,7 +122,6 @@ namespace BigDays
 			};
 			shopping.Click += (sender, e) => {
 				StartActivity(browserIntent);
-				LocalStorage.SetShowABS(false, this);
 			};
 			#else
 			trialMainImg.Visibility = ViewStates.Gone;
@@ -208,9 +205,6 @@ namespace BigDays
 			ui_showListButton.Click += (sender, e) => {
 				var IntentListActivity = new Intent(this, typeof(ListActivity));
 				StartActivityForResult(IntentListActivity, LIST_ID);
-
-				//IntentListActivity.
-				LocalStorage.SetShowABS(false, this);
 			};
 			var ui_addBigDaysBtn = FindViewById<ImageButton> (Resource.Id.mainAddBigDays);
 			ui_addBigDaysBtn.Click += (sender, e) => {
@@ -229,7 +223,6 @@ namespace BigDays
 				}else{
 					var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
 					StartActivityForResult(IntentNewBigDaysActivity, ADDNEW_ID);
-					LocalStorage.SetShowABS(false, this);
 				}
 				#else
 				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
@@ -241,7 +234,6 @@ namespace BigDays
 			ui_Feedback.Click += (sender, e) => {
 				var IntentFeedbackActivity = new Intent(this, typeof(Feedback));
 				StartActivity(IntentFeedbackActivity);
-				LocalStorage.SetShowABS(false, this);
 			};
 
 			_infoBoxControl.EditBigDaysBtn.Click += (sender, e) => {
@@ -249,14 +241,12 @@ namespace BigDays
 				IntentNewBigDaysActivity.PutExtra("Edit", true);
 				IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
 				StartActivityForResult(IntentNewBigDaysActivity, EDIT_ID);
-				LocalStorage.SetShowABS(false, this);
 			};
 
 			_infoBoxControl.ShareBigDaysBtn.Click += (sender, e) => {
 				var IntentShareActivity = new Intent(this, typeof(Share));
 				IntentShareActivity.PutExtra("ID", _CurrentItem._ID);
 				StartActivity(IntentShareActivity);
-				LocalStorage.SetShowABS(false, this);
 			};	
 
 			if (_infoBoxControl.Visibility != ViewStates.Gone) {
