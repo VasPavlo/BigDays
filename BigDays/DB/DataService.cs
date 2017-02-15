@@ -146,7 +146,7 @@ namespace BigDays.Services
 
         public List<BigDaysItemModel> SelectBDItems()
         {                 
-            var data = _database.Table<BigDaysItemModel>().OrderByDescending(x=>x._Name).ToList();
+			var data = _database.Table<BigDaysItemModel>().OrderBy(x=>x._EndDate).ToList();
             _database.Close();
             return data;
         }
