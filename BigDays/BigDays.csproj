@@ -142,6 +142,7 @@
     <Compile Include="Utils\ImageHelpers.cs" />
     <Compile Include="Controls\InfoBoxControl.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Utils\CameraHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

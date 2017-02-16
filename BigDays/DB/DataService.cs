@@ -55,7 +55,7 @@ namespace BigDays.Services
                     _ImageStorage = 1,
                     _Repeat = 0,
                     _Alerts = "1;0#2;0#3;0#4;0#5;0",
-                    _Active = 1,
+                    _Active = true,
                     _PosLeft = 0,
                     _PosTop = 0,
                     _ChangePos = 0
@@ -170,7 +170,7 @@ namespace BigDays.Services
         public BigDaysItemModel GetCurrentItem()
         {           
            var n = _database.Table<BigDaysItemModel>();
-            var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x=>x._Active == 1);
+			var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x=>x._Active == true);
             _database.Close();
             return data;
         }
@@ -188,7 +188,7 @@ namespace BigDays.Services
         {
             SetDeActivate();                      
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == ID);
-            data._Active = 1;
+			data._Active = true;
             _database.Update(data);
             _database.Close();
         }
@@ -199,7 +199,7 @@ namespace BigDays.Services
             if (CurrItem != null)
             {
                 var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == CurrItem._ID);
-                data._Active = 0;
+				data._Active = false;
                 _database.Update(data);
                 _database.Close();
             }

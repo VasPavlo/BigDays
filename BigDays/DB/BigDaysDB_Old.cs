@@ -20,7 +20,6 @@ namespace BigDays
 				SqliteConnection.CreateFile (dbPath);
 				_FileExists = System.IO.File.Exists (dbPath);
 			}
-			
 			_connection = new SqliteConnection ("Data Source=" + dbPath);
 			return _FileExists;
 		}
@@ -46,7 +45,7 @@ namespace BigDays
 						_ImageStorage = 1,
 						_Repeat = 0,
 						_Alerts = "1;0#2;0#3;0#4;0#5;0",
-						_Active = 1,
+						_Active = true,
 						_PosLeft = 0,
 						_PosTop = 0,
 						_ChangePos = 0
@@ -93,7 +92,6 @@ namespace BigDays
 						c.ExecuteNonQuery ();
 					}
 				}
-
 				_connection.Close ();
 			}
 			return _FileExists;
@@ -110,7 +108,6 @@ namespace BigDays
 					c.CommandText = command;
 					c.ExecuteNonQuery ();
 				}
-
 				_connection.Close ();
 			}
 			return _FileExists;
@@ -125,7 +122,6 @@ namespace BigDays
 					c.CommandText = command;
 					c.ExecuteNonQuery ();
 				}
-
 				_connection.Close ();
 			}
 			return _FileExists;
@@ -140,7 +136,6 @@ namespace BigDays
 					c.CommandText = command;
 					c.ExecuteNonQuery ();
 				}
-
 				_connection.Close ();
 			}
 			return _FileExists;
@@ -165,11 +160,10 @@ namespace BigDays
 							_ImageStorage = Convert.ToInt16(r ["_ImageStorage"].ToString ()), 
 							_Repeat = Convert.ToInt16(r ["_Repeat"].ToString ()), 
 							_Alerts = r ["_Alerts"].ToString (),
-							_Active = Convert.ToInt16(r ["_Active"].ToString ()),
+						_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
 							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ()) } );
-
 				}
 				_connection.Close ();
 				if( BDitems.Count > 0 )
@@ -196,15 +190,13 @@ namespace BigDays
 							_ImageStorage = Convert.ToInt16(r ["_ImageStorage"].ToString ()), 
 							_Repeat = Convert.ToInt16(r ["_Repeat"].ToString ()), 
 							_Alerts = r ["_Alerts"].ToString (),
-							_Active = Convert.ToInt16(r ["_Active"].ToString ()),
+							_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
 							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())};
-
 				}
 				_connection.Close ();
 			}
-
 			return BDItem;
 		}
 
@@ -226,17 +218,14 @@ namespace BigDays
 						_ImageStorage = Convert.ToInt16(r ["_ImageStorage"].ToString ()), 
 						_Repeat = Convert.ToInt16(r ["_Repeat"].ToString ()), 
 						_Alerts = r ["_Alerts"].ToString (),
-						_Active = Convert.ToInt16(r ["_Active"].ToString ()),
+						_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 						_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 						_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
 						_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())};
-
 				}
 				_connection.Close ();
 			}
-
-			return BDItem;
-		
+			return BDItem;		
 		}
 
 		public int GetLastID(){
@@ -251,11 +240,9 @@ namespace BigDays
 					var r = contents.ExecuteReader ();
 					while (r.Read ())
 						ret = Convert.ToInt16(r ["_ID"].ToString());
-
 				}
 				_connection.Close ();
 			}
-
 			return ret;
 		}
 
@@ -277,14 +264,12 @@ namespace BigDays
 							_ImageStorage = Convert.ToInt16 (r ["_ImageStorage"].ToString ()), 
 							_Repeat = Convert.ToInt16 (r ["_Repeat"].ToString ()), 
 							_Alerts = r ["_Alerts"].ToString (),
-							_Active = Convert.ToInt16(r ["_Active"].ToString ()),
+							_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
 							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())
 						};
 					}
-						
-
 				}
 				_connection.Close ();
 			}
@@ -320,7 +305,6 @@ namespace BigDays
 						c.ExecuteNonQuery ();
 					}
 				}
-
 				_connection.Close ();
 			}
 		}
@@ -373,7 +357,6 @@ namespace BigDays
 			}
 			return item;
 		}
-			
 	}
 }
 

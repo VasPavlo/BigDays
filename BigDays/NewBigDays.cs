@@ -49,14 +49,10 @@ namespace BigDays
 
 		private BigDaysItemModel _Item;
 		private int _ID;
-
 	
 		const int TIME_DIALOG_ID = 0;
 		const int DATE_DIALOG_ID = 1;
-
-		Java.IO.File _file;
-		Java.IO.File _dir;
-
+	
 		private int _ImageStorageNum;
 		private string _ImgPath;
 
@@ -89,13 +85,12 @@ namespace BigDays
 		private DateTime date;
 
 		private int[] garbage = new int[6];
-
+		private CameraHelpers _cameraHelpers;
 		NotificationManager _NM;
 
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
-			base.OnActivityResult(requestCode, resultCode, data);
-		//	Geneticist.Splice(this);
+			base.OnActivityResult(requestCode, resultCode, data);	
 			if (resultCode == Result.Ok )
 			{
 				switch (requestCode)
@@ -203,11 +198,11 @@ namespace BigDays
 						break;
 					case (int) RequestCode.CameraImage : 
 						Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
-						Android.Net.Uri contentUri = Android.Net.Uri.FromFile(_file);
+						Android.Net.Uri contentUri = Android.Net.Uri.FromFile(_cameraHelpers._file);
 						mediaScanIntent.SetData(contentUri);
 						SendBroadcast(mediaScanIntent);
 
-						_ImgPath = _file.Path.ToString();
+						_ImgPath = _cameraHelpers._file.Path;
 						_ImageStorageNum = 3;
 						try
 						{
@@ -227,7 +222,7 @@ namespace BigDays
 						break;
 					case (int) RequestCode.Repeat:
 						_RepeatNum = data.GetIntExtra("Num", 0);
-						_UiEditRepeat.Text = _RepeatStrs[_RepeatNum].ToString();
+						_UiEditRepeat.Text = _RepeatStrs[_RepeatNum];
 						break;
 					case (int) RequestCode.Alerts: 
 						_AlertStr = data.GetStringExtra("Alert");
@@ -248,8 +243,8 @@ namespace BigDays
 			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 			SetActionBar(toolbar);
 			ActionBar.Title = "Edit Big Days";
-		
-			// Create your application here
+
+			_cameraHelpers = new CameraHelpers(this);
 			MainActivity._BDDB.CheckRepeats();
 			_Edit = Intent.GetBooleanExtra("Edit", false);
 
@@ -360,10 +355,10 @@ namespace BigDays
 
 			if (IsThereAnAppToTakePictures())
 			{
-				CreateDirectoryForPictures();
+				_cameraHelpers.CreateDirectoryForPictures();
 
 				_UiCameraBtn = FindViewById<Button>(Resource.Id.CameraBtn);
-				_UiCameraBtn.Click += TakeAPicture;
+				_UiCameraBtn.Click += _cameraHelpers.TakeAPicture;
 			}
 
 			_UiSeveOrEdit = FindViewById<ImageButton>(Resource.Id.SeveOrEdit);
@@ -624,19 +619,6 @@ namespace BigDays
 			return unixTimestamp;
 		}
 
-		public static long JavaTimestampFromDateTime(DateTime date)
-		{
-			return (UnixTimestampFromDateTime(date) * 1000);
-		}
-
-		private void TakeAPicture(object sender, EventArgs eventArgs)
-		{
-			Intent intent = new Intent(MediaStore.ActionImageCapture);
-			_file = new File(_dir, string.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
-			intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(_file));
-			StartActivityForResult(intent, (int) RequestCode.CameraImage);
-		}
-
 		private void UpdateDisplayTime()
 		{
 			string time = string.Format("{0}:{1}", hour, minute.ToString().PadLeft(2, '0'));
@@ -678,14 +660,6 @@ namespace BigDays
 			return availableActivities != null && availableActivities.Count > 0;
 		}
 
-		private void CreateDirectoryForPictures()
-		{
-			_dir = new File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "BigDays");
-			if (!_dir.Exists())
-			{
-				_dir.Mkdirs();
-			}
-		}
 
 		private string GetPathToImage(global::Android.Net.Uri uri)
 		{

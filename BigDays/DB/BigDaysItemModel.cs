@@ -26,7 +26,7 @@ namespace BigDays.Models
         public int _Repeat { get; set; }
         public string _Alerts { get; set; }
         public bool _IsSetImage { get; set; }
-        public int _Active { get; set; }
+		public bool _Active { get; set; }
         public string ImageBase64 { get; set; }
         [Ignore]
         public Bitmap _BigImg { get; set; }

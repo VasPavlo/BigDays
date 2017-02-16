@@ -114,8 +114,8 @@ namespace BigDays
 			var t = MainActivity._BDitems[e.Position];
 			MainActivity._BDDB.SetActive ( t._ID );
 			for (int i = 0; i < MainActivity._BDitems.Count; i++)
-				MainActivity._BDitems [i]._Active = 0;
-			MainActivity._BDitems [e.Position]._Active = 1;
+				MainActivity._BDitems [i]._Active = false;
+			MainActivity._BDitems [e.Position]._Active = true;
 			Intent ParentIntent = new Intent (this, typeof(MainActivity));
 			SetResult (Result.Ok, ParentIntent);
 			Finish();
