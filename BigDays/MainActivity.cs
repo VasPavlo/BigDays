@@ -9,14 +9,13 @@ using System.Collections.Generic;
 using Android.Graphics;
 using Java.Lang;
 using Android.Gms.Ads;
-using AppfireworksXamarin;
 using System.IO;
 using Android.Util;
 using BigDays.Services;
 using BigDays.DB;
 using BigDays.Models;
-using Android.Telephony;
 using System.Linq;
+using BigDays.Enums;
 
 namespace BigDays
 {
@@ -44,16 +43,12 @@ namespace BigDays
 		public static int _InfoBoxHeight;
 		public static int _InfoBoxChangePosInd;
 		public static int _FirstAppOpen;
-		const int LIST_ID = 0;
-		const int EDIT_ID = 1;
-		const int ADDNEW_ID = 2;
 		public static List<AlarmManager> _amMains = new List<AlarmManager>();
 		public static List<PendingIntent> _PIMains = new List<PendingIntent>();
 		public static List<BigDaysItemModel> _BDitems;
 		public ImageView _trialImg;
 		public InterstitialAd interstitialAds = null;
 		protected AdView mAdView;
-
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -63,10 +58,12 @@ namespace BigDays
 			{
 				System.IO.File.AppendAllText("tmp.txt", args.Exception.ToString());
 			};
+
 			AppDomain.CurrentDomain.UnhandledException += (s, e) =>
 			{
 				Toast.MakeText(this, "Test", ToastLength.Short).Show();
 			};
+
 			Window.RequestFeature(WindowFeatures.NoTitle);
 			SetContentView(Resource.Layout.Main);
 
@@ -167,7 +164,7 @@ namespace BigDays
 				   RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
 				   infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
 				   infoBoxParams.TopMargin = _ActiveBD._PosTop;
-				   if (_ActiveBD._ChangePos == 1)
+				   if (_ActiveBD._ChangePos)
 					   _infoBoxControl.LayoutParameters = infoBoxParams;
 				   else
 				   {
@@ -190,17 +187,16 @@ namespace BigDays
 				_CurrentItem = _BDDB.GetCurrentItem();
 				if (_ItemID != 0)
 					_CurrentItem._ID = _ItemID;
+
+				ShowImage(_BDitems.FirstOrDefault(n => n._ID == _CurrentItem._ID));
 				_infoBoxControl.Visibility = ViewStates.Visible;
 			}
 			else
 			{
 				ShowDefImage();
 				_infoBoxControl.Visibility = ViewStates.Gone;
-			}
-
-			foreach (var i in _BDitems)
-				if (i._ID == _CurrentItem._ID)
-					ShowImage(i);
+			}	
+				
 
 			if (_infoBoxControl.Visibility != ViewStates.Gone)
 				_infoBoxControl.Title = _CurrentItem._Name;
@@ -210,7 +206,7 @@ namespace BigDays
 			ui_showListButton.Click += (sender, e) =>
 			{
 				var IntentListActivity = new Intent(this, typeof(ListActivity));
-				StartActivityForResult(IntentListActivity, LIST_ID);
+			StartActivityForResult(IntentListActivity, (int)RequestCode.List_BigDays);
 			};
 
 			var ui_addBigDaysBtn = FindViewById<ImageButton>(Resource.Id.mainAddBigDays);
@@ -233,11 +229,11 @@ namespace BigDays
 				}
 				else {
 					var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-					StartActivityForResult(IntentNewBigDaysActivity, ADDNEW_ID);
+					StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.AddNew_BigDay);
 				}
 #else
 				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-				StartActivityForResult(IntentNewBigDaysActivity, ADDNEW_ID);
+			StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.AddNew_BigDay);
 #endif
 			};
 
@@ -253,7 +249,7 @@ namespace BigDays
 				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
 				IntentNewBigDaysActivity.PutExtra("Edit", true);
 				IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
-				StartActivityForResult(IntentNewBigDaysActivity, EDIT_ID);
+			StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.Edit_BigDay);
 			};
 
 			_infoBoxControl.ShareBigDaysBtn.Click += (sender, e) =>
@@ -265,7 +261,7 @@ namespace BigDays
 
 			if (_infoBoxControl.Visibility != ViewStates.Gone)
 			{
-				if (_ActiveBD._ChangePos == 1)
+				if (_ActiveBD._ChangePos)
 				{
 					RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
 					infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
@@ -290,33 +286,32 @@ namespace BigDays
 		{
 			base.OnActivityResult(requestCode, resultCode, data);
 
-			if ((requestCode == LIST_ID || requestCode == EDIT_ID) && (resultCode == Result.Ok))
+		if ((requestCode == (int)RequestCode.List_BigDays || requestCode == (int)RequestCode.Edit_BigDay) && (resultCode == Result.Ok))
 			{
 				_BDDB.CheckRepeats();
 				_CurrentItem = _BDDB.GetCurrentItem();
 				_infoBoxControl.Visibility = ViewStates.Visible;
-				if (requestCode == EDIT_ID)
+			if (requestCode == (int)RequestCode.Edit_BigDay)
 				{
 					for (int i = 0; i < _BDitems.Count; i++)
 						if (_BDitems[i]._ID == _CurrentItem._ID)
+							{
+								BigDaysItemModel item = _BDDB.SelectItem(_CurrentItem._ID);
+								BitmapHelpers.LoadImage(this, item);
+								_BDitems[i] = item;
+								ShowImage(item);
+							}
+						if (_BDitems.Count == 0)
 						{
-							BigDaysItemModel item = _BDDB.SelectItem(_CurrentItem._ID);
-							BitmapHelpers.LoadImage(this, item);
-							_BDitems[i] = item;
-							ShowImage(item);
-							//this.Recreate();
+							ShowDefImage();
+							_infoBoxControl.Visibility = ViewStates.Gone;
 						}
-					if (_BDitems.Count == 0)
-					{
-						ShowDefImage();
-						_infoBoxControl.Visibility = ViewStates.Gone;
-					}
 				}
-				else {
+			else 
+				{
 					foreach (var i in _BDitems)
 						if (i._ID == _CurrentItem._ID)
 							ShowImage(i);
-					//this.Recreate();
 				}
 
 				_ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
@@ -325,14 +320,15 @@ namespace BigDays
 				{
 					_infoBoxControl.Title = _CurrentItem._Name;
 
-					if (_ActiveBD._ChangePos == 1)
+					if (_ActiveBD._ChangePos)
 					{
 						RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
 						infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
 						infoBoxParams.TopMargin = _ActiveBD._PosTop;
 						_infoBoxControl.LayoutParameters = infoBoxParams;
 					}
-					else {
+					else
+					{
 						RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
 						infoBoxParams.LeftMargin = 0;
 						infoBoxParams.AddRule(LayoutRules.CenterVertical);
@@ -340,7 +336,7 @@ namespace BigDays
 					}
 				}
 			}
-			else if ((requestCode == ADDNEW_ID) && (resultCode == Result.Ok))
+			else if ((requestCode == (int)RequestCode.AddNew_BigDay) && (resultCode == Result.Ok))
 			{
 				BigDaysItemModel item = _BDDB.GetLastAddItem();
 				BitmapHelpers.LoadImage(this, item);
@@ -356,7 +352,7 @@ namespace BigDays
 
 				if (_infoBoxControl.Visibility != ViewStates.Gone)
 				{
-					if (_ActiveBD._ChangePos == 1)
+					if (_ActiveBD._ChangePos)
 					{
 						RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
 						infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
@@ -397,7 +393,7 @@ namespace BigDays
 			{
 				_MainImage.SetImageBitmap(item._BigImg);
 			}
-			catch (OutOfMemoryError em)
+			catch (OutOfMemoryError)
 			{
 				AlertDialog.Builder builder;
 				builder = new AlertDialog.Builder(this);
@@ -459,7 +455,6 @@ namespace BigDays
 			_TimerHandler.PostDelayed(UpdateGeneration, 1000);
 		}
 
-
 		private PointF last = new PointF();
 		public bool OnTouch(View view, MotionEvent mEvent)
 		{
@@ -520,7 +515,7 @@ namespace BigDays
 					break;
 
 				case MotionEventActions.Up:
-					_ActiveBD._ChangePos = 1;
+					_ActiveBD._ChangePos = true;
 					_BDDB.UpdatePos(_ActiveBD);
 					break;
 			}

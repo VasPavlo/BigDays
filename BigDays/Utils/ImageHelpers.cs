@@ -20,7 +20,6 @@ namespace BigDays
 			_activity = activity;
 		}
 
-
 		public Bitmap LoadImage(string uri)
 		{
 			BitmapFactory.Options options = new BitmapFactory.Options();

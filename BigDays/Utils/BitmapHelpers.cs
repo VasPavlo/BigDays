@@ -6,15 +6,17 @@ using Java.Lang;
 
 namespace BigDays
 {
-    using System;
-    using System.IO;
+	using System;
+	using System.IO;
 
-    using Android.Graphics;
-    using Android.Net;
-    using Java.IO;
-    using Models;
+	using Android.Graphics;
+	using Android.Net;
+	using BigDays.Converters;
+	using BigDays.Enums;
+	using Java.IO;
+	using Models;
 
-    public static class BitmapHelpers
+	public static class BitmapHelpers
     {
 		public static int SAVE = 1;
 		public static int InSampleSize = 0;
@@ -158,26 +160,28 @@ namespace BigDays
 
 		public static void LoadImage(Activity context, BigDaysItemModel item){
 				switch (item._ImageStorage) {
-				case 1:
+				case(int) LocationPicture.ResourcesImage:
 					string path_main_bg_def = item._Image.Replace ("small", "");
 					Resources res = context.Resources;
 					int imageID = res.GetIdentifier (path_main_bg_def.Replace(".jpg", ""), "drawable", context.PackageName);
 					int imageIDsmall = res.GetIdentifier (item._Image.Replace(".jpg", ""), "drawable", context.PackageName);
-					item._BigImg = BitmapHelpers.DecodeSampledBitmapFromResource(res, imageID, (int)MainActivity._DisplayWidth, (int)MainActivity._DisplayWidth, context);
-					item._SmallImg = BitmapHelpers.DecodeSampledBitmapFromResource(res, imageIDsmall,(int)70, (int)70, context );
+					item._BigImg = DecodeSampledBitmapFromResource(res, imageID, (int)MainActivity._DisplayWidth, (int)MainActivity._DisplayWidth, context);
+					item._SmallImg = DecodeSampledBitmapFromResource(res, imageIDsmall,70, 70, context );
 					break;
-				case 2:
-				case 3:
-					item._BigImg = BitmapHelpers.LoadAndResizeBitmap(item._Image,(int)MainActivity._DisplayWidth,(int)MainActivity._DisplayWidth);
-					item._SmallImg = BitmapHelpers.LoadAndResizeBitmap (item._Image, 70, 70);
+				case (int) LocationPicture.Base64Image:
+					item._BigImg = BitmapToBase64Converter.Base64ToBitmap(item.ImageBase64);
+					item._SmallImg = item._BigImg;
+					break;
+				case (int) LocationPicture.FileImage:
+					item._BigImg = LoadAndResizeBitmap(item._Image,(int)MainActivity._DisplayWidth,(int)MainActivity._DisplayWidth);
+					item._SmallImg = LoadAndResizeBitmap (item._Image, 70, 70);
 					break;
 				}
-
 		}
 
-		public static Drawable LoadImages(string path){
-			return new BitmapDrawable(BitmapHelpers.LoadAndResizeBitmap (path, (int)70, (int)70));
+		public static Drawable LoadImage(string path)
+		{
+			return new BitmapDrawable(BitmapHelpers.LoadAndResizeBitmap(path, 70, 70));
 		}
-
     }
 }

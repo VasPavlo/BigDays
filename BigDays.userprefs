@@ -7,13 +7,16 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\Utils\CameraHelpers.cs">
     <Files>
-      <File FileName="BigDays\MainActivity.cs" Line="355" Column="62" />
-      <File FileName="BigDays\NewBigDays.cs" Line="93" Column="57" />
-      <File FileName="BigDays\DB\BigDaysItemModel.cs" Line="29" Column="14" />
-      <File FileName="BigDays\DB\BigDaysDB_Old.cs" Line="245" Column="5" />
-      <File FileName="BigDays\ListActivity.cs" Line="118" Column="53" />
-      <File FileName="BigDays\DB\DataService.cs" Line="202" Column="25" />
-      <File FileName="BigDays\Utils\CameraHelpers.cs" Line="38" Column="4" NotebookId="1" />
+      <File FileName="BigDays\MainActivity.cs" Line="155" Column="1" />
+      <File FileName="BigDays\DB\BigDaysDB_Old.cs" Line="161" Column="8" />
+      <File FileName="BigDays\ListActivity.cs" Line="44" Column="19" />
+      <File FileName="BigDays\DB\DataService.cs" Line="56" Column="6" />
+      <File FileName="BigDays\NewBigDays.cs" Line="16" Column="17" />
+      <File FileName="BigDays\Utils\CameraHelpers.cs" Line="35" Column="20" NotebookId="1" />
+      <File FileName="BigDays\Utils\ImageHelpers.cs" Line="96" Column="32" NotebookId="1" />
+      <File FileName="BigDays\DB\BigDaysItemModel.cs" Line="17" Column="18" NotebookId="1" />
+      <File FileName="BigDays\Converters\BitmapToBase64Converter.cs" Line="16" Column="37" NotebookId="1" />
+      <File FileName="BigDays\ImagePreview.cs" Line="150" Column="29" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>

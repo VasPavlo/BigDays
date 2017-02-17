@@ -36,7 +36,7 @@ namespace BigDays.Models
         public int _PosLeft { get; set; }
         public int _PosRight { get; set; }
         public int _PosBottom { get; set; }
-        public int _ChangePos { get; set; }
+        public bool _ChangePos { get; set; }
         public bool empty { get; set; }
     }
 }

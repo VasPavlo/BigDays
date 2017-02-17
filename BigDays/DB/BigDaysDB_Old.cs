@@ -5,6 +5,7 @@ using System.Data;
 using Mono.Data.Sqlite;
 using BigDays.DB;
 using BigDays.Models;
+using BigDays.Enums;
 
 namespace BigDays
 {
@@ -42,13 +43,13 @@ namespace BigDays
 						_Notification = random.Next(0, 999999),
 						_EndDate = DateTime.Now.AddYears(1),
 						_Image = "img17small.jpg",
-						_ImageStorage = 1,
+						_ImageStorage = (int)LocationPicture.ResourcesImage,
 						_Repeat = 0,
 						_Alerts = "1;0#2;0#3;0#4;0#5;0",
 						_Active = true,
 						_PosLeft = 0,
 						_PosTop = 0,
-						_ChangePos = 0
+						_ChangePos = false
 					};
 					this.Insert (test);
 				}
@@ -160,10 +161,10 @@ namespace BigDays
 							_ImageStorage = Convert.ToInt16(r ["_ImageStorage"].ToString ()), 
 							_Repeat = Convert.ToInt16(r ["_Repeat"].ToString ()), 
 							_Alerts = r ["_Alerts"].ToString (),
-						_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
+							_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
-							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ()) } );
+							_ChangePos = Convert.ToBoolean(r ["_ChangePos"].ToString ()) } );
 				}
 				_connection.Close ();
 				if( BDitems.Count > 0 )
@@ -193,7 +194,7 @@ namespace BigDays
 							_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
-							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())};
+							_ChangePos = Convert.ToBoolean(r ["_ChangePos"].ToString ())};
 				}
 				_connection.Close ();
 			}
@@ -221,7 +222,7 @@ namespace BigDays
 						_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 						_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 						_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
-						_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())};
+						_ChangePos = Convert.ToBoolean(r ["_ChangePos"].ToString ())};
 				}
 				_connection.Close ();
 			}
@@ -267,7 +268,7 @@ namespace BigDays
 							_Active = Convert.ToBoolean(r ["_Active"].ToString ()),
 							_PosLeft = Convert.ToInt16(r ["_PosLeft"].ToString ()),
 							_PosTop = Convert.ToInt16(r ["_PosTop"].ToString ()),
-							_ChangePos = Convert.ToInt16(r ["_ChangePos"].ToString ())
+							_ChangePos = Convert.ToBoolean(r ["_ChangePos"].ToString ())
 						};
 					}
 				}

@@ -116,10 +116,13 @@ namespace BigDays
                     //// , null, 100, 0);
 
                     _bmp = ScreenShot(_scaleImageView);
-                    var path=  saveToInternalStorage(_bmp);
+
+					Constants.ImageBtm = _bmp;
+                   // var path=  saveToInternalStorage(_bmp);
 
 					Intent returnIntent = new Intent();
-					returnIntent.PutExtra("result", path);
+					//returnIntent.PutExtra("result", path);
+					returnIntent.PutExtra("result", "");
 					SetResult( Result.Ok, returnIntent);
 					Finish();
 
@@ -142,11 +145,11 @@ namespace BigDays
 
 				
 
-			_imageHelpers = new ImageHelpers(this);
+			//_imageHelpers = new ImageHelpers(this);
 
-			var temp = _imageHelpers.getRealPathFromURI(Constants.URI);
-			_ImgPath  = temp.Item2;
-			_imageName = temp.Item1;
+			//var temp = _imageHelpers.getRealPathFromURI(Constants.URI);
+			//_ImgPath  = temp.Item2;
+			//_imageName = temp.Item1;
 
 
 			if (Constants.ImageBtm != null)

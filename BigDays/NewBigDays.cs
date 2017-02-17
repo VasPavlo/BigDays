@@ -1,31 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.Graphics.Drawables;
 using Android.Provider;
-using Android.Content.PM;
-using Java.IO;
 using Android.Graphics;
-using System.Windows.Input;
-using Java.Util;
 using Android.Content.Res;
-using Java.Text;
 using Java.Lang;
-
 using Genetics.Attributes;
 using Genetics;
 using BigDays.Enums;
-using BigDays.Controls;
-using Android.Util;
 using UniversalImageLoader.Core;
 using BigDays.Models;
+using BigDays.Converters;
 
 namespace BigDays
 {
@@ -53,8 +42,9 @@ namespace BigDays
 		const int TIME_DIALOG_ID = 0;
 		const int DATE_DIALOG_ID = 1;
 	
-		private int _ImageStorageNum;
+		private LocationPicture _ImageStorageNum;
 		private string _ImgPath;
+		private string _ImageBase64;
 
 		private EditText _UiName;
 		private ImageView _ImageArea;
@@ -126,7 +116,7 @@ namespace BigDays
 							builder.SetPositiveButton("OK", delegate { Finish(); });
 							builder.Show();
 						}
-						_ImageStorageNum = 1;
+						_ImageStorageNum = LocationPicture.ResourcesImage;
 					}
 						#else
 						_ImgPath = data.GetStringExtra("image");
@@ -146,7 +136,7 @@ namespace BigDays
 							builder.SetPositiveButton("OK", delegate { Finish(); });
 							builder.Show();
 						}
-						_ImageStorageNum = 1;
+						_ImageStorageNum = LocationPicture.ResourcesImage;
 						#endif
 						break;
 					case (int) RequestCode.PickImage:
@@ -165,60 +155,61 @@ namespace BigDays
 
 						var IntentShareActivity = new Intent(this, typeof(ImagePreview));
 						StartActivityForResult(IntentShareActivity, (int)RequestCode.ReturnPickImagePath);
-
-						try
-						{
-							//Drawable album = BitmapHelpers.LoadImages(_ImgPath);
-							_ImageStorageNum = 2;
-							//_ImageArea.SetImageBitmap(bmp);
-						}
-						catch (OutOfMemoryError)
-						{
-							AlertDialog.Builder builder;
-							builder = new AlertDialog.Builder(this);
-							builder.SetTitle("Error");
-							builder.SetMessage("Out Of Memory Error");
-							builder.SetCancelable(false);
-							builder.SetPositiveButton("OK", delegate { Finish(); });
-							builder.Show();
-						}
 						break;
 
 					case (int)RequestCode.ReturnPickImagePath:
 
 						if (data == null) break;
-						string result = data.GetStringExtra("result");
-						Android.Net.Uri contentUri2 = Android.Net.Uri.FromFile(new File(result));
 
-						_ImgPath = contentUri2.Path;
-						_ImageStorageNum = 3;
-						Drawable camera2 = BitmapHelpers.LoadImages(_ImgPath);
-						_ImageArea.SetImageDrawable(camera2);
+						string result = data.GetStringExtra("result");
+						//Android.Net.Uri contentUri2 = Android.Net.Uri.FromFile(new File(result));
+						//_ImgPath = contentUri2.Path;
+
+						//var config2 = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
+						////Initialize ImageLoader with configuration.
+						//ImageLoader.Instance.Init(config2);
+						//ImageLoader imageLoader2 = ImageLoader.Instance;
+						//Bitmap bmp2 = imageLoader2.LoadImageSync(contentUri2.ToString());
+
+						_ImageArea.SetImageBitmap(Constants.ImageBtm);
+						_ImageStorageNum = LocationPicture.Base64Image;
+
+						_ImageBase64 = BitmapToBase64Converter.BitmapToBase64(Constants.ImageBtm);
 
 						break;
 					case (int) RequestCode.CameraImage : 
+						
 						Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
-						Android.Net.Uri contentUri = Android.Net.Uri.FromFile(_cameraHelpers._file);
+						Android.Net.Uri contentUri = Android.Net.Uri.FromFile(App._file);
 						mediaScanIntent.SetData(contentUri);
 						SendBroadcast(mediaScanIntent);
 
-						_ImgPath = _cameraHelpers._file.Path;
-						_ImageStorageNum = 3;
-						try
-						{
-							Drawable camera = BitmapHelpers.LoadImages(_ImgPath);
-							_ImageArea.SetImageDrawable(camera);
-						}
-						catch (OutOfMemoryError)
-						{
-							AlertDialog.Builder builder;
-							builder = new AlertDialog.Builder(this);
-							builder.SetTitle("Error");
-							builder.SetMessage("Out Of Memory Error");
-							builder.SetCancelable(false);
-							builder.SetPositiveButton("OK", delegate { Finish(); });
-							builder.Show();
-						}
+						var config2 = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
+						//Initialize ImageLoader with configuration.
+						ImageLoader.Instance.Init(config2);
+						ImageLoader imageLoader3 = ImageLoader.Instance;
+						Bitmap bmp2 = imageLoader3.LoadImageSync(contentUri.ToString());
+						Constants.ImageBtm = bmp2;
+
+						var IntentShareActivity2 = new Intent(this, typeof(ImagePreview));
+						StartActivityForResult(IntentShareActivity2, (int)RequestCode.ReturnPickImagePath);
+						//_ImgPath = _cameraHelpers._file.Path;
+						//_ImageStorageNum = LocationPicture.FileImage;
+						//try
+						//{
+						//	Drawable camera = BitmapHelpers.LoadImage(_ImgPath);
+						//	_ImageArea.SetImageDrawable(camera);
+						//}
+						//catch (OutOfMemoryError)
+						//{
+						//	AlertDialog.Builder builder;
+						//	builder = new AlertDialog.Builder(this);
+						//	builder.SetTitle("Error");
+						//	builder.SetMessage("Out Of Memory Error");
+						//	builder.SetCancelable(false);
+						//	builder.SetPositiveButton("OK", delegate { Finish(); });
+						//	builder.Show();
+						//}
 						break;
 					case (int) RequestCode.Repeat:
 						_RepeatNum = data.GetIntExtra("Num", 0);
@@ -267,7 +258,7 @@ namespace BigDays
 			};
 
 			_ImgPath = "img17.jpg";
-			_ImageStorageNum = 1;
+			_ImageStorageNum = LocationPicture.ResourcesImage;
 
 			// Get the current time
 			DateTime now = DateTime.Now;
@@ -303,7 +294,7 @@ namespace BigDays
 
 					_AlertStr = _AlertStrOld = _Item._Alerts;
 
-					_ImageStorageNum = _Item._ImageStorage;
+					_ImageStorageNum = (LocationPicture)_Item._ImageStorage;
 					_ImgPath = _Item._Image;
 					foreach (var i in MainActivity._BDitems)
 						if (i._ID == _ID)
@@ -353,7 +344,7 @@ namespace BigDays
 				StartActivityForResult(IntentDefaultImagesSelect, 0);
 			};
 
-			if (IsThereAnAppToTakePictures())
+			if (_cameraHelpers.IsThereAnAppToTakePictures())
 			{
 				_cameraHelpers.CreateDirectoryForPictures();
 
@@ -372,8 +363,9 @@ namespace BigDays
 					DateTime t = Convert.ToDateTime(_UiTimeEdit.Text.ToString());
 					_Item._EndDate = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
 					_Item._Image = _ImgPath;
-					_Item._ImageStorage = _ImageStorageNum;
+					_Item._ImageStorage = (int)_ImageStorageNum;
 					_Item._Repeat = _RepeatNum;
+					_Item.ImageBase64 = _ImageBase64;
 					int garbageMain = _Notification;
 					string MainMessage = string.Format("BIG DAYS OF OUR LIVES COUNTDOWN\r\n{0}\r\n\r\nCongratulation!\r\n{0} has com.", _Item._Name);
 					System.Random random = new System.Random();
@@ -467,8 +459,9 @@ namespace BigDays
 					DateTime t = Convert.ToDateTime(_UiTimeEdit.Text.ToString());
 					_Item._EndDate = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
 					_Item._Image = _ImgPath;
-					_Item._ImageStorage = _ImageStorageNum;
+					_Item._ImageStorage = (int)_ImageStorageNum;
 					_Item._Repeat = _RepeatNum;
+					_Item.ImageBase64 = _ImageBase64;
 					string MainMessage = string.Format("BIG DAYS OF OUR LIVES COUNTDOWN\r\n{0}\r\n\r\nCongratulation!\r\n{0} has com.", _Item._Name);
 					System.Random random = new System.Random();
 					_Item._Notification = random.Next(0, 999999);
@@ -653,12 +646,6 @@ namespace BigDays
 			return null;
 		}
 
-		private bool IsThereAnAppToTakePictures()
-		{
-			Intent intent = new Intent(MediaStore.ActionImageCapture);
-			IList<ResolveInfo> availableActivities = PackageManager.QueryIntentActivities(intent, PackageInfoFlags.MatchDefaultOnly);
-			return availableActivities != null && availableActivities.Count > 0;
-		}
 
 
 		private string GetPathToImage(global::Android.Net.Uri uri)

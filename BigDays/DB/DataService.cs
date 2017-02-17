@@ -6,6 +6,7 @@ using BigDays.DB;
 using Mono.Data.Sqlite;
 using System;
 using BigDays.Models;
+using BigDays.Enums;
 
 namespace BigDays.Services
 {
@@ -52,13 +53,13 @@ namespace BigDays.Services
                     _Notification = random.Next(0, 999999),
                     _EndDate = DateTime.Now.AddYears(1),
                     _Image = "img17small.jpg",
-                    _ImageStorage = 1,
+					_ImageStorage = (int)LocationPicture.ResourcesImage,
                     _Repeat = 0,
                     _Alerts = "1;0#2;0#3;0#4;0#5;0",
                     _Active = true,
                     _PosLeft = 0,
                     _PosTop = 0,
-                    _ChangePos = 0
+					_ChangePos = false
                 };
                 _database.Insert(firstItem);
                 _database.Close();
@@ -125,7 +126,7 @@ namespace BigDays.Services
         {            
             try
             {
-                BDItem._ChangePos = 1;
+				BDItem._ChangePos = true;
                 var db = new SQLiteConnection(_pathToDatabase);
                 db.Update(BDItem);
                 _database.Close();

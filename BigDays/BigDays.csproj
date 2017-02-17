@@ -143,6 +143,7 @@
     <Compile Include="Controls\InfoBoxControl.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Utils\CameraHelpers.cs" />
+    <Compile Include="Enums\LocationPicture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
