@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}|Default">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.BigDays AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.4d0024c8b4b5901d" />
+  <MonoDevelop.Ide.ItemProperties.BigDays AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.192.168.194.101:5555" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\Utils\CameraHelpers.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\DefaultImagesAdapter.cs">
     <Files>
       <File FileName="BigDays\MainActivity.cs" Line="155" Column="1" />
       <File FileName="BigDays\DB\BigDaysDB_Old.cs" Line="161" Column="8" />
@@ -17,6 +17,7 @@
       <File FileName="BigDays\DB\BigDaysItemModel.cs" Line="17" Column="18" NotebookId="1" />
       <File FileName="BigDays\Converters\BitmapToBase64Converter.cs" Line="16" Column="37" NotebookId="1" />
       <File FileName="BigDays\ImagePreview.cs" Line="150" Column="29" NotebookId="1" />
+      <File FileName="BigDays\DefaultImagesAdapter.cs" Line="16" Column="18" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
 </Properties>

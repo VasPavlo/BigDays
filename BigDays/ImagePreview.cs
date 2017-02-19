@@ -12,6 +12,8 @@ using BigDays.Controls;
 using Java.IO;
 using Java.Lang;
 using UniversalImageLoader.Core;
+using Genetics;
+using Genetics.Attributes;
 
 namespace BigDays
 {
@@ -25,12 +27,44 @@ namespace BigDays
 		private ScaleImageView _scaleImageView;
 		private float _rotationDegrees = 0;
 
-		protected override void OnCreate(Android.OS.Bundle savedInstanceState)
+
+        [Splice(Resource.Id.btnSave)]
+        private ImageButton btnSave;
+
+        [SpliceClick(Resource.Id.btnSave)]
+        void OnSaveClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                _bmp = ScreenShot(_scaleImageView);
+                Constants.ImageBtm = _bmp;        
+
+                Intent returnIntent = new Intent();           
+                returnIntent.PutExtra("result", "");
+                SetResult(Result.Ok, returnIntent);
+                Finish();
+            }
+            catch (System.Exception)
+            {
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(this);
+                builder.SetTitle("Error");
+                builder.SetMessage("Error №104");
+                builder.SetCancelable(false);
+                builder.SetPositiveButton("OK", delegate { Finish(); });
+                builder.Show();                
+            }
+        }
+
+
+        protected override void OnCreate(Android.OS.Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 			SetContentView(Resource.Layout.ImagePreview);
 
-			var helpRelaLayout = FindViewById<RelativeLayout>(Resource.Id.helpRelaLayout);
+            Geneticist.Splice(this);
+
+            var helpRelaLayout = FindViewById<RelativeLayout>(Resource.Id.helpRelaLayout);
 
 			helpRelaLayout.Click += (sender, e) => 
 			{
@@ -38,7 +72,9 @@ namespace BigDays
 			};
             _scaleImageView = FindViewById<ScaleImageView>(Resource.Id.scaleImageView);
 
-            var btnRotate = FindViewById<ImageButton>(Resource.Id.btnRotate);
+            //var btnSave = FindViewById<ImageButton>(Resource.Id.btnSave);
+           // var btnRotate = FindViewById<ImageButton>(Resource.Id.btnRotate);
+
 			//btnRotate.Click += (sender, e) => 
 			//{
 			//	try
@@ -74,74 +110,74 @@ namespace BigDays
 			//}
 			//};
 
-			var btnSave = FindViewById<ImageButton>(Resource.Id.btnSave);
-			btnSave.Click += (sender, e) =>
-			{
-				try
-				{
-                    //DisplayMetrics displaymetrics = new DisplayMetrics();
-                    //WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
+			
+			//btnSave.Click += (sender, e) =>
+			//{
+			//	try
+			//	{
+   //                 //DisplayMetrics displaymetrics = new DisplayMetrics();
+   //                 //WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
 
-                    //float WidthPixels = displaymetrics.WidthPixels;
-                    //float HeightPixels = displaymetrics.HeightPixels;
-                    //int x = ((int)(_scaleImageView.MtransX / _scaleImageView.Scale) * -1);
-                    //int y = ((int)(_scaleImageView.MtransY / _scaleImageView.Scale) * -1);
-                    //int Width = (int)(WidthPixels / _scaleImageView.Scale);
-                    //int Height = (int)(HeightPixels / _scaleImageView.Scale);
+   //                 //float WidthPixels = displaymetrics.WidthPixels;
+   //                 //float HeightPixels = displaymetrics.HeightPixels;
+   //                 //int x = ((int)(_scaleImageView.MtransX / _scaleImageView.Scale) * -1);
+   //                 //int y = ((int)(_scaleImageView.MtransY / _scaleImageView.Scale) * -1);
+   //                 //int Width = (int)(WidthPixels / _scaleImageView.Scale);
+   //                 //int Height = (int)(HeightPixels / _scaleImageView.Scale);
 
-                    ////TypedValue tv = new TypedValue();
-                    ////if (Theme.ResolveAttribute(Android.Resource.Attribute.ActionBarSize, tv, true))
-                    ////{
-                    ////	var actionBarHeight = TypedValue.ComplexToDimensionPixelSize(tv.Data, Resources.DisplayMetrics);
-                    ////}
+   //                 ////TypedValue tv = new TypedValue();
+   //                 ////if (Theme.ResolveAttribute(Android.Resource.Attribute.ActionBarSize, tv, true))
+   //                 ////{
+   //                 ////	var actionBarHeight = TypedValue.ComplexToDimensionPixelSize(tv.Data, Resources.DisplayMetrics);
+   //                 ////}
 
-                    ////Width = (Width > _bitmap.Width) ? _bitmap.Width : Width;
-                    ////Height = (Height > _bitmap.Height) ? _bitmap.Height : Height;
+   //                 ////Width = (Width > _bitmap.Width) ? _bitmap.Width : Width;
+   //                 ////Height = (Height > _bitmap.Height) ? _bitmap.Height : Height;
 
-                    //x = (x < 0) ? 0 : x;
-                    //y = (y < 0) ? 0 : y;
+   //                 //x = (x < 0) ? 0 : x;
+   //                 //y = (y < 0) ? 0 : y;
 
-                    //_bmp = Bitmap.CreateBitmap(_bmp, x, y, Width, Height);
+   //                 //_bmp = Bitmap.CreateBitmap(_bmp, x, y, Width, Height);
 
-                    //_bmp = Bitmap.CreateScaledBitmap(_bmp, (int)WidthPixels,(int) HeightPixels, true);
-                    ////_scaleImageView.SetImageBitmap(_bmp);
+   //                 //_bmp = Bitmap.CreateScaledBitmap(_bmp, (int)WidthPixels,(int) HeightPixels, true);
+   //                 ////_scaleImageView.SetImageBitmap(_bmp);
 
-                    ////var _timer2 = new System.Threading.Timer((o) =>
-                    //// {
-                    ////	 RunOnUiThread(() =>
-                    ////	 {
-                    ////		_scaleImageView.MinZoom();
-                    ////	 });
-                    ////	}
-                    //// , null, 100, 0);
+   //                 ////var _timer2 = new System.Threading.Timer((o) =>
+   //                 //// {
+   //                 ////	 RunOnUiThread(() =>
+   //                 ////	 {
+   //                 ////		_scaleImageView.MinZoom();
+   //                 ////	 });
+   //                 ////	}
+   //                 //// , null, 100, 0);
 
-                    _bmp = ScreenShot(_scaleImageView);
+   //                 _bmp = ScreenShot(_scaleImageView);
 
-					Constants.ImageBtm = _bmp;
-                   // var path=  saveToInternalStorage(_bmp);
+			//		Constants.ImageBtm = _bmp;
+   //                // var path=  saveToInternalStorage(_bmp);
 
-					Intent returnIntent = new Intent();
-					//returnIntent.PutExtra("result", path);
-					returnIntent.PutExtra("result", "");
-					SetResult( Result.Ok, returnIntent);
-					Finish();
+			//		Intent returnIntent = new Intent();
+			//		//returnIntent.PutExtra("result", path);
+			//		returnIntent.PutExtra("result", "");
+			//		SetResult( Result.Ok, returnIntent);
+			//		Finish();
 
-				}
-				catch (OutOfMemoryError)
-				{
-					AlertDialog.Builder builder;
-					builder = new AlertDialog.Builder(this);
-					builder.SetTitle("Error");
-					builder.SetMessage("Out Of Memory Error");
-					builder.SetCancelable(false);
-					builder.SetPositiveButton("OK", delegate { Finish(); });
-					builder.Show();
-				}
-				catch (System.Exception ex)
-				{
+			//	}
+			//	catch (OutOfMemoryError)
+			//	{
+			//		AlertDialog.Builder builder;
+			//		builder = new AlertDialog.Builder(this);
+			//		builder.SetTitle("Error");
+			//		builder.SetMessage("Out Of Memory Error");
+			//		builder.SetCancelable(false);
+			//		builder.SetPositiveButton("OK", delegate { Finish(); });
+			//		builder.Show();
+			//	}
+			//	catch (System.Exception ex)
+			//	{
 
-				}
-			};
+			//	}
+			//};
 
 				
 
@@ -174,7 +210,7 @@ namespace BigDays
 				AlertDialog.Builder builder;
 				builder = new AlertDialog.Builder(this);
 				builder.SetTitle("Error");
-				builder.SetMessage("File not support");
+				builder.SetMessage("File not support №102");
 				builder.SetCancelable(false);
 				builder.SetPositiveButton("OK", delegate { Finish(); });
 				builder.Show();
@@ -225,7 +261,7 @@ namespace BigDays
 				AlertDialog.Builder builder;
 				builder = new AlertDialog.Builder(this);
 				builder.SetTitle("Error");
-				builder.SetMessage("Out Of Memory Error");
+				builder.SetMessage("Out Of Memory Error №103");
 				builder.SetCancelable(false);
 				builder.SetPositiveButton("OK", delegate { Finish(); });
 				builder.Show();

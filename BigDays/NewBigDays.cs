@@ -87,7 +87,7 @@ namespace BigDays
 				{
 					case 0:
 						if (data == null) break;
-					#if _TRIAL_
+#if _TRIAL_
 					int imgPos = data.GetIntExtra ("pos", 0);
 					if( imgPos > 1 ){
 						AlertDialog.Builder builder;
@@ -111,15 +111,15 @@ namespace BigDays
 							AlertDialog.Builder builder;
 							builder = new AlertDialog.Builder(this);
 							builder.SetTitle("Error");
-							builder.SetMessage("Out Of Memory Error");
+							builder.SetMessage("Out Of Memory Error №98");
 							builder.SetCancelable(false);
 							builder.SetPositiveButton("OK", delegate { Finish(); });
 							builder.Show();
 						}
 						_ImageStorageNum = LocationPicture.ResourcesImage;
 					}
-						#else
-						_ImgPath = data.GetStringExtra("image");
+#else
+                        _ImgPath = data.GetStringExtra("image");
 						try
 						{
 							Resources res = Resources;
@@ -131,7 +131,7 @@ namespace BigDays
 							AlertDialog.Builder builder;
 							builder = new AlertDialog.Builder(this);
 							builder.SetTitle("Error");
-							builder.SetMessage("Out Of Memory Error");
+							builder.SetMessage("Out Of Memory Error №99");
 							builder.SetCancelable(false);
 							builder.SetPositiveButton("OK", delegate { Finish(); });
 							builder.Show();
@@ -140,22 +140,35 @@ namespace BigDays
 						#endif
 						break;
 					case (int) RequestCode.PickImage:
-						if (data == null) break;
-						Constants.URI= data.Data;
+                        try
+                        {
+                            if (data == null) break;
+						    Constants.URI= data.Data;
 
-						var config = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
-						//Initialize ImageLoader with configuration.
-						ImageLoader.Instance.Init(config);
-						ImageLoader imageLoader = ImageLoader.Instance;
-						Bitmap bmp = imageLoader.LoadImageSync(data.DataString);
+						    var config = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
+						    //Initialize ImageLoader with configuration.
+						    ImageLoader.Instance.Init(config);
+						    ImageLoader imageLoader = ImageLoader.Instance;
+						    Bitmap bmp = imageLoader.LoadImageSync(data.DataString);
 
-						Constants.ImageBtm = bmp;
+						    Constants.ImageBtm = bmp;
 
-						_ImgPath = data.DataString;
+						    _ImgPath = data.DataString;
 
-						var IntentShareActivity = new Intent(this, typeof(ImagePreview));
-						StartActivityForResult(IntentShareActivity, (int)RequestCode.ReturnPickImagePath);
-						break;
+						    var IntentShareActivity = new Intent(this, typeof(ImagePreview));
+						    StartActivityForResult(IntentShareActivity, (int)RequestCode.ReturnPickImagePath);
+                        }
+                        catch (OutOfMemoryError)
+                        {
+                            AlertDialog.Builder builder;
+                            builder = new AlertDialog.Builder(this);
+                            builder.SetTitle("Error");
+                            builder.SetMessage("Out Of Memory Error №100");
+                            builder.SetCancelable(false);
+                            builder.SetPositiveButton("OK", delegate { Finish(); });
+                            builder.Show();
+                        }
+                        break;
 
 					case (int)RequestCode.ReturnPickImagePath:
 
@@ -177,40 +190,55 @@ namespace BigDays
 						_ImageBase64 = BitmapToBase64Converter.BitmapToBase64(Constants.ImageBtm);
 
 						break;
-					case (int) RequestCode.CameraImage : 
-						
-						Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
-						Android.Net.Uri contentUri = Android.Net.Uri.FromFile(App._file);
-						mediaScanIntent.SetData(contentUri);
-						SendBroadcast(mediaScanIntent);
+					case (int) RequestCode.CameraImage :
+                        try
+                        {
+                            Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
+						    Android.Net.Uri contentUri = Android.Net.Uri.FromFile(App._file);
+						    mediaScanIntent.SetData(contentUri);
+						    SendBroadcast(mediaScanIntent);
 
-						var config2 = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
-						//Initialize ImageLoader with configuration.
-						ImageLoader.Instance.Init(config2);
-						ImageLoader imageLoader3 = ImageLoader.Instance;
-						Bitmap bmp2 = imageLoader3.LoadImageSync(contentUri.ToString());
-						Constants.ImageBtm = bmp2;
+						    var config2 = ImageLoaderConfiguration.CreateDefault(ApplicationContext);
+						    //Initialize ImageLoader with configuration.
+						    ImageLoader.Instance.Init(config2);
+						    ImageLoader imageLoader3 = ImageLoader.Instance;
+						    Bitmap bmp2 = imageLoader3.LoadImageSync(contentUri.ToString());                            
 
-						var IntentShareActivity2 = new Intent(this, typeof(ImagePreview));
-						StartActivityForResult(IntentShareActivity2, (int)RequestCode.ReturnPickImagePath);
-						//_ImgPath = _cameraHelpers._file.Path;
-						//_ImageStorageNum = LocationPicture.FileImage;
-						//try
-						//{
-						//	Drawable camera = BitmapHelpers.LoadImage(_ImgPath);
-						//	_ImageArea.SetImageDrawable(camera);
-						//}
-						//catch (OutOfMemoryError)
-						//{
-						//	AlertDialog.Builder builder;
-						//	builder = new AlertDialog.Builder(this);
-						//	builder.SetTitle("Error");
-						//	builder.SetMessage("Out Of Memory Error");
-						//	builder.SetCancelable(false);
-						//	builder.SetPositiveButton("OK", delegate { Finish(); });
-						//	builder.Show();
-						//}
-						break;
+                            Constants.ImageBtm = bmp2;
+
+						    var IntentShareActivity2 = new Intent(this, typeof(ImagePreview));
+						    StartActivityForResult(IntentShareActivity2, (int)RequestCode.ReturnPickImagePath);
+                        }
+                        catch (OutOfMemoryError)
+                        {
+                            AlertDialog.Builder builder;
+                            builder = new AlertDialog.Builder(this);
+                            builder.SetTitle("Error");
+                            builder.SetMessage("Out Of Memory Error №101");
+                            builder.SetCancelable(false);
+                            builder.SetPositiveButton("OK", delegate { Finish(); });
+                            builder.Show();
+                        }
+
+
+                        //_ImgPath = _cameraHelpers._file.Path;
+                        //_ImageStorageNum = LocationPicture.FileImage;
+                        //try
+                        //{
+                        //	Drawable camera = BitmapHelpers.LoadImage(_ImgPath);
+                        //	_ImageArea.SetImageDrawable(camera);
+                        //}
+                        //catch (OutOfMemoryError)
+                        //{
+                        //	AlertDialog.Builder builder;
+                        //	builder = new AlertDialog.Builder(this);
+                        //	builder.SetTitle("Error");
+                        //	builder.SetMessage("Out Of Memory Error");
+                        //	builder.SetCancelable(false);
+                        //	builder.SetPositiveButton("OK", delegate { Finish(); });
+                        //	builder.Show();
+                        //}
+                        break;
 					case (int) RequestCode.Repeat:
 						_RepeatNum = data.GetIntExtra("Num", 0);
 						_UiEditRepeat.Text = _RepeatStrs[_RepeatNum];
@@ -296,7 +324,9 @@ namespace BigDays
 
 					_ImageStorageNum = (LocationPicture)_Item._ImageStorage;
 					_ImgPath = _Item._Image;
-					foreach (var i in MainActivity._BDitems)
+                    _ImageBase64 = _Item.ImageBase64;
+
+                    foreach (var i in MainActivity._BDitems)
 						if (i._ID == _ID)
 							_ImageArea.SetImageBitmap(i._BigImg);
 				}
