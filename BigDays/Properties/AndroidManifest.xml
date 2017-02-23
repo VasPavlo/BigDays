@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.prosellersworld.bigdaysapp" android:versionCode="14" android:versionName="14">
-	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="23" />
+	<uses-sdk android:minSdkVersion="10" />
 	<supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
 	<application android:label="Big Days of Our Lives Countdown" android:icon="@drawable/big_day_countdown_icon_app_1" android:largeHeap="true">
 		<!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
