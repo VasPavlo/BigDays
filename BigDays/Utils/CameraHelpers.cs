@@ -32,7 +32,7 @@ namespace BigDays
 		public void TakeAPicture(object sender, EventArgs eventArgs)
 		{
 			Intent intent = new Intent(MediaStore.ActionImageCapture);
-			App._file = new File(App._dir, string.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
+			App._file = new File(App._dir, string.Format("BigDaysPhoto_{0}.jpg", Guid.NewGuid()));
 			intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
 			_activity.StartActivityForResult(intent, (int)RequestCode.CameraImage);
 		}

@@ -72,6 +72,10 @@
     <DefineConstants>__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SQLite-net, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlite-net-pcl.1.0.11\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +85,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
@@ -110,10 +115,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigDaysApplication.cs" />
     <Compile Include="DB\IBigDaysDB.cs" />
     <Compile Include="Converters\BitmapToBase64Converter.cs" />
     <Compile Include="DB\MigrationDB_OldInNew.cs" />
     <Compile Include="Notifications\AlarmServices.cs" />
+    <Compile Include="Pixabay\PixabayService.cs" />
+    <Compile Include="Pixabay\PixabayView.cs" />
+    <Compile Include="Pixabay\PixabayRequest.cs" />
+    <Compile Include="Pixabay\PixabayResult.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListActivity.cs" />
@@ -157,6 +167,11 @@
     </None>
     <None Include="Key\key_amazon_full.keystore" />
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\layout\PixabayImageGrid.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PixabayImageGridItem.axml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -299,7 +314,9 @@
     <AndroidResource Include="Resources\drawable\Big_Day_CountdownFree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_empty.png" />
+  </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">
       <Visible>False</Visible>
@@ -314,6 +331,11 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_stub.png" />
+  </ItemGroup>
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />
 </Project>

@@ -137,6 +137,24 @@ namespace BigDays
 			// aapt resource value: 0x7f080005
 			public const int com_facebook_usersettingsfragment_not_connected_text_color = 2131230725;
 			
+			// aapt resource value: 0x7f080008
+			public const int xam_blue = 2131230728;
+			
+			// aapt resource value: 0x7f080009
+			public const int xam_dark_blue = 2131230729;
+			
+			// aapt resource value: 0x7f08000b
+			public const int xam_gray = 2131230731;
+			
+			// aapt resource value: 0x7f08000a
+			public const int xam_green = 2131230730;
+			
+			// aapt resource value: 0x7f08000c
+			public const int xam_light_gray = 2131230732;
+			
+			// aapt resource value: 0x7f080007
+			public const int xam_purple = 2131230727;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -298,8 +316,8 @@ namespace BigDays
 			// aapt resource value: 0x7f02001e
 			public const int com_facebook_logo = 2130837534;
 			
-			// aapt resource value: 0x7f020078
-			public const int com_facebook_picker_default_separator_color = 2130837624;
+			// aapt resource value: 0x7f02007b
+			public const int com_facebook_picker_default_separator_color = 2130837627;
 			
 			// aapt resource value: 0x7f02001f
 			public const int com_facebook_picker_item_background = 2130837535;
@@ -425,148 +443,157 @@ namespace BigDays
 			public const int ic_action_view_as_list = 2130837575;
 			
 			// aapt resource value: 0x7f020048
-			public const int icon = 2130837576;
+			public const int ic_empty = 2130837576;
 			
 			// aapt resource value: 0x7f020049
-			public const int Icon62 = 2130837577;
+			public const int ic_error = 2130837577;
 			
 			// aapt resource value: 0x7f02004a
-			public const int Icon99x99 = 2130837578;
+			public const int ic_stub = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int img1 = 2130837579;
+			public const int icon = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int img10 = 2130837580;
+			public const int Icon62 = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int img10small = 2130837581;
+			public const int Icon99x99 = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int img11 = 2130837582;
+			public const int img1 = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int img11small = 2130837583;
+			public const int img10 = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int img12 = 2130837584;
+			public const int img10small = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int img12small = 2130837585;
+			public const int img11 = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int img13 = 2130837586;
+			public const int img11small = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int img13small = 2130837587;
+			public const int img12 = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int img14 = 2130837588;
+			public const int img12small = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int img14small = 2130837589;
+			public const int img13 = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int img15 = 2130837590;
+			public const int img13small = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int img15small = 2130837591;
+			public const int img14 = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int img16 = 2130837592;
+			public const int img14small = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int img16small = 2130837593;
+			public const int img15 = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int img17 = 2130837594;
+			public const int img15small = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int img17small = 2130837595;
+			public const int img16 = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int img1small = 2130837596;
+			public const int img16small = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int img2 = 2130837597;
+			public const int img17 = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int img2small = 2130837598;
+			public const int img17small = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int img3 = 2130837599;
+			public const int img1small = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int img3small = 2130837600;
+			public const int img2 = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int img4 = 2130837601;
+			public const int img2small = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int img4small = 2130837602;
+			public const int img3 = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int img5 = 2130837603;
+			public const int img3small = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int img5small = 2130837604;
+			public const int img4 = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int img6 = 2130837605;
+			public const int img4small = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int img6small = 2130837606;
+			public const int img5 = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int img7 = 2130837607;
+			public const int img5small = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int img7small = 2130837608;
+			public const int img6 = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int img8 = 2130837609;
+			public const int img6small = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int img8small = 2130837610;
+			public const int img7 = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int img9 = 2130837611;
+			public const int img7small = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int img9small = 2130837612;
+			public const int img8 = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int img_help_resize = 2130837613;
+			public const int img8small = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int List = 2130837614;
+			public const int img9 = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int ListSmall = 2130837615;
+			public const int img9small = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int Mail = 2130837616;
+			public const int img_help_resize = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int Message = 2130837617;
+			public const int List = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int rotate = 2130837618;
+			public const int ListSmall = 2130837618;
 			
 			// aapt resource value: 0x7f020073
-			public const int Save = 2130837619;
+			public const int Mail = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int Share = 2130837620;
+			public const int Message = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int ShareSmall = 2130837621;
+			public const int rotate = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int splashscreen = 2130837622;
+			public const int Save = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int Twitter = 2130837623;
+			public const int Share = 2130837623;
+			
+			// aapt resource value: 0x7f020078
+			public const int ShareSmall = 2130837624;
+			
+			// aapt resource value: 0x7f020079
+			public const int splashscreen = 2130837625;
+			
+			// aapt resource value: 0x7f02007a
+			public const int Twitter = 2130837626;
 			
 			static Drawable()
 			{
@@ -584,8 +611,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0021
 			public const int AlertOk = 2131361825;
 			
-			// aapt resource value: 0x7f0a0089
-			public const int Alerts = 2131361929;
+			// aapt resource value: 0x7f0a008a
+			public const int Alerts = 2131361930;
 			
 			// aapt resource value: 0x7f0a007f
 			public const int BigDayName = 2131361919;
@@ -593,11 +620,11 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0068
 			public const int BigDaysListView = 2131361896;
 			
-			// aapt resource value: 0x7f0a0087
-			public const int CameraBtn = 2131361927;
+			// aapt resource value: 0x7f0a0088
+			public const int CameraBtn = 2131361928;
 			
-			// aapt resource value: 0x7f0a008b
-			public const int CancelOrDelete = 2131361931;
+			// aapt resource value: 0x7f0a008c
+			public const int CancelOrDelete = 2131361932;
 			
 			// aapt resource value: 0x7f0a0029
 			public const int CountDownDays = 2131361833;
@@ -617,8 +644,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0027
 			public const int EndDate = 2131361831;
 			
-			// aapt resource value: 0x7f0a0094
-			public const int FacebookBtn = 2131361940;
+			// aapt resource value: 0x7f0a009b
+			public const int FacebookBtn = 2131361947;
 			
 			// aapt resource value: 0x7f0a0074
 			public const int Feedback = 2131361908;
@@ -653,11 +680,11 @@ namespace BigDays
 			// aapt resource value: 0x7f0a005b
 			public const int Report = 2131361883;
 			
-			// aapt resource value: 0x7f0a008a
-			public const int SeveOrEdit = 2131361930;
+			// aapt resource value: 0x7f0a008b
+			public const int SeveOrEdit = 2131361931;
 			
-			// aapt resource value: 0x7f0a0095
-			public const int TwitterBtn = 2131361941;
+			// aapt resource value: 0x7f0a009c
+			public const int TwitterBtn = 2131361948;
 			
 			// aapt resource value: 0x7f0a006f
 			public const int adView = 2131361903;
@@ -740,11 +767,11 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0060
 			public const int btnSave = 2131361888;
 			
-			// aapt resource value: 0x7f0a008d
-			public const int button1 = 2131361933;
-			
 			// aapt resource value: 0x7f0a008e
-			public const int button2 = 2131361934;
+			public const int button1 = 2131361934;
+			
+			// aapt resource value: 0x7f0a008f
+			public const int button2 = 2131361935;
 			
 			// aapt resource value: 0x7f0a0046
 			public const int com_facebook_body_frame = 2131361862;
@@ -824,14 +851,14 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0081
 			public const int dateEdit = 2131361921;
 			
-			// aapt resource value: 0x7f0a0085
-			public const int defImagesBtn = 2131361925;
+			// aapt resource value: 0x7f0a0086
+			public const int defImagesBtn = 2131361926;
 			
 			// aapt resource value: 0x7f0a0065
 			public const int editBigDaysBtn = 2131361893;
 			
-			// aapt resource value: 0x7f0a0088
-			public const int editRepeat = 2131361928;
+			// aapt resource value: 0x7f0a0089
+			public const int editRepeat = 2131361929;
 			
 			// aapt resource value: 0x7f0a0051
 			public const int facebook_login_button = 2131361873;
@@ -839,8 +866,14 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0057
 			public const int fragment_container = 2131361879;
 			
+			// aapt resource value: 0x7f0a0093
+			public const int gridImages = 2131361939;
+			
 			// aapt resource value: 0x7f0a0061
 			public const int helpRelaLayout = 2131361889;
+			
+			// aapt resource value: 0x7f0a0094
+			public const int image = 2131361940;
 			
 			// aapt resource value: 0x7f0a0084
 			public const int imageArea = 2131361924;
@@ -899,8 +932,8 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0025
 			public const int linearLayout9 = 2131361829;
 			
-			// aapt resource value: 0x7f0a0090
-			public const int listRepeat = 2131361936;
+			// aapt resource value: 0x7f0a0097
+			public const int listRepeat = 2131361943;
 			
 			// aapt resource value: 0x7f0a0073
 			public const int mainAddBigDays = 2131361907;
@@ -923,17 +956,29 @@ namespace BigDays
 			// aapt resource value: 0x7f0a0004
 			public const int normal = 2131361796;
 			
-			// aapt resource value: 0x7f0a008c
-			public const int numberPicker1 = 2131361932;
+			// aapt resource value: 0x7f0a008d
+			public const int numberPicker1 = 2131361933;
 			
-			// aapt resource value: 0x7f0a0086
-			public const int photo_AlbumBtn = 2131361926;
+			// aapt resource value: 0x7f0a0087
+			public const int photo_AlbumBtn = 2131361927;
 			
 			// aapt resource value: 0x7f0a0043
 			public const int picker_subtitle = 2131361859;
 			
+			// aapt resource value: 0x7f0a0085
+			public const int pixabayImagesBtn = 2131361925;
+			
+			// aapt resource value: 0x7f0a0092
+			public const int pixabaySearchBtn = 2131361938;
+			
+			// aapt resource value: 0x7f0a0091
+			public const int pixabaySearchText = 2131361937;
+			
 			// aapt resource value: 0x7f0a0056
 			public const int postStatusUpdateButton = 2131361878;
+			
+			// aapt resource value: 0x7f0a0095
+			public const int progress = 2131361941;
 			
 			// aapt resource value: 0x7f0a006b
 			public const int progressBar1 = 2131361899;
@@ -953,11 +998,14 @@ namespace BigDays
 			// aapt resource value: 0x7f0a005c
 			public const int scaleImageView = 2131361884;
 			
-			// aapt resource value: 0x7f0a0092
-			public const int sendEmail = 2131361938;
+			// aapt resource value: 0x7f0a0090
+			public const int searchLayout = 2131361936;
 			
-			// aapt resource value: 0x7f0a0093
-			public const int sendSMS = 2131361939;
+			// aapt resource value: 0x7f0a0099
+			public const int sendEmail = 2131361945;
+			
+			// aapt resource value: 0x7f0a009a
+			public const int sendSMS = 2131361946;
 			
 			// aapt resource value: 0x7f0a0066
 			public const int shareBigDaysBtn = 2131361894;
@@ -1019,11 +1067,11 @@ namespace BigDays
 			// aapt resource value: 0x7f0a004e
 			public const int toolbarSelDefImg = 2131361870;
 			
-			// aapt resource value: 0x7f0a008f
-			public const int toolbarSelectRepeat = 2131361935;
+			// aapt resource value: 0x7f0a0096
+			public const int toolbarSelectRepeat = 2131361942;
 			
-			// aapt resource value: 0x7f0a0091
-			public const int toolbarShare = 2131361937;
+			// aapt resource value: 0x7f0a0098
+			public const int toolbarShare = 2131361944;
 			
 			// aapt resource value: 0x7f0a006e
 			public const int trialMainImg = 2131361902;
@@ -1145,13 +1193,19 @@ namespace BigDays
 			public const int NumberPickerDlg = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int RepeatSelect = 2130903068;
+			public const int PixabayImageGrid = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int Share = 2130903069;
+			public const int PixabayImageGridItem = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int toolbar = 2130903070;
+			public const int RepeatSelect = 2130903070;
+			
+			// aapt resource value: 0x7f03001f
+			public const int Share = 2130903071;
+			
+			// aapt resource value: 0x7f030020
+			public const int toolbar = 2130903072;
 			
 			static Layout()
 			{
@@ -1299,6 +1353,9 @@ namespace BigDays
 			// aapt resource value: 0x7f040006
 			public const int decline = 2130968582;
 			
+			// aapt resource value: 0x7f04003b
+			public const int descr_image = 2130968635;
+			
 			// aapt resource value: 0x7f040030
 			public const int error = 2130968624;
 			
@@ -1380,6 +1437,9 @@ namespace BigDays
 			
 			// aapt resource value: 0x7f060007
 			public const int CustomActionBarTheme_ImagePreview = 2131099655;
+			
+			// aapt resource value: 0x7f060008
+			public const int ProgressBarStyle = 2131099656;
 			
 			// aapt resource value: 0x7f060000
 			public const int Theme_IAPTheme = 2131099648;

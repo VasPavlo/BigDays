@@ -21,13 +21,13 @@ namespace BigDays
              
              _BDDB = new DataService();
              _BDDB.ConnectToDB("BigDaysNew.db3");
-             _BDDB.CreateTable();
+            // _BDDB.CreateTable();
              _BDDB.SetActive(ItemID);            
 
             Notification n = new Notification(Resource.Drawable.Icon62, message, Java.Lang.JavaSystem.CurrentTimeMillis());
 			n.Flags = NotificationFlags.AutoCancel;
 
-			Intent i = new Intent (context, typeof(MainActivity));
+			Intent i = new Intent (context, typeof(LoadAppScreen));
 			i.PutExtra ("ItemID", ItemID);
 			i.SetFlags (ActivityFlags.ClearTop | ActivityFlags.SingleTop);
 			PendingIntent contentIntent = PendingIntent.GetActivity(context, 0, i, 0);

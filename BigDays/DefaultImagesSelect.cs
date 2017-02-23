@@ -79,9 +79,8 @@ namespace BigDays
 
 			Point point = new Point();
 
-			Display.GetSize(point);
-			point.X = Display.Width;
-			columnWidth = point.X;
+			Display.GetSize(point);			
+			columnWidth = Display.Width;
 			return columnWidth;
 		}
 

@@ -23,7 +23,9 @@ namespace BigDays
 		public static Android.Net.Uri URI { get; set; }
 		public static Bitmap ImageBtm { get; set; }
 
-		static Constants()
+        public static string ImageBtmUri { get; set; }
+
+        static Constants()
 		{
 			VersionLink = "http://play.google.com/store/apps/details?id=com.prosellersworld.bigdaysapp&c=apps";
 			StoreSearchLink = "https://play.google.com/store/search?q=com.prosellersworld.bigdaysapp";

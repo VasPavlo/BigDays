@@ -14,6 +14,8 @@ using Java.Lang;
 using UniversalImageLoader.Core;
 using Genetics;
 using Genetics.Attributes;
+using UniversalImageLoader.Core.Listener;
+using UniversalImageLoader.Core.Assist;
 
 namespace BigDays
 {
@@ -37,19 +39,23 @@ namespace BigDays
             try
             {
                 _bmp = ScreenShot(_scaleImageView);
-                Constants.ImageBtm = _bmp;        
+                Constants.ImageBtm = _bmp;
 
-                Intent returnIntent = new Intent();           
-                returnIntent.PutExtra("result", "");
-                SetResult(Result.Ok, returnIntent);
-                Finish();
+				Intent ParentIntent = new Intent(this, typeof(NewBigDays));
+				SetResult(Result.Ok, ParentIntent);
+				Finish();
+
+                //Intent returnIntent = new Intent();           
+                //returnIntent.PutExtra("result", "");
+                //SetResult(Result.Ok, returnIntent);
+                //Finish();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(this);
-                builder.SetTitle("Error");
-                builder.SetMessage("Error №104");
+                builder.SetTitle("Error CodeBloc №104");
+				builder.SetMessage($"Error{ex.Message}");
                 builder.SetCancelable(false);
                 builder.SetPositiveButton("OK", delegate { Finish(); });
                 builder.Show();                
@@ -72,204 +78,77 @@ namespace BigDays
 			};
             _scaleImageView = FindViewById<ScaleImageView>(Resource.Id.scaleImageView);
 
-            //var btnSave = FindViewById<ImageButton>(Resource.Id.btnSave);
-           // var btnRotate = FindViewById<ImageButton>(Resource.Id.btnRotate);
+          
+			if (!string.IsNullOrEmpty(Constants.ImageBtmUri))
+			{                
+               var options = new DisplayImageOptions.Builder()
+                   .ShowImageOnLoading(Resource.Drawable.ic_stub)
+                   .ShowImageForEmptyUri(Resource.Drawable.ic_empty)
+                   .ShowImageOnFail(Resource.Drawable.ic_error)
+				                                    .CacheInMemory(false)
+				                                    .CacheOnDisk(false)                  
+                   .BitmapConfig(Bitmap.Config.Rgb565)
+                   .Build();
 
-			//btnRotate.Click += (sender, e) => 
-			//{
-			//	try
-			//	{
-			//		_bmp = Settings.ImageBtm; //Compress(Settings.ImageBtm);
+                ImageLoader.Instance.DisplayImage(
+                    Constants.ImageBtmUri,
+                    _scaleImageView,
+                    options,
+                    new ImageLoadingListener(
+                        loadingStarted: delegate
+                        {
+                            //spinner.Visibility = ViewStates.Visible;
+                        },
+                        loadingComplete: delegate
+                        {
+                            //spinner.Visibility = ViewStates.Gone;
+                        },
+                        loadingFailed: (imageUri, _view, failReason) =>
+                        {
+                            string message = null;
+                            if (failReason.Type == FailReason.FailType.IoError)
+                            {
+                                message = "Input/Output error";
+                            }
+                            else if (failReason.Type == FailReason.FailType.DecodingError)
+                            {
+                                message = "Image can't be decoded";
+                            }
+                            else if (failReason.Type == FailReason.FailType.NetworkDenied)
+                            {
+                                message = "Downloads are denied";
+                            }
+                            else if (failReason.Type == FailReason.FailType.OutOfMemory)
+                            {
+                                message = "Out Of Memory error";
+                            }
+                            else
+                            {
+                                message = "Unknown error";
+                            }
 
-			//	Matrix matrix = new Matrix();
-			//	matrix.PostRotate(_rotationDegrees +=90);
+                            AlertDialog.Builder builder;
+                            builder = new AlertDialog.Builder(this);
+                            builder.SetTitle("Error CodeBloc №102/1");
+                            builder.SetMessage("message");
+                            builder.SetCancelable(false);
+                            builder.SetPositiveButton("OK", delegate { Finish(); });
+                            builder.Show();
 
-			//	_bmp = Bitmap.CreateBitmap(_bmp, 0, 0, this._bmp.Width, this._bmp.Height, matrix, true);
-			//	_scaleImageView.SetImageBitmap(_bmp);
-
-			//	var _timer2 = new System.Threading.Timer((o) =>
-			//	 {
-			//		 RunOnUiThread(() =>
-			//		 {
-			//			_bmp = _imageHelpers.BitmapFitScreenSize(_scaleImageView, _bmp);
-			//			_scaleImageView.SetImageBitmap(_bmp);
-			//		 });
-			//	 }
-			//	 , null, 30, 0);
-
-			//	}
-			//			catch (OutOfMemoryError)
-			//{
-			//	AlertDialog.Builder builder;
-			//	builder = new AlertDialog.Builder(this);
-			//	builder.SetTitle("Error");
-			//	builder.SetMessage("Out Of Memory Error");
-			//	builder.SetCancelable(false);
-			//	builder.SetPositiveButton("OK", delegate { Finish(); });
-			//	builder.Show();
-			//}
-			//};
-
-			
-			//btnSave.Click += (sender, e) =>
-			//{
-			//	try
-			//	{
-   //                 //DisplayMetrics displaymetrics = new DisplayMetrics();
-   //                 //WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
-
-   //                 //float WidthPixels = displaymetrics.WidthPixels;
-   //                 //float HeightPixels = displaymetrics.HeightPixels;
-   //                 //int x = ((int)(_scaleImageView.MtransX / _scaleImageView.Scale) * -1);
-   //                 //int y = ((int)(_scaleImageView.MtransY / _scaleImageView.Scale) * -1);
-   //                 //int Width = (int)(WidthPixels / _scaleImageView.Scale);
-   //                 //int Height = (int)(HeightPixels / _scaleImageView.Scale);
-
-   //                 ////TypedValue tv = new TypedValue();
-   //                 ////if (Theme.ResolveAttribute(Android.Resource.Attribute.ActionBarSize, tv, true))
-   //                 ////{
-   //                 ////	var actionBarHeight = TypedValue.ComplexToDimensionPixelSize(tv.Data, Resources.DisplayMetrics);
-   //                 ////}
-
-   //                 ////Width = (Width > _bitmap.Width) ? _bitmap.Width : Width;
-   //                 ////Height = (Height > _bitmap.Height) ? _bitmap.Height : Height;
-
-   //                 //x = (x < 0) ? 0 : x;
-   //                 //y = (y < 0) ? 0 : y;
-
-   //                 //_bmp = Bitmap.CreateBitmap(_bmp, x, y, Width, Height);
-
-   //                 //_bmp = Bitmap.CreateScaledBitmap(_bmp, (int)WidthPixels,(int) HeightPixels, true);
-   //                 ////_scaleImageView.SetImageBitmap(_bmp);
-
-   //                 ////var _timer2 = new System.Threading.Timer((o) =>
-   //                 //// {
-   //                 ////	 RunOnUiThread(() =>
-   //                 ////	 {
-   //                 ////		_scaleImageView.MinZoom();
-   //                 ////	 });
-   //                 ////	}
-   //                 //// , null, 100, 0);
-
-   //                 _bmp = ScreenShot(_scaleImageView);
-
-			//		Constants.ImageBtm = _bmp;
-   //                // var path=  saveToInternalStorage(_bmp);
-
-			//		Intent returnIntent = new Intent();
-			//		//returnIntent.PutExtra("result", path);
-			//		returnIntent.PutExtra("result", "");
-			//		SetResult( Result.Ok, returnIntent);
-			//		Finish();
-
-			//	}
-			//	catch (OutOfMemoryError)
-			//	{
-			//		AlertDialog.Builder builder;
-			//		builder = new AlertDialog.Builder(this);
-			//		builder.SetTitle("Error");
-			//		builder.SetMessage("Out Of Memory Error");
-			//		builder.SetCancelable(false);
-			//		builder.SetPositiveButton("OK", delegate { Finish(); });
-			//		builder.Show();
-			//	}
-			//	catch (System.Exception ex)
-			//	{
-
-			//	}
-			//};
-
-				
-
-			//_imageHelpers = new ImageHelpers(this);
-
-			//var temp = _imageHelpers.getRealPathFromURI(Constants.URI);
-			//_ImgPath  = temp.Item2;
-			//_imageName = temp.Item1;
-
-
-			if (Constants.ImageBtm != null)
-			{
-
-				//_bmp = Compress(Constants.ImageBtm);
-
-				_scaleImageView.SetImageBitmap(Constants.ImageBtm);
-
-				//var _timer = new System.Threading.Timer((o) =>
-				// {
-				//	 RunOnUiThread(() =>
-				//	 {
-				//		 _bmp = _imageHelpers.BitmapFitScreenSize(_scaleImageView, _bmp);
-				//		 _scaleImageView.SetImageBitmap(_bmp);
-				//	 });
-				// }
-				// , null, 30, 0);
-			}
+                            //spinner.Visibility = ViewStates.Gone;
+                        }));                
+            }			
 			else 
 			{
 				AlertDialog.Builder builder;
 				builder = new AlertDialog.Builder(this);
-				builder.SetTitle("Error");
-				builder.SetMessage("File not support №102");
+				builder.SetTitle("Error CodeBlock №102/2");
+				builder.SetMessage("File not support");
 				builder.SetCancelable(false);
 				builder.SetPositiveButton("OK", delegate { Finish(); });
 				builder.Show();
 			}
 		}
-
-		private string saveToInternalStorage(Bitmap bitmapImage)
-		{
-			ContextWrapper cw = new ContextWrapper(this.ApplicationContext);
-			// path to /data/data/yourapp/app_data/imageDir
-			File directory = cw.GetDir("imageDir", FileCreationMode.Private);
-			// Create imageDir
-			File mypath = new File(directory, _imageName);
-
-			try
-			{
-				 using (var os = new System.IO.FileStream(mypath.AbsolutePath, System.IO.FileMode.Create))
-				{
-					bitmapImage.Compress(Bitmap.CompressFormat.Png, 100, os);
-				}
-			}
-			catch (System.Exception ex)
-			{
-				System.Console.Write(ex.Message);
-			}
-
-
-			return (string) mypath.AbsoluteFile;
-		}
-	
-
-		Bitmap Compress(Bitmap btm , int quality = 80)
-		{
-			try
-			{
-				using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
-				{
-					using (btm)
-					{
-						btm.Compress(Bitmap.CompressFormat.Jpeg, quality, stream);
-						byte[] bitmapData = stream.ToArray();
-						return BitmapFactory.DecodeByteArray(bitmapData, 0, bitmapData.Length);
-					}
-				}
-			}
-			catch (OutOfMemoryError)
-			{
-				AlertDialog.Builder builder;
-				builder = new AlertDialog.Builder(this);
-				builder.SetTitle("Error");
-				builder.SetMessage("Out Of Memory Error №103");
-				builder.SetCancelable(false);
-				builder.SetPositiveButton("OK", delegate { Finish(); });
-				builder.Show();
-				return btm;
-			}
-		}
-
-
 
         public Bitmap ScreenShot(View view)
         {
@@ -277,22 +156,7 @@ namespace BigDays
             Canvas canvas = new Canvas(bitmap);
             view.Draw(canvas);
             return bitmap;
-        }
-
-
-        //public static void initImageLoader(Context context)
-        //{		
-        //	var config = new ImageLoaderConfiguration.Builder(context);
-
-        //	config.ThreadPriority(Thread.NormPriority - 2);
-        //	config.DenyCacheImageMultipleSizesInMemory();
-        //	config.DiskCacheFileNameGenerator(new Md5FileNameGenerator());
-        //	config.DiskCacheSize(50 * 1024 * 1024);//50Mbi
-        //	config.TasksProcessingOrder(QueueProcessingType.Lifo);
-        //	config.WriteDebugLogs();
-
-        //	ImageLoader.Instance.Init(config.Build());
-        //}
+        }     
 
     }
 }
