@@ -33,7 +33,7 @@ namespace BigDays.Pixabay
 
 		public async Task<PixabayResult> Init(string searchText )
         { 
-			var result = await httpClient.GetStringAsync($"{BASE_URL}key={Key}&q={searchText}&response_group=image_details&image_type=photo&orientation=vertical&=min_width=200&min_height=220");
+			var result = await httpClient.GetStringAsync($"{BASE_URL}key={Key}&q={searchText}&response_group=image_details&image_type=photo&orientation=vertical&=min_width=100&min_height=120&safesearch=true");
            	var model = JsonConvert.DeserializeObject<PixabayResult>(result);
 	        return model;
         }

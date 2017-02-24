@@ -16,7 +16,8 @@
     <AssemblyName>BigDays</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -35,7 +36,7 @@
     <DefineConstants>__MOBILE__;__ANDROID__;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <AndroidSigningKeyStore>D:\Dev\BigDays\BIgDays\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
@@ -44,7 +45,10 @@
     <DebugType>
     </DebugType>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <DebugSymbols>False</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
     <Optimize>true</Optimize>
