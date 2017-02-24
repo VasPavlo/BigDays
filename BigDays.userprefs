@@ -20,7 +20,7 @@
       <File FileName="BigDays\Pixabay\PixabayView.cs" Line="23" Column="40" NotebookId="1" />
       <File FileName="BigDays\NewBigDays.cs" Line="174" Column="1" NotebookId="1" />
       <File FileName="BigDays\Resources\values\styles.xml" Line="4" Column="66" NotebookId="1" />
-      <File FileName="BigDays\Pixabay\PixabayService.cs" Line="36" Column="180" NotebookId="1" />
+      <File FileName="BigDays\Pixabay\PixabayService.cs" Line="36" Column="210" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
