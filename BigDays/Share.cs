@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Widget;
 using Android.Content.PM;
 using BigDays.Models;
+using BigDays.Helpers;
 
 namespace BigDays
 {
@@ -58,27 +59,38 @@ namespace BigDays
 			};
 
 			var ui_sendSMSBtn = FindViewById<Button> (Resource.Id.sendSMS);
-			ui_sendSMSBtn.Click += (sender, e) => {
-				TimeSpan ts = _Item._EndDate.Subtract (DateTime.Now);
-				string DaysTo = String.Format ("{0:0000}", ts.Days);
-				string HoursTo = String.Format ("{0:00}", ts.Hours);
-				string MinTo = String.Format ("{0:00}", ts.Minutes);
-				string SecTo = String.Format ("{0:00}", ts.Seconds);
-				String message = string.Format("{0} {1} {2} days, {3} hours, {4} minutes, {5} seconds {6} \n{7}",
-					_Item._Name,
-					_Item._EndDate < DateTime.Now ? "was" : "is coming in",
-					DaysTo, HoursTo, MinTo, SecTo,
-					_Item._EndDate < DateTime.Now ? " ago" : "",
-					googlePlayLink);
+			ui_sendSMSBtn.Click += (sender, e) =>
+            {
+                if (PermissionHelpers.NeedPermissionsSendSms(this))
+                {
+                    PermissionHelpers.RequestPermissionssSendSms(this);
+                }
+                else
+                {
+                    TimeSpan ts = _Item._EndDate.Subtract(DateTime.Now);
+                    string DaysTo = String.Format("{0:0000}", ts.Days);
+                    string HoursTo = String.Format("{0:00}", ts.Hours);
+                    string MinTo = String.Format("{0:00}", ts.Minutes);
+                    string SecTo = String.Format("{0:00}", ts.Seconds);
+                    String message = string.Format("{0} {1} {2} days, {3} hours, {4} minutes, {5} seconds {6} \n{7}",
+                        _Item._Name,
+                        _Item._EndDate < DateTime.Now ? "was" : "is coming in",
+                        DaysTo, HoursTo, MinTo, SecTo,
+                        _Item._EndDate < DateTime.Now ? " ago" : "",
+                        googlePlayLink);
 
-				try {
-					Intent sendIntent = new Intent(Intent.ActionView);
-					sendIntent.PutExtra("sms_body", message); 
-					sendIntent.SetType("vnd.android-dir/mms-sms");
-					StartActivity(sendIntent);
-				} catch (Exception em) {
-					Toast.MakeText(this, "SMS faild, please try again later!", ToastLength.Long).Show();
-				}					
+                    try
+                    {
+                        Intent sendIntent = new Intent(Intent.ActionView);
+                        sendIntent.PutExtra("sms_body", message);
+                        sendIntent.SetType("vnd.android-dir/mms-sms");
+                        StartActivity(sendIntent);
+                    }
+                    catch (Exception em)
+                    {
+                        Toast.MakeText(this, "SMS faild, please try again later!", ToastLength.Long).Show();
+                    }
+                }				
 			};
 
 

@@ -16,6 +16,9 @@ using BigDays.DB;
 using BigDays.Models;
 using System.Linq;
 using BigDays.Enums;
+using Android;
+using Android.Content.PM;
+using BigDays.Helpers;
 
 namespace BigDays
 {
@@ -49,8 +52,13 @@ namespace BigDays
 		public ImageView _trialImg;
 		public InterstitialAd interstitialAds = null;
 		protected AdView mAdView;
+      
 
-		protected override void OnCreate(Bundle bundle)
+        private const int RequestCode = 5469;
+
+
+
+        protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
 
@@ -62,21 +70,39 @@ namespace BigDays
 			AppDomain.CurrentDomain.UnhandledException += (s, e) =>
 			{
 				Toast.MakeText(this, "Test", ToastLength.Short).Show();
-			};
+			};                 
 
-			Window.RequestFeature(WindowFeatures.NoTitle);
+
+            Window.RequestFeature(WindowFeatures.NoTitle);
 			SetContentView(Resource.Layout.Main);
 
-			_trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
-			_infoBoxControl = (InfoBoxControl)FindViewById(Resource.Id.NewInfoBoxControl);
-			_timer = new System.Timers.Timer();
+            _trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
+            _infoBoxControl = (InfoBoxControl)FindViewById(Resource.Id.NewInfoBoxControl);
+            mAdView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView);
+            mAdView.Visibility = ViewStates.Invisible;
 
-			mAdView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView);
-			mAdView.Visibility = ViewStates.Invisible;
+            _MainLayout = (RelativeLayout)FindViewById(Resource.Id.main_layout);
+            _MainImage = (ImageView)FindViewById(Resource.Id.mainImgBase);
+            _MainImage.SetScaleType(ImageView.ScaleType.CenterCrop);
 
-			_MainLayout = (RelativeLayout)FindViewById(Resource.Id.main_layout);
-			_MainImage = (ImageView)FindViewById(Resource.Id.mainImgBase);
-			_MainImage.SetScaleType(ImageView.ScaleType.CenterCrop);
+            _timer = new System.Timers.Timer();
+
+            if (PermissionHelpers.NeedPermissionsWriteExternalStorage(this))
+            {
+                PermissionHelpers.RequestPermissionssWriteExternalStorage(this);
+            }
+            else
+            {
+                Init();
+            }
+		}
+
+
+        private void Init()
+        {
+            var trialMainImg = (ImageView)FindViewById(Resource.Id.trialMainImg);
+            var shopping = FindViewById<ImageButton>(Resource.Id.shopping);
+
 #if _TRIAL_
 			try
 			{
@@ -114,8 +140,7 @@ namespace BigDays
 			}
 #endif
 
-			var trialMainImg = (ImageView)FindViewById(Resource.Id.trialMainImg);
-			var shopping = FindViewById<ImageButton>(Resource.Id.shopping);
+
 
 #if _TRIAL_
 			trialMainImg.Visibility = ViewStates.Visible;
@@ -130,88 +155,89 @@ namespace BigDays
 				StartActivity(browserIntent);
 			};
 #else
-			trialMainImg.Visibility = ViewStates.Gone;
-			shopping.Visibility = ViewStates.Gone;
-#endif
+            trialMainImg.Visibility = ViewStates.Gone;
+            shopping.Visibility = ViewStates.Gone;
+            #endif
 
 
-			long max_memory = Runtime.GetRuntime().MaxMemory();
-			long total_memory = Runtime.GetRuntime().TotalMemory();
-
-			new MigrationDB_OldInNew("BigDays.db3", "BigDaysNew.db3");
-
-			_BDDB = new DataService();
-			_BDDB.ConnectToDB("BigDaysNew.db3");
-
-			//_BDDB = new BigDaysDB_Old();
-			//_BDDB.ConnectToDB("BigDays.db3");
-
-			_BDDB.CreateTable();
-			_BDDB.CheckRepeats();
-			_BDitems = MainActivity._BDDB.SelectBDItems();
-			_ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
+            long max_memory = Runtime.GetRuntime().MaxMemory();
+            long total_memory = Runtime.GetRuntime().TotalMemory();
 
 
-			var Display = WindowManager.DefaultDisplay;
-			_DisplayHeight = Display.Height;
-			_DisplayWidth = Display.Width;
-			_infoBoxControl.SetOnTouchListener(this);
-			GlobalLayoutListener l = null;
-			l = new GlobalLayoutListener(() =>
-		   {
-			   if (_FirstAppOpen == 0)
-			   {
-				   RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
-				   infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
-				   infoBoxParams.TopMargin = _ActiveBD._PosTop;
-				   if (_ActiveBD._ChangePos)
-					   _infoBoxControl.LayoutParameters = infoBoxParams;
-				   else
-				   {
-					   RelativeLayout.LayoutParams infoBoxParamsDef = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
-					   infoBoxParamsDef.LeftMargin = 0;
-					   infoBoxParamsDef.AddRule(LayoutRules.CenterVertical);
-					   _infoBoxControl.LayoutParameters = infoBoxParamsDef;
-				   }
+            new MigrationDB_OldInNew("BigDays.db3", "BigDaysNew.db3");
 
-				   _FirstAppOpen = 1;
-			   }
-			   _infoBoxControl.ViewTreeObserver.RemoveGlobalOnLayoutListener(l);
-		   });
-			_infoBoxControl.ViewTreeObserver.AddOnGlobalLayoutListener(l);
+            _BDDB = new DataService();
+            _BDDB.ConnectToDB("BigDaysNew.db3");
 
-			int _ItemID = Intent.GetIntExtra("ItemID", 0);
-			if (_BDitems.Count > 0)
-			{
-				BitmapHelpers.LoadImages(this, _BDitems);
-				_CurrentItem = _BDDB.GetCurrentItem();
-				if (_ItemID != 0)
-					_CurrentItem._ID = _ItemID;
+            //_BDDB = new BigDaysDB_Old();
+            //_BDDB.ConnectToDB("BigDays.db3");
 
-				ShowImage(_BDitems.FirstOrDefault(n => n._ID == _CurrentItem._ID));
-				_infoBoxControl.Visibility = ViewStates.Visible;
-			}
-			else
-			{
-				ShowDefImage();
-				_infoBoxControl.Visibility = ViewStates.Gone;
-			}	
-				
-
-			if (_infoBoxControl.Visibility != ViewStates.Gone)
-				_infoBoxControl.Title = _CurrentItem._Name;
+            _BDDB.CreateTable();
+            _BDDB.CheckRepeats();
+            _BDitems = MainActivity._BDDB.SelectBDItems();
+            _ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
 
 
-			var ui_showListButton = FindViewById<ImageButton>(Resource.Id.showListButton);
-			ui_showListButton.Click += (sender, e) =>
-			{
-				var IntentListActivity = new Intent(this, typeof(ListActivity));
-			StartActivityForResult(IntentListActivity, (int)RequestCode.List_BigDays);
-			};
+            var Display = WindowManager.DefaultDisplay;
+            _DisplayHeight = Display.Height;
+            _DisplayWidth = Display.Width;
+            _infoBoxControl.SetOnTouchListener(this);
+            GlobalLayoutListener l = null;
+            l = new GlobalLayoutListener(() =>
+            {
+                if (_FirstAppOpen == 0)
+                {
+                    RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
+                    infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
+                    infoBoxParams.TopMargin = _ActiveBD._PosTop;
+                    if (_ActiveBD._ChangePos)
+                        _infoBoxControl.LayoutParameters = infoBoxParams;
+                    else
+                    {
+                        RelativeLayout.LayoutParams infoBoxParamsDef = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
+                        infoBoxParamsDef.LeftMargin = 0;
+                        infoBoxParamsDef.AddRule(LayoutRules.CenterVertical);
+                        _infoBoxControl.LayoutParameters = infoBoxParamsDef;
+                    }
 
-			var ui_addBigDaysBtn = FindViewById<ImageButton>(Resource.Id.mainAddBigDays);
-			ui_addBigDaysBtn.Click += (sender, e) =>
-			{
+                    _FirstAppOpen = 1;
+                }
+                _infoBoxControl.ViewTreeObserver.RemoveGlobalOnLayoutListener(l);
+            });
+            _infoBoxControl.ViewTreeObserver.AddOnGlobalLayoutListener(l);
+
+            int _ItemID = Intent.GetIntExtra("ItemID", 0);
+            if (_BDitems.Count > 0)
+            {
+                BitmapHelpers.LoadImages(this, _BDitems);
+                _CurrentItem = _BDDB.GetCurrentItem();
+                if (_ItemID != 0)
+                    _CurrentItem._ID = _ItemID;
+
+                ShowImage(_BDitems.FirstOrDefault(n => n._ID == _CurrentItem._ID));
+                _infoBoxControl.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                ShowDefImage();
+                _infoBoxControl.Visibility = ViewStates.Gone;
+            }
+
+
+            if (_infoBoxControl.Visibility != ViewStates.Gone)
+                _infoBoxControl.Title = _CurrentItem._Name;
+
+
+            var ui_showListButton = FindViewById<ImageButton>(Resource.Id.showListButton);
+            ui_showListButton.Click += (sender, e) =>
+            {
+                var IntentListActivity = new Intent(this, typeof(ListActivity));
+                StartActivityForResult(IntentListActivity, (int)BigDays.Enums.RequestCode.List_BigDays);
+            };
+
+            var ui_addBigDaysBtn = FindViewById<ImageButton>(Resource.Id.mainAddBigDays);
+            ui_addBigDaysBtn.Click += (sender, e) =>
+            {
 #if _TRIAL_
 				if (_BDitems.Count == 1)
 				{
@@ -232,66 +258,102 @@ namespace BigDays
 					StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.AddNew_BigDay);
 				}
 #else
-				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-			StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.AddNew_BigDay);
+                var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
+                StartActivityForResult(IntentNewBigDaysActivity, (int)BigDays.Enums.RequestCode.AddNew_BigDay);
 #endif
-			};
+            };
 
-			var ui_Feedback = FindViewById<ImageButton>(Resource.Id.Feedback);
-			ui_Feedback.Click += (sender, e) =>
-			{
-				var IntentFeedbackActivity = new Intent(this, typeof(Feedback));
-				StartActivity(IntentFeedbackActivity);
-			};
+            var ui_Feedback = FindViewById<ImageButton>(Resource.Id.Feedback);
+            ui_Feedback.Click += (sender, e) =>
+            {
+                var IntentFeedbackActivity = new Intent(this, typeof(Feedback));
+                StartActivity(IntentFeedbackActivity);
+            };
 
-			_infoBoxControl.EditBigDaysBtn.Click += (sender, e) =>
-			{
-				var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-				IntentNewBigDaysActivity.PutExtra("Edit", true);
-				IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
-			StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.Edit_BigDay);
-			};
+            _infoBoxControl.EditBigDaysBtn.Click += (sender, e) =>
+            {
+                var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
+                IntentNewBigDaysActivity.PutExtra("Edit", true);
+                IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
+                StartActivityForResult(IntentNewBigDaysActivity, (int)BigDays.Enums.RequestCode.Edit_BigDay);
+            };
 
-			_infoBoxControl.ShareBigDaysBtn.Click += (sender, e) =>
-			{
-				var IntentShareActivity = new Intent(this, typeof(Share));
-				IntentShareActivity.PutExtra("ID", _CurrentItem._ID);
-				StartActivity(IntentShareActivity);
-			};
+            _infoBoxControl.ShareBigDaysBtn.Click += (sender, e) =>
+            {
+                var IntentShareActivity = new Intent(this, typeof(Share));
+                IntentShareActivity.PutExtra("ID", _CurrentItem._ID);
+                StartActivity(IntentShareActivity);
+            };
 
-			if (_infoBoxControl.Visibility != ViewStates.Gone)
-			{
-				if (_ActiveBD._ChangePos)
-				{
-					RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
-					infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
-					infoBoxParams.TopMargin = _ActiveBD._PosTop;
+            if (_infoBoxControl.Visibility != ViewStates.Gone)
+            {
+                if (_ActiveBD._ChangePos)
+                {
+                    RelativeLayout.LayoutParams infoBoxParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
+                    infoBoxParams.LeftMargin = _ActiveBD._PosLeft;
+                    infoBoxParams.TopMargin = _ActiveBD._PosTop;
 
-					_infoBoxControl.LayoutParameters = infoBoxParams;
-				}
-				else {
-					RelativeLayout.LayoutParams infoBoxParamsDef = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
-					infoBoxParamsDef.LeftMargin = 0;
-					infoBoxParamsDef.AddRule(LayoutRules.CenterVertical);
-					_infoBoxControl.LayoutParameters = infoBoxParamsDef;
-				}
-			}
+                    _infoBoxControl.LayoutParameters = infoBoxParams;
+                }
+                else
+                {
+                    RelativeLayout.LayoutParams infoBoxParamsDef = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent - 30, ViewGroup.LayoutParams.WrapContent);
+                    infoBoxParamsDef.LeftMargin = 0;
+                    infoBoxParamsDef.AddRule(LayoutRules.CenterVertical);
+                    _infoBoxControl.LayoutParameters = infoBoxParamsDef;
+                }
+            }
 
-			_TimerHandler = new Handler();
-			UpdateGeneration();
-		}
+            _TimerHandler = new Handler();
+            UpdateGeneration();
+
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);        
+            if (requestCode == (int)Enums.RequestCode.PermissionsWriteExternalStorage && grantResults[0] == Permission.Granted)
+            {
+                Init();
+            }
+            else
+            {
+                if (PermissionHelpers.NeedPermissionsWriteExternalStorage(this))
+                {                   
+                   var builder = new AlertDialog.Builder(this);
+                    builder.SetTitle("Need Permissions Write External Storage");
+                    builder.SetMessage("Without this permit application can not fully work");
+                    builder.SetCancelable(false);
+                    builder.SetPositiveButton("OK", delegate {
+                        PermissionHelpers.RequestPermissionssWriteExternalStorage(this);
+                        Finish();
+                    });
+                    builder.SetNegativeButton("Cansel", delegate
+                    {
+                        Android.OS.Process.KillProcess(Android.OS.Process.MyPid());
+                        Finish();                       
+                    });
+                    builder.Show();                    
+                }
+                else
+                {
+                    Init();
+                }
+            }            
+        }
 
 
-		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult(requestCode, resultCode, data);
 
-		if ((requestCode == (int)RequestCode.List_BigDays || requestCode == (int)RequestCode.Edit_BigDay) && (resultCode == Result.Ok))
+		if ((requestCode == (int)BigDays.Enums.RequestCode.List_BigDays || requestCode == (int)BigDays.Enums.RequestCode.Edit_BigDay) && (resultCode == Result.Ok))
 			{
 				_BDDB.CheckRepeats();
 				_CurrentItem = _BDDB.GetCurrentItem();
 				_infoBoxControl.Visibility = ViewStates.Visible;
-			if (requestCode == (int)RequestCode.Edit_BigDay)
+			if (requestCode == (int)BigDays.Enums.RequestCode.Edit_BigDay)
 				{
 					for (int i = 0; i < _BDitems.Count; i++)
 						if (_BDitems[i]._ID == _CurrentItem._ID)
@@ -336,7 +398,7 @@ namespace BigDays
 					}
 				}
 			}
-			else if ((requestCode == (int)RequestCode.AddNew_BigDay) && (resultCode == Result.Ok))
+			else if ((requestCode == (int)BigDays.Enums.RequestCode.AddNew_BigDay) && (resultCode == Result.Ok))
 			{
 				BigDaysItemModel item = _BDDB.GetLastAddItem();
 				BitmapHelpers.LoadImage(this, item);
@@ -526,9 +588,9 @@ namespace BigDays
 		{
 			var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
 			return dp;
-		}
-
-		class GlobalLayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
+		}     
+        
+        class GlobalLayoutListener : Java.Lang.Object, ViewTreeObserver.IOnGlobalLayoutListener
 		{
 			public GlobalLayoutListener(System.Action onGlobalLayout)
 			{

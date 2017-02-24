@@ -17,6 +17,9 @@ using BigDays.Models;
 using BigDays.Converters;
 using BigDays.Pixabay;
 using Java.IO;
+using BigDays.Helpers;
+using Android.Content.PM;
+using Android.Runtime;
 
 namespace BigDays
 {
@@ -58,7 +61,24 @@ namespace BigDays
             StartActivityForResult(Intent.CreateChooser(Intent, "Select Picture"), (int)RequestCode.PickImage);
         }
 
-       
+
+        [Splice(Resource.Id.CameraBtn)]
+        private Button CameraBtn;
+
+        [SpliceClick(Resource.Id.CameraBtn)]
+        void OnCameraBtnClicked(object sender, EventArgs e)
+        {
+            if (PermissionHelpers.NeedPermissionsCamera(this))
+            {
+                PermissionHelpers.RequestPermissionssCamera(this);
+            }
+            else
+            {
+                _cameraHelpers.TakeAPicture(_cameraHelpers);
+            }
+        }      
+
+
         private bool _Edit = false;
 
 		private BigDaysItemModel _Item;
@@ -76,8 +96,6 @@ namespace BigDays
 
 		private EditText _UiTimeEdit;
 		private EditText _UiDateEdit;
-		
-		private Button _UiCameraBtn;
 
 		private ImageButton _UiSeveOrEdit;
 		private ImageButton _UiCancelOrDelete;
@@ -101,7 +119,7 @@ namespace BigDays
 		private int[] garbage = new int[6];
 		private CameraHelpers _cameraHelpers;
 		NotificationManager _NM;
-
+        
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 		{
 			base.OnActivityResult(requestCode, resultCode, data);	
@@ -357,15 +375,6 @@ namespace BigDays
 
 			// display the current date (this method is below)
 			UpdateDisplayDate();
-			
-
-			if (_cameraHelpers.IsThereAnAppToTakePictures())
-			{
-				_cameraHelpers.CreateDirectoryForPictures();
-
-				_UiCameraBtn = FindViewById<Button>(Resource.Id.CameraBtn);
-				_UiCameraBtn.Click += TakeAPicture;
-			}
 
 			_UiSeveOrEdit = FindViewById<ImageButton>(Resource.Id.SeveOrEdit);
 			_UiSeveOrEdit.Click += (sender, e) =>
@@ -612,15 +621,32 @@ namespace BigDays
 		}
 
 
-		private void TakeAPicture(object sender, EventArgs eventArgs)
-		{
-			Intent intent = new Intent(MediaStore.ActionImageCapture);
-			App._file = new File(App._dir, string.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
-			intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
-			StartActivityForResult(intent, (int)RequestCode.CameraImage);
-		}
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+          
+            if (requestCode == (int)Enums.RequestCode.PermissionsCameraAndWriteExternalStorage && grantResults[0] == Permission.Granted)
+            {
+                if (_cameraHelpers != null)
+                {
+                    _cameraHelpers.TakeAPicture(_cameraHelpers);
+                }
+                else
+                {
 
-		public string getRealPathFromURI(Android.Net.Uri contentUri)
+                }
+            }
+            else
+            {     var builder = new AlertDialog.Builder(this);
+                    builder.SetTitle("Need Permissions Camera");
+                    builder.SetMessage("To interact with the camera requires permission");
+                    builder.SetCancelable(false);
+                    builder.SetPositiveButton("OK", delegate { Finish(); });                   
+                    builder.Show();               
+            }
+        }
+
+        public string getRealPathFromURI(Android.Net.Uri contentUri)
 		{
 			string[] proj = { MediaStore.Images.Media.InterfaceConsts.Data };
 			var cursor = ManagedQuery(contentUri, proj, null, null, null);

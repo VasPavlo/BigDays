@@ -10,6 +10,8 @@ namespace BigDays.Enums
 		ReturnPickImagePath = 5000,
 		CameraImage = 2000,
 		Repeat = 3000,
-		Alerts =4000
-	}
+		Alerts =4000,
+        PermissionsCameraAndWriteExternalStorage = 44,
+        PermissionsWriteExternalStorage=45
+    }
 }
