@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Genetics</name>
+    </assembly>
+    <members>
+        <member name="T:Genetics.Attributes.SpliceAttribute">
+            <summary>
+            Splice the specified view or resource into the field or property.
+            </summary>
+        </member>
+        <member name="M:Genetics.Attributes.SpliceAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Genetics.Attributes.SpliceAttribute"/> class.
+            </summary>
+            <param name="resourceId">The Android view or resource ID.</param>
+        </member>
+        <member name="P:Genetics.Attributes.SpliceAttribute.ResourceId">
+            <summary>
+            Gets the Android view or resource ID.
+            </summary>
+            <value>The Android view or resource ID.</value>
+        </member>
+        <member name="P:Genetics.Attributes.SpliceAttribute.Optional">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Genetics.Attributes.SpliceAttribute"/> is optional.
+            </summary>
+            <value><c>true</c> if optional; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Genetics.Attributes.SpliceAttribute.DisposeOnSever">
+            <summary>
+            Gets or sets a value indicating whether the value should be disposed when Sever is invoked.
+            </summary>
+            <value><c>true</c> if the value should be disposed when Sever is invoked; otherwise, <c>false</c>.</value>
+            <remarks>
+            In the case of <see cref="T:Android.Graphics.Bitmap"/>, the bitmap is recycled. 
+            And, an <see cref="T:System.Xml.XmlReader"/> is closed.
+            </remarks>
+            <seealso cref="M:Genetics.Geneticist.Sever(Android.App.Activity)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(Android.App.Dialog)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(Android.Views.View)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(System.Object,Android.App.Activity)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(System.Object,Android.App.Dialog)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(System.Object,Android.Views.View)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(System.Object,Android.Content.Context)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever(System.Object,System.Object,Android.Content.Context)"/>
+            <seealso cref="M:Genetics.Geneticist.Sever``1(System.Object,``0,System.Func{``0,Android.Content.Context})"/>
+        </member>
+        <member name="T:Genetics.Genes.XmlGene.WrappedXmlReader">
+            <summary>
+            Temporary work around until the Xamarin.Android bug (#32696) is fixed:
+            https://bugzilla.xamarin.com/show_bug.cgi?id=32696
+            </summary>
+        </member>
+        <member name="T:Genetics.Geneticist">
+             <summary>
+             This type is used to inject views and resources into members using attributes.
+             </summary>
+             <remarks>
+             <para>
+             Views and resource values can be injected into both fields and properties using 
+             the <see cref="T:Genetics.Attributes.SpliceAttribute">[Splice]</see> attribute. Event handlers can be attached 
+             using the various <see cref="T:Genetics.Attributes.SpliceEventAttribute">[SpliceEvent]</see> attributes.
+             </para>
+             <para>
+             Finding views from your activity is as easy as:
+             <code>
+             public class ExampleActivity : Activity
+             {
+               [Splice(Resource.Id.title)]
+               private EditText titleView;
+               [Splice(Resource.Id.subtitle)]
+               private EditText subtitleView;
+            
+               protected override void OnCreate(Bundle savedInstanceState)
+               {
+                 base.OnCreate(savedInstanceState);
+                 SetContentView(Resource.Layout.ExampleLayout);
+                 
+                 Geneticist.Splice(this);
+               }
+             }
+             </code>
+             </para>
+             <para>
+             View and resource injection can be performed directly on an <see cref="M:Genetics.Geneticist.Splice(Android.App.Activity)">Activity</see>,
+             a <see cref="M:Genetics.Geneticist.Splice(Android.Views.View)">View</see> or a <see cref="M:Genetics.Geneticist.Splice(Android.App.Dialog)">Dialog</see>. 
+             Alternate objects with view members can be specified along with an 
+             <see cref="M:Genetics.Geneticist.Splice(System.Object,Android.App.Activity)">Activity</see>,
+             <see cref="M:Genetics.Geneticist.Splice(System.Object,Android.Views.View)">View</see> or
+             <see cref="M:Genetics.Geneticist.Splice(System.Object,Android.App.Dialog)">Dialog</see>.
+             </para>
+             <para>
+             In the case where the object only contains resource members, and no UI component, such as in the case
+             of a <see cref="T:Android.Widget.IListAdapter" />, the <see cref="T:Android.Content.Context" /> 
+             can be specified along with a <see langword="null" /> source object:
+             <code>
+             Geneticist.Splice(this, null, context);
+             </code>
+             </para>
+             <para>
+             Resource values can also be injected to fields or properties:
+             <code>
+             [Splice(Resource.Boolean.isTablet)]
+             private bool isTablet;
+             
+             [Splice(Resource.Integer.columns)]
+             public int Columns { get; set; }
+             
+             [Splice(Resource.Xml.manifest)]
+             public XDocument Manifest { get; private set; }
+             </code>
+             </para>
+             <para>
+             To inject event handlers, you can attribute your methods. As long as the method parameters are compatible, 
+             they will be automatically hooked up:
+             <code>
+             [SpliceClick(Resource.Id.submit)]
+             private void OnSubmit(object sender, EventArgs e)
+             {
+               // React to button click.
+             }
+             </code>
+             </para>
+             <para>
+             Be default, views and resource are required to be present for member bindings.
+             If a view is optional set the <see cref="P:Genetics.Attributes.SpliceAttribute.Optional">Optional</see> 
+             property to <c>true</c>:
+             <code>
+             [Splice(Resource.Id.title, Optional = true)]
+             private EditText titleView;
+             
+             [Splice(Resource.Xml.manifest, Optional = true)]
+             public XDocument Manifest { get; private set; }
+             </code>
+             </para>
+             </remarks>
+        </member>
+        <member name="P:Genetics.Geneticist.Debug">
+            <summary>
+            Gets or sets a value indicating whether to write to the <see cref="P:Genetics.Geneticist.DebugTextWriter" />.
+            </summary>
+            <value><c>true</c> if it should debug; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Genetics.Geneticist.ThrowOnError">
+            <summary>
+            Gets or sets a value indicating whether errors should raise exceptions.
+            </summary>
+            <value><c>true</c> if errors should raise exceptions; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:Genetics.Geneticist.Splice(Android.App.Activity)">
+            <summary>
+            Splice attributed members in the specified <see cref="T:Android.App.Activity"/>. 
+            The current content view is used as the view root.
+            </summary>
+            <param name="target">The target activity for member injection.</param>
+        </member>
+        <member name="M:Genetics.Geneticist.Splice(Android.Views.View)">
+            <summary>
+            Splice attributed members in the specified <see cref="T:Android.Views.View"/>. 
+            The specified view is used as the view root.
+            </summary>
+            <param name="target">The target view for member injection.</param>
+        </member>
+        <member name="M:Genetics.Geneticist.Splice(Android.App.Dialog)">
+            <summary>
+            Splice attributed members in the specified <see cref="T:Android.App.Dialog"/>. 
+            The current content view is used as the view root.
+            </summary>
+            <param name="target">The target dialog for member injection.</param>
+        </member>
+    </members>
+</doc>

@@ -52,11 +52,7 @@ namespace BigDays
 		public ImageView _trialImg;
 		public InterstitialAd interstitialAds = null;
 		protected AdView mAdView;
-      
-
-        private const int RequestCode = 5469;
-
-
+		private ImageButton _shopping;
 
         protected override void OnCreate(Bundle bundle)
 		{
@@ -76,7 +72,12 @@ namespace BigDays
             Window.RequestFeature(WindowFeatures.NoTitle);
 			SetContentView(Resource.Layout.Main);
 
+			_shopping = FindViewById<ImageButton>(Resource.Id.shopping);
+			_shopping.Visibility = ViewStates.Gone;
+
             _trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
+			_trialImg.Visibility = ViewStates.Invisible;
+
             _infoBoxControl = (InfoBoxControl)FindViewById(Resource.Id.NewInfoBoxControl);
             mAdView = FindViewById<Android.Gms.Ads.AdView>(Resource.Id.adView);
             mAdView.Visibility = ViewStates.Invisible;
@@ -84,6 +85,7 @@ namespace BigDays
             _MainLayout = (RelativeLayout)FindViewById(Resource.Id.main_layout);
             _MainImage = (ImageView)FindViewById(Resource.Id.mainImgBase);
             _MainImage.SetScaleType(ImageView.ScaleType.CenterCrop);
+			ShowDefImage();
 
             _timer = new System.Timers.Timer();
 
@@ -99,9 +101,7 @@ namespace BigDays
 
 
         private void Init()
-        {
-            var trialMainImg = (ImageView)FindViewById(Resource.Id.trialMainImg);
-            var shopping = FindViewById<ImageButton>(Resource.Id.shopping);
+        {      
 
 #if _TRIAL_
 			try
@@ -130,8 +130,7 @@ namespace BigDays
 
 				ThisAdListener.AdLoaded += () =>
 				{
-					var trialImg = FindViewById<ImageView>(Resource.Id.trialMainImg);
-					trialImg.Visibility = ViewStates.Invisible;
+					_trialImg.Visibility = ViewStates.Invisible;
 					mAdView.Visibility = ViewStates.Visible;
 				};
 			}
@@ -143,20 +142,20 @@ namespace BigDays
 
 
 #if _TRIAL_
-			trialMainImg.Visibility = ViewStates.Visible;
-			shopping.Visibility = ViewStates.Visible;
+			_trialImg.Visibility = ViewStates.Visible;
+			_shopping.Visibility = ViewStates.Visible;
 			Intent browserIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Constants.VersionLink));
-			trialMainImg.Click += (sender, e) =>
+			_trialImg.Click += (sender, e) =>
 			{
 				StartActivity(browserIntent);
 			};
-			shopping.Click += (sender, e) =>
+			_shopping.Click += (sender, e) =>
 			{
 				StartActivity(browserIntent);
 			};
 #else
-            trialMainImg.Visibility = ViewStates.Gone;
-            shopping.Visibility = ViewStates.Gone;
+            _trialImg.Visibility = ViewStates.Gone;
+            _shopping.Visibility = ViewStates.Gone;
             #endif
 
 
@@ -255,7 +254,7 @@ namespace BigDays
 				}
 				else {
 					var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-					StartActivityForResult(IntentNewBigDaysActivity, (int)RequestCode.AddNew_BigDay);
+					StartActivityForResult(IntentNewBigDaysActivity, (int)Enums.RequestCode.AddNew_BigDay);
 				}
 #else
                 var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));

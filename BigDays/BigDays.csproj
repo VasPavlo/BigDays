@@ -23,7 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__;</DefineConstants>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
@@ -31,15 +31,37 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugTrial|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\DebugTrial</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPaid|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugPaid\</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__ANDROID__</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleasePaid|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>__MOBILE__;__ANDROID__;</DefineConstants>
+    <OutputPath>bin\ReleasePaid</OutputPath>
+    <DefineConstants>__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
-    <AndroidSigningKeyStore>E:\dev\BigDays\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>D:\Dev\BigDays\BIgDays\BigDays\Key\key_bigdays_full.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
@@ -51,6 +73,12 @@
     <Debugger>.Net (Xamarin)</Debugger>
     <DebugSymbols>False</DebugSymbols>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAmazon|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -59,16 +87,29 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidSigningKeyStore>D:\Dev\BigDays\BigDays_PaidVersion\BigDays_PaidVersion\trunk\BigDays\Key\key_amazon_full.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>test1234</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
     <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <JavaOptions>1G</JavaOptions>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Free|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseFree|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release Free</OutputPath>
+    <OutputPath>bin\ReleaseFree</OutputPath>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidSigningKeyStore>F:\dev\SourseSVN\bigdays\New\svn\bigdays\trunk\BigDays\Key\key_bigdays_free.keystore</AndroidSigningKeyStore>

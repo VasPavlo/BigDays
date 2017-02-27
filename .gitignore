@@ -12,3 +12,10 @@
 /BigDays/bin/Release
 /BigDays/bin/Release Amazon
 /BigDays/obj/ReleaseAmazon
+/BigDays/Components
+/BigDays/.vs/BigDays/v14
+/BigDays/.vs/BigDays/v14
+/BigDays/bin
+/BigDays/obj/ReleasePaid
+/BigDays/obj/DebugFree
+/BigDays/obj/ReleaseFree

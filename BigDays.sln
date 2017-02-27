@@ -8,18 +8,30 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugFree|Any CPU = DebugFree|Any CPU
 		Release|Any CPU = Release|Any CPU
 		ReleaseAmazon|Any CPU = ReleaseAmazon|Any CPU
+		ReleaseFree|Any CPU = ReleaseFree|Any CPU
+		ReleasePaid|Any CPU = ReleasePaid|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.DebugFree|Any CPU.ActiveCfg = DebugPaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.DebugFree|Any CPU.Build.0 = DebugPaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.DebugFree|Any CPU.Deploy.0 = DebugPaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.ActiveCfg = ReleasePaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.Build.0 = ReleasePaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.Release|Any CPU.Deploy.0 = ReleasePaid|Any CPU
 		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleaseAmazon|Any CPU.ActiveCfg = ReleaseAmazon|Any CPU
 		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleaseAmazon|Any CPU.Build.0 = ReleaseAmazon|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleaseFree|Any CPU.ActiveCfg = ReleaseFree|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleaseFree|Any CPU.Build.0 = ReleaseFree|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleaseFree|Any CPU.Deploy.0 = ReleaseFree|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleasePaid|Any CPU.ActiveCfg = ReleasePaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleasePaid|Any CPU.Build.0 = ReleasePaid|Any CPU
+		{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}.ReleasePaid|Any CPU.Deploy.0 = ReleasePaid|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
