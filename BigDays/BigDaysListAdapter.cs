@@ -20,6 +20,7 @@ namespace BigDays
 	{
         BigDaysItemModel[] items;
 		Activity context;
+		LayoutInflater _inflater;
         private TextView _countDownDays;
         private TextView _countDownHours;
         private TextView _countDownMin;
@@ -27,6 +28,13 @@ namespace BigDays
 
         public BigDaysListAdapter(Activity context, BigDaysItemModel[] items) : base() {
 			this.context = context;
+			this.items = items;
+		}
+
+		public BigDaysListAdapter(LayoutInflater inflater, BigDaysItemModel[] items) : base()
+		{
+			_inflater = inflater;
+			context = null;
 			this.items = items;
 		}
 
@@ -55,7 +63,16 @@ namespace BigDays
 			View view = convertView; // re-use an existing view, if one is available
 
 			if (view == null) // otherwise create a new one
-				view = context.LayoutInflater.Inflate (Resource.Layout.BigDaysListItem, null);
+			{
+				if (context == null)
+				{
+					view = _inflater.Inflate(Resource.Layout.BigDaysListItem, null);
+				}
+				else 
+				{
+					view = context.LayoutInflater.Inflate(Resource.Layout.BigDaysListItem, null);
+				}
+			}
 
 			//if (items [position]._Name.Length < 15)
 				view.FindViewById<TextView> (Resource.Id.name).Text = items [position]._Name;
@@ -92,6 +109,7 @@ namespace BigDays
 			view.FindViewById<TextView> (Resource.Id.EndDate).Text = items [position]._EndDate.ToString ("dd/MM/yyyy hh:mm:ss tt");
 			if (!items [position]._IsSetImage) {
 				view.FindViewById<ImageView> (Resource.Id.ItemImage).SetScaleType (ImageView.ScaleType.CenterCrop);
+				if(MainActivity._BDitems.Count <= position-1)
 				view.FindViewById<ImageView> (Resource.Id.ItemImage).SetImageBitmap (MainActivity._BDitems [position]._SmallImg);
 			}
 

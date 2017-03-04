@@ -8,7 +8,7 @@ namespace BigDays
 {
 	using System;
 	using System.IO;
-
+	using Android.Content;
 	using Android.Graphics;
 	using Android.Net;
 	using BigDays.Converters;
@@ -122,7 +122,7 @@ namespace BigDays
 			return (int)inSampleSize;
 		}
 
-		public static Bitmap DecodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight, Activity context)
+		public static Bitmap DecodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight, Context context)
 		{
 			// First decode with inJustDecodeBounds=true to check dimensions
 			var options = new BitmapFactory.Options {
@@ -145,7 +145,7 @@ namespace BigDays
 				builder.SetTitle("Error");
 				builder.SetMessage("Out Of Memory Error");
 				builder.SetCancelable(false);
-				builder.SetPositiveButton("OK", delegate { context.Finish(); });
+				builder.SetPositiveButton("OK", delegate {((Activity)builder.Context).Finish(); });
 				builder.Show();
 			}
 			return null;
@@ -158,7 +158,7 @@ namespace BigDays
 			}
 		}
 
-		public static void LoadImage(Activity context, BigDaysItemModel item){
+		public static void LoadImage(Context context, BigDaysItemModel item){
 				switch (item._ImageStorage) {
 				case(int) LocationPicture.ResourcesImage:
 					string path_main_bg_def = item._Image.Replace ("small", "");

@@ -38,4 +38,8 @@
   <!-- Content descriptions -->
   <string name="descr_image">Image</string>
 
+	<string name="openDrawer">Drawer Open</string>
+	<string name="closeDrawer">Drawer Closed</string>
+
+	
 </resources>

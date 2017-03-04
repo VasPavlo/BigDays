@@ -1,106 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_layout">
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:id="@+id/mainImgBase"
+    android:fitsSystemWindows="true">
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <ImageView
-        android:src="@drawable/AdBannerDefault"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/trialMainImg"
-        android:scaleType="fitCenter" />
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-3919550248819664/2945556030" />
-<!--	Test-->
-<!--   <com.google.android.gms.ads.AdView
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_layout">
+            <ImageView
+                android:src="@android:drawable/ic_menu_gallery"
+                android:id="@+id/mainImgBase"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:src="@drawable/AdBannerDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:id="@+id/trialMainImg"
+                android:scaleType="fitCenter" />
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:adSize="SMART_BANNER"
+                app:adUnitId="ca-app-pub-3919550248819664/2945556030" />
+        <!--	Test-->
+        <!--   <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />-->
-    <BigDays.InfoBoxControl
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/NewInfoBoxControl" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout1"
-        android:gravity="center"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:background="#4D000000">
+            <BigDays.InfoBoxControl
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/NewInfoBoxControl" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayout1"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:background="#4D000000">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout13"
+                    android:gravity="center">
+                    <ImageButton
+                        android:src="@drawable/ic_action_storage"
+                        android:id="@+id/showListButton"
+                        android:background="@drawable/button_custom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp" />
+                    <ImageButton
+                        android:src="@drawable/ic_action_new"
+                        android:id="@+id/mainAddBigDays"
+                        android:background="@drawable/button_custom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:clickable="true"
+                        android:layout_marginRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp" />
+                    <ImageButton
+                        android:src="@drawable/ic_action_about"
+                        android:id="@+id/Feedback"
+                        android:background="@drawable/button_custom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:clickable="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginRight="15dp" />
+                    <ImageButton
+                        android:src="@drawable/ic_action_download"
+                        android:id="@+id/shopping"
+                        android:background="@drawable/button_custom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:clickable="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
         <LinearLayout
+            android:choiceMode="singleChoice"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout13"
-            android:gravity="center">
-            <ImageButton
-                android:src="@drawable/ic_action_storage"
-                android:id="@+id/showListButton"
-                android:background="@drawable/button_custom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="15dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp" />
-            <ImageButton
-                android:src="@drawable/ic_action_new"
-                android:id="@+id/mainAddBigDays"
-                android:background="@drawable/button_custom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:layout_marginRight="15dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp" />
-            <ImageButton
-                android:src="@drawable/ic_action_about"
-                android:id="@+id/Feedback"
-                android:background="@drawable/button_custom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:layout_marginRight="15dp" />
-            <ImageButton
-                android:src="@drawable/ic_action_download"
-                android:id="@+id/shopping"
-                android:background="@drawable/button_custom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:clickable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp" />
+            android:layout_gravity="right"
+            android:background="#9E9E9E"
+            android:layout_width="278dp"
+            android:layout_height="match_parent"
+            android:id="@+id/left_drawer"
+            android:dividerHeight="1dp"
+            android:divider="#E2E2E2">
+            <FrameLayout
+                android:id="@+id/BigDaysListFragmentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

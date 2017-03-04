@@ -19,11 +19,13 @@ using BigDays.Enums;
 using Android;
 using Android.Content.PM;
 using BigDays.Helpers;
+using Android.Support.V4.Widget;
+using Android.Support.V7.App;
 
 namespace BigDays
 {
 	[Activity(Label = "BigDays", Theme = "@style/CustomActionBarTheme", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-	public class MainActivity : Activity, View.IOnTouchListener
+	public class MainActivity :  AppCompatActivity//, View.IOnTouchListener
 	{
 		private System.Timers.Timer _timer;
 		RelativeLayout _MainLayout;
@@ -53,6 +55,8 @@ namespace BigDays
 		public InterstitialAd interstitialAds = null;
 		protected AdView mAdView;
 		private ImageButton _shopping;
+		private LinearLayout mLeftDrawer;
+		private DrawerLayout mDrawerLayout;
 
         protected override void OnCreate(Bundle bundle)
 		{
@@ -71,6 +75,26 @@ namespace BigDays
 
             Window.RequestFeature(WindowFeatures.NoTitle);
 			SetContentView(Resource.Layout.Main);
+
+
+			mLeftDrawer = FindViewById<LinearLayout>(Resource.Id.left_drawer);
+
+			//mLeftDrawer.Tag = 0;
+
+			mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
+			var drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, Resource.String.openDrawer, Resource.String.closeDrawer);
+			mDrawerLayout.SetDrawerListener(drawerToggle);
+			drawerToggle.SyncState();
+
+			var ft = FragmentManager.BeginTransaction();
+			ft.AddToBackStack(null);
+			ft.Add(Resource.Id.BigDaysListFragmentLayout, new BigDaysListFragment());
+			ft.Commit();
+
+
+
+
 
 			_shopping = FindViewById<ImageButton>(Resource.Id.shopping);
 			_shopping.Visibility = ViewStates.Gone;
@@ -180,7 +204,7 @@ namespace BigDays
             var Display = WindowManager.DefaultDisplay;
             _DisplayHeight = Display.Height;
             _DisplayWidth = Display.Width;
-            _infoBoxControl.SetOnTouchListener(this);
+          //  _infoBoxControl.SetOnTouchListener(this);
             GlobalLayoutListener l = null;
             l = new GlobalLayoutListener(() =>
             {
@@ -230,8 +254,9 @@ namespace BigDays
             var ui_showListButton = FindViewById<ImageButton>(Resource.Id.showListButton);
             ui_showListButton.Click += (sender, e) =>
             {
-                var IntentListActivity = new Intent(this, typeof(ListActivity));
-                StartActivityForResult(IntentListActivity, (int)BigDays.Enums.RequestCode.List_BigDays);
+			mDrawerLayout.OpenDrawer(mLeftDrawer);
+               // var IntentListActivity = new Intent(this, typeof(ListActivity));
+               // StartActivityForResult(IntentListActivity, (int)BigDays.Enums.RequestCode.List_BigDays);
             };
 
             var ui_addBigDaysBtn = FindViewById<ImageButton>(Resource.Id.mainAddBigDays);
@@ -271,10 +296,10 @@ namespace BigDays
 
             _infoBoxControl.EditBigDaysBtn.Click += (sender, e) =>
             {
-                var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
-                IntentNewBigDaysActivity.PutExtra("Edit", true);
-                IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
-                StartActivityForResult(IntentNewBigDaysActivity, (int)BigDays.Enums.RequestCode.Edit_BigDay);
+               var IntentNewBigDaysActivity = new Intent(this, typeof(NewBigDays));
+               IntentNewBigDaysActivity.PutExtra("Edit", true);
+               IntentNewBigDaysActivity.PutExtra("ID", _CurrentItem._ID);
+               StartActivityForResult(IntentNewBigDaysActivity, (int)BigDays.Enums.RequestCode.Edit_BigDay);
             };
 
             _infoBoxControl.ShareBigDaysBtn.Click += (sender, e) =>
@@ -320,7 +345,7 @@ namespace BigDays
             {
                 if (PermissionHelpers.NeedPermissionsWriteExternalStorage(this))
                 {                   
-                   var builder = new AlertDialog.Builder(this);
+				var builder = new Android.App.AlertDialog.Builder(this);
                     builder.SetTitle("Need Permissions Write External Storage");
                     builder.SetMessage("Without this permit application can not fully work");
                     builder.SetCancelable(false);
@@ -456,8 +481,8 @@ namespace BigDays
 			}
 			catch (OutOfMemoryError)
 			{
-				AlertDialog.Builder builder;
-				builder = new AlertDialog.Builder(this);
+				Android.App.AlertDialog.Builder builder;
+			builder = new Android.App.AlertDialog.Builder(this);
 				builder.SetTitle("Error");
 				builder.SetMessage("Out Of Memory Error");
 				builder.SetCancelable(false);
@@ -476,8 +501,7 @@ namespace BigDays
 			}
 			catch (OutOfMemoryError em)
 			{
-				AlertDialog.Builder builder;
-				builder = new AlertDialog.Builder(this);
+			var builder = new Android.App.AlertDialog.Builder(this);
 				builder.SetTitle("Error");
 				builder.SetMessage("Out Of Memory Error");
 				builder.SetCancelable(false);
