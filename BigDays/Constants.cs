@@ -29,14 +29,7 @@ namespace BigDays
 		{
 			VersionLink = "http://play.google.com/store/apps/details?id=com.prosellersworld.bigdaysapp&c=apps";
 			StoreSearchLink = "https://play.google.com/store/search?q=com.prosellersworld.bigdaysapp";
-			CaptionName = "Download from Google Play ...";
-
-
-			#if _TRIAL_
-			VersionLink = "http://play.google.com/store/apps/details?id=com.prosellersworld.bigdaysfree&c=apps";
-			StoreSearchLink = "https://play.google.com/store/search?q=com.prosellersworld.bigdaysfree";
-			CaptionName = "Download from Google Play...";
-			#endif
+			CaptionName = "Download from Google Play ...";			
 
 			#if __AMAZON__
 			VersionLink = "http://www.amazon.com/gp/mas/dl/android?p=com.prosellersworld.bigdays";

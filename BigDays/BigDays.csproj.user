@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
-    <SelectedDevice>Genymotion Custom Phone - 7.0.0 - API 24 - 768x1280</SelectedDevice>
+    <SelectedDevice>Genymotion Samsung Galaxy S6 - 5.1.0 - API 22 - 1440x2560</SelectedDevice>
     <DefaultDevice>5.1" Lollipop %285.1.1%29 XXHDPI Phone</DefaultDevice>
   </PropertyGroup>
 </Project>

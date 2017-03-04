@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{C1408DBF-CEEC-4119-92FC-BBD24F6F2921}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="ReleaseFree" />
   <MonoDevelop.Ide.ItemProperties.BigDays AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.192.168.194.101:5555" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -9,7 +9,7 @@
       <Breakpoint file="D:\Dev\BigDays\BIgDays\BigDays\PixabayGridFragment.cs" relfile="BigDays\PixabayGridFragment.cs" line="197" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="BigDays\MainActivity.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="BigDays\DefaultImagesSelect.cs" Line="11" Column="24" />
       <File FileName="BigDays\Utils\CameraHelpers.cs" Line="35" Column="4" />

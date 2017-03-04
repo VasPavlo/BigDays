@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.prosellersworld.bigdaysfree" android:versionCode="17" android:versionName="17" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.prosellersworld.bigdaysfree" android:versionCode="18" android:versionName="18" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="25" />
 	<supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
-	<application android:label="Big Days of Our Lives Countdown" android:icon="@drawable/Big_Day_CountdownFree" android:largeHeap="true">
+	<application android:label="Big Days of Our Lives Countdown" android:icon="@drawable/big_day_countdownfree" android:largeHeap="true">
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" />
 		<activity android:name="com.facebook.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/app_name" />
