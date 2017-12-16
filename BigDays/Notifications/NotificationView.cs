@@ -1,14 +1,13 @@
 ﻿using Android.App;
 using Android.Content;
 using BigDays.Services;
-using BigDays.DB;
 
 namespace BigDays
 {
 	[BroadcastReceiver]
 	public class NotificationView: BroadcastReceiver
 	{
-        public IBigDaysDB _BDDB;       
+        public DataService _BDDB;       
 
 		public override void OnReceive(Context context, Intent intent) {
 			NotificationManager mNM;
@@ -20,8 +19,7 @@ namespace BigDays
 			string title = intent.GetStringExtra ("Title");           
              
              _BDDB = new DataService();
-             _BDDB.ConnectToDB("BigDaysNew.db3");
-            // _BDDB.CreateTable();
+             _BDDB.ConnectToDB("BigDaysNew.db3");           
              _BDDB.SetActive(ItemID);            
 
             Notification n = new Notification(Resource.Drawable.Icon62, message, Java.Lang.JavaSystem.CurrentTimeMillis());

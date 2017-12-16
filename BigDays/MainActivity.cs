@@ -12,7 +12,6 @@ using Android.Gms.Ads;
 using System.IO;
 using Android.Util;
 using BigDays.Services;
-using BigDays.DB;
 using BigDays.Models;
 using System.Linq;
 using BigDays.Enums;
@@ -33,7 +32,7 @@ namespace BigDays
 		private float _viewY;
 		public static int _DisplayWidth;
 		public static int _DisplayHeight;
-		public static IBigDaysDB _BDDB;
+		public static DataService _BDDB;
 		private Handler _TimerHandler;
 		public BigDaysItemModel _ActiveBD;
 		private BigDaysItemModel _CurrentItem;
@@ -162,19 +161,16 @@ namespace BigDays
             long max_memory = Runtime.GetRuntime().MaxMemory();
             long total_memory = Runtime.GetRuntime().TotalMemory();
 
-
-            new MigrationDB_OldInNew("BigDays.db3", "BigDaysNew.db3");
-
             _BDDB = new DataService();
             _BDDB.ConnectToDB("BigDaysNew.db3");
 
-            //_BDDB = new BigDaysDB_Old();
-            //_BDDB.ConnectToDB("BigDays.db3");
-
             _BDDB.CreateTable();
             _BDDB.CheckRepeats();
-            _BDitems = MainActivity._BDDB.SelectBDItems();
-            _ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
+            _BDitems = _BDDB.SelectBDItems();
+
+			_ActiveBD =_BDitems.FirstOrDefault(x => x._Active == true);
+			if(_ActiveBD == null)
+				_ActiveBD =_BDitems.FirstOrDefault();
 
 
             var Display = WindowManager.DefaultDisplay;
@@ -206,14 +202,20 @@ namespace BigDays
             _infoBoxControl.ViewTreeObserver.AddOnGlobalLayoutListener(l);
 
             int _ItemID = Intent.GetIntExtra("ItemID", 0);
-            if (_BDitems.Count > 0)
-            {
-                BitmapHelpers.LoadImages(this, _BDitems);
-                _CurrentItem = _BDDB.GetCurrentItem();
-                if (_ItemID != 0)
-                    _CurrentItem._ID = _ItemID;
+			if (_BDitems.Count > 0)
+			{
+				BitmapHelpers.LoadImages(this, _BDitems);
+				_CurrentItem = _BDDB.GetCurrentItem();
+				if (_ItemID != 0)
+					_CurrentItem._ID = _ItemID;
 
-                ShowImage(_BDitems.FirstOrDefault(n => n._ID == _CurrentItem._ID));
+				var currentItem = _BDitems.FirstOrDefault(n => n._ID == _CurrentItem._ID);
+
+				if (currentItem != null)
+				{
+					ShowImage(currentItem);
+				}
+
                 _infoBoxControl.Visibility = ViewStates.Visible;
             }
             else
@@ -376,6 +378,8 @@ namespace BigDays
 				}
 
 				_ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
+				if(_ActiveBD == null)
+					_ActiveBD =_BDitems.FirstOrDefault();
 
 				if (_infoBoxControl.Visibility != ViewStates.Gone)
 				{
@@ -409,7 +413,9 @@ namespace BigDays
 				}
 				_CurrentItem = _BDDB.GetCurrentItem();
 
-			_ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
+				_ActiveBD = _BDitems.FirstOrDefault(x => x._Active == true);
+					if(_ActiveBD == null)
+						_ActiveBD =_BDitems.FirstOrDefault();
 
 				if (_infoBoxControl.Visibility != ViewStates.Gone)
 				{

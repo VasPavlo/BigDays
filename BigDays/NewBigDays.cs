@@ -20,6 +20,7 @@ using Java.IO;
 using BigDays.Helpers;
 using Android.Content.PM;
 using Android.Runtime;
+using BigDays.Utils;
 
 namespace BigDays
 {
@@ -391,23 +392,11 @@ namespace BigDays
 					_Item._Repeat = _RepeatNum;
 					_Item.ImageBase64 = _ImageBase64;
 					int garbageMain = _Notification;
-					string MainMessage = string.Format("BIG DAYS OF OUR LIVES COUNTDOWN\r\n{0}\r\n\r\nCongratulation!\r\n{0} has com.", _Item._Name);
-					System.Random random = new System.Random();
-					_Item._Notification = random.Next(0, 999999);
-					DateTime d1Main = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-					TimeSpan tsMain = new TimeSpan(_Item._EndDate.ToFileTimeUtc() - d1Main.Ticks);
-					long whensysMain = (long)_Item._EndDate.ToUniversalTime().Subtract(d1Main).TotalMilliseconds;
-					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
-					IntentMainNot.PutExtra("ID", _Item._Notification);
-					IntentMainNot.PutExtra("ItemID", _Item._ID);
-					IntentMainNot.PutExtra("Title", _Item._Name);
-					IntentMainNot.PutExtra("Message", MainMessage);
-					IntentMainNot.PutExtra("Garbage", garbageMain);
-					PendingIntent mAlarmMainSender = PendingIntent.GetBroadcast(this, _Item._Notification, IntentMainNot, PendingIntentFlags.UpdateCurrent);
-					PendingIntent mAlarmMainSenderCansel = PendingIntent.GetBroadcast(this, garbageMain, IntentMainNot, PendingIntentFlags.UpdateCurrent);
-					AlarmManager amMain = (AlarmManager)GetSystemService(Context.AlarmService);
-					amMain.Cancel(mAlarmMainSenderCansel);
-					amMain.Set(AlarmType.RtcWakeup, whensysMain, mAlarmMainSender);
+
+					_Item._Notification = new System.Random().Next(0, 999999);
+
+					AlarmHelpers.UpdateAlarm(this, _Item, garbageMain);
+
 					_Item._Alerts = _AlertStr;
 					string[] alertOld = _AlertStrOld.Split('#');
 					NotificationManager NM = (NotificationManager)GetSystemService(Context.NotificationService);
@@ -421,54 +410,16 @@ namespace BigDays
 						}
 					}
 					string[] alerts = _AlertStr.Split('#');
-					string message = string.Format("{0} - {1}/{2}/{3} {4}:{5}", _Item._Name, _Item._EndDate.Day, _Item._EndDate.Month, _Item._EndDate.Year,
-						_Item._EndDate.Hour, _Item._EndDate.Minute);
 					int i = 0;
 					foreach (var a in alerts)
 					{
 						string[] alertStr = a.Split(';');
 						if (alertStr[1] == "1")
 						{
-							DateTime when = _Item._EndDate;
-							switch (Convert.ToInt16(alertStr[4]))
-							{
-								case 0:
-									when = _Item._EndDate.AddSeconds(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 1:
-									when = _Item._EndDate.AddMinutes(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 2:
-									when = _Item._EndDate.AddHours(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 3:
-									when = _Item._EndDate.AddDays(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 4:
-									when = _Item._EndDate.AddDays(-(Convert.ToInt16(alertStr[3]) * 7));
-									break;
-								case 5:
-									when = _Item._EndDate.AddMonths(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 6:
-									when = _Item._EndDate.AddYears(-Convert.ToInt16(alertStr[3]));
-									break;
-							}
-							DateTime d1 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-							TimeSpan ts = new TimeSpan(when.ToFileTimeUtc() - d1.Ticks);
-							long whensys = (long)when.ToUniversalTime().Subtract(d1).TotalMilliseconds;
-							int ID = Convert.ToInt32(alertStr[2]);
-							Intent IntentNot = new Intent(this, typeof(NotificationView));
-							IntentNot.PutExtra("ID", ID);
-							IntentNot.PutExtra("Title", _Item._Name);
-							IntentNot.PutExtra("Message", message);
-							IntentNot.PutExtra("ItemID", _Item._ID);
-							PendingIntent mAlarmSender = PendingIntent.GetBroadcast(this, ID, IntentNot, PendingIntentFlags.UpdateCurrent);
-							PendingIntent mAlarmSenderCansel = PendingIntent.GetBroadcast(this, garbage[i], IntentNot, PendingIntentFlags.UpdateCurrent);
-							AlarmManager am = (AlarmManager)GetSystemService(Context.AlarmService);
-							am.Cancel(mAlarmSenderCansel);
-							am.Set(AlarmType.RtcWakeup, whensys, mAlarmSender);
+							int ID = Convert.ToInt32(alertStr[2]);						
+							AlarmHelpers.UpdateAlertsAlarm(this, _Item, ID, alertStr, garbage[i]);
 						}
+
 						i++;
 					}
 					MainActivity._BDDB.Update(_Item);
@@ -486,72 +437,27 @@ namespace BigDays
 					_Item._ImageStorage = (int)_ImageStorageNum;
 					_Item._Repeat = _RepeatNum;
 					_Item.ImageBase64 = _ImageBase64;
-					string MainMessage = string.Format("BIG DAYS OF OUR LIVES COUNTDOWN\r\n{0}\r\n\r\nCongratulation!\r\n{0} has com.", _Item._Name);
-					System.Random random = new System.Random();
-					_Item._Notification = random.Next(0, 999999);
-					DateTime d1Main = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-					TimeSpan tsMain = new TimeSpan(_Item._EndDate.ToFileTimeUtc() - d1Main.Ticks);
-					long whensysMain = (long)_Item._EndDate.ToUniversalTime().Subtract(d1Main).TotalMilliseconds;
-					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
-					int ItemID = MainActivity._BDDB.GetLastID() + 1;
-					IntentMainNot.PutExtra("ID", _Item._Notification);
-					IntentMainNot.PutExtra("ItemID", ItemID);
-					IntentMainNot.PutExtra("Title", _Item._Name);
-					IntentMainNot.PutExtra("Message", MainMessage);
-					PendingIntent mAlarmMainSender = PendingIntent.GetBroadcast(this, _Item._Notification, IntentMainNot, PendingIntentFlags.UpdateCurrent);
-					AlarmManager amMain = (AlarmManager)GetSystemService(Context.AlarmService);
-					amMain.Set(AlarmType.RtcWakeup, whensysMain, mAlarmMainSender);
+
+
+					_Item._Notification = new System.Random().Next(0, 999999);
+					_Item._ID= MainActivity._BDDB.GetLastID() + 1;
+
+					AlarmHelpers.SetAlarm(this, _Item);
+
 					_Item._Alerts = _AlertStr;
 					string[] alerts = _AlertStr.Split('#');
-					string message = string.Format("{0} - {1}/{2}/{3} {4}:{5}", _Item._Name, _Item._EndDate.Day, _Item._EndDate.Month, _Item._EndDate.Year,
-						_Item._EndDate.Hour, _Item._EndDate.Minute);
 					foreach (var a in alerts)
 					{
 						string[] alertStr = a.Split(';');
 						if (alertStr[1] == "1")
 						{
-							DateTime when = _Item._EndDate;
-							switch (Convert.ToInt16(alertStr[4]))
-							{
-								case 0:
-									when = _Item._EndDate.AddSeconds(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 1:
-									when = _Item._EndDate.AddMinutes(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 2:
-									when = _Item._EndDate.AddHours(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 3:
-									when = _Item._EndDate.AddDays(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 4:
-									when = _Item._EndDate.AddDays(-(Convert.ToInt16(alertStr[3]) * 7));
-									break;
-								case 5:
-									when = _Item._EndDate.AddMonths(-Convert.ToInt16(alertStr[3]));
-									break;
-								case 6:
-									when = _Item._EndDate.AddYears(-Convert.ToInt16(alertStr[3]));
-									break;
-							}
-							DateTime d1 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-							TimeSpan ts = new TimeSpan(when.ToFileTimeUtc() - d1.Ticks);
-							long whensys = (long)when.ToUniversalTime().Subtract(d1).TotalMilliseconds;
-
 							int ID = Convert.ToInt32(alertStr[2]);
+							_Item._ID= MainActivity._BDDB.GetLastID() + 1;
 
-							Intent IntentNot = new Intent(this, typeof(NotificationView));
-							IntentNot.PutExtra("ID", ID);
-							IntentNot.PutExtra("ItemID", ItemID);
-							IntentNot.PutExtra("Title", _Item._Name);
-							IntentNot.PutExtra("Message", message);
-							PendingIntent mAlarmSender = PendingIntent.GetBroadcast(this, ID, IntentNot, PendingIntentFlags.UpdateCurrent);
-							AlarmManager am = (AlarmManager)GetSystemService(Context.AlarmService);
-							am.Set(AlarmType.RtcWakeup, whensys, mAlarmSender);
+							AlarmHelpers.SetAlertsAlarm(this, _Item, ID, alertStr);						
 						}
-
 					}
+
 					MainActivity._BDDB.Insert(_Item);
 
 					List<BigDaysItemModel> items = MainActivity._BDDB.SelectBDItems();
@@ -570,11 +476,7 @@ namespace BigDays
 			_UiCancelOrDelete.Click += (sender, e) =>
 			{
 				if (_Edit)
-				{
-					Intent IntentMainNot = new Intent(this, typeof(NotificationView));
-					PendingIntent mAlarmMainSenderCansel = PendingIntent.GetBroadcast(this, _Notification, IntentMainNot, PendingIntentFlags.UpdateCurrent);
-					AlarmManager amMain = (AlarmManager)GetSystemService(Context.AlarmService);
-					amMain.Cancel(mAlarmMainSenderCansel);
+				{AlarmHelpers.RemoveAlarm(this, _Notification);
 
 					foreach (var g in garbage)
 						if (g != 0)

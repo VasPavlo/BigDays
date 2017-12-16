@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SQLite;
-using BigDays.DB;
 using Mono.Data.Sqlite;
 using System;
 using BigDays.Models;
@@ -10,7 +9,7 @@ using BigDays.Enums;
 
 namespace BigDays.Services
 {
-    public class DataService : IBigDaysDB
+    public class DataService 
     {
         private bool _FileExists;
         private string _pathToDatabase;
@@ -67,14 +66,6 @@ namespace BigDays.Services
             //}
             return _FileExists;
         }
-
-
-        //Use the old version
-        public bool TableExists(string tableName, SqliteConnection connection)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public bool Insert(BigDaysItemModel BDItem)
         {
@@ -171,7 +162,13 @@ namespace BigDays.Services
         public BigDaysItemModel GetCurrentItem()
         {           
            var n = _database.Table<BigDaysItemModel>();
-			var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x=>x._Active == true);
+
+			BigDaysItemModel data = n.FirstOrDefault(x=>x._Active == true);
+			if (data == null)
+			{
+				 data = _database.Table<BigDaysItemModel>().FirstOrDefault();
+			}
+
             _database.Close();
             return data;
         }
@@ -189,8 +186,11 @@ namespace BigDays.Services
         {
             SetDeActivate();                      
             var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == ID);
-			data._Active = true;
-            _database.Update(data);
+			if (data != null)
+			{
+				data._Active = true;
+				_database.Update(data);
+			}
             _database.Close();
         }
 
@@ -200,8 +200,11 @@ namespace BigDays.Services
             if (CurrItem != null)
             {
                 var data = _database.Table<BigDaysItemModel>().FirstOrDefault(x => x._ID == CurrItem._ID);
-				data._Active = false;
-                _database.Update(data);
+				if (data != null)
+				{
+					data._Active = false;
+					_database.Update(data);
+				}
                 _database.Close();
             }
         }

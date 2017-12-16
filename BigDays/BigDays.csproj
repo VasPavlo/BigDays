@@ -105,7 +105,7 @@
     <AndroidSigningKeyAlias>bigdays</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>test1234</AndroidSigningKeyPass>
     <DefineConstants>__MOBILE__;__ANDROID__;_TRIAL_</DefineConstants>
-<AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidKeyStore>True</AndroidKeyStore>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -169,10 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigDaysApplication.cs" />
-    <Compile Include="DB\IBigDaysDB.cs" />
     <Compile Include="Converters\BitmapToBase64Converter.cs" />
-    <Compile Include="DB\MigrationDB_OldInNew.cs" />
-    <Compile Include="Notifications\AlarmServices.cs" />
     <Compile Include="Pixabay\PixabayService.cs" />
     <Compile Include="Pixabay\PixabayView.cs" />
     <Compile Include="Pixabay\PixabayRequest.cs" />
@@ -181,7 +178,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListActivity.cs" />
     <Compile Include="BigDaysListAdapter.cs" />
-    <Compile Include="DB\BigDaysDB_Old.cs" />
     <Compile Include="NewBigDays.cs" />
     <Compile Include="DefaultImagesSelect.cs" />
     <Compile Include="DefaultImagesAdapter.cs" />
@@ -201,12 +197,15 @@
     <Compile Include="Enums\RequestCode.cs" />
     <Compile Include="Controls\ScaleImageView.cs" />
     <Compile Include="ImagePreview.cs" />
+    <Compile Include="Utils\AfterRebootDeviceRevertAlertService.cs" />
+    <Compile Include="Utils\AlarmHelpers.cs" />
     <Compile Include="Utils\BitmapHelpers.cs" />
     <Compile Include="Utils\ImageHelpers.cs" />
     <Compile Include="Controls\InfoBoxControl.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Utils\CameraHelpers.cs" />
     <Compile Include="Enums\LocationPicture.cs" />
+    <Compile Include="Utils\NotificationReceiver.cs" />
     <Compile Include="Utils\PermissionHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
